@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "microbundle": "^0.15.1"
+  },
+  "author": "Sayan senapati",
+  "license": "MIT"
+}
