@@ -51,16 +51,34 @@ export function ToastContainer({
         ...containerStyle,
       }}
     >
-      {visibleToasts.map((toast) => (
-        <ToastDefault
-          key={toast.id}
-          {...toast}
-          style={{
-            animation:
-              "0.35s cubic-bezier(.21,1.02,.73,1) forwards toast-enter",
-          }}
-        />
-      ))}
+      {visibleToasts.map((toast) => {
+        // If component is provided, use it
+        if (toast.component) {
+          return React.cloneElement(toast.component, {
+            key: toast.id,
+            onClose: () => removeToast(toast.id),
+            style: {
+              animation:
+                "0.35s cubic-bezier(.21,1.02,.73,1) forwards toast-enter",
+              ...toast.component.props.style,
+            },
+          });
+        }
+
+        // Otherwise, fall back to ToastDefault
+        return (
+          <ToastDefault
+            key={toast.id}
+            {...toast}
+            onClose={() => removeToast(toast.id)}
+            style={{
+              animation:
+                "0.35s cubic-bezier(.21,1.02,.73,1) forwards toast-enter",
+              ...toast.style,
+            }}
+          />
+        );
+      })}
       <style>
         {`
           @keyframes toast-enter {

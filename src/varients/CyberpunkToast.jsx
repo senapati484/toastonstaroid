@@ -111,6 +111,7 @@ export default function CyberpunkToast({
   style = {},
   description,
   action,
+  onClose,
   ...rest
 }) {
   const toastRef = useRef(null);
@@ -266,6 +267,37 @@ export default function CyberpunkToast({
           {action.label}
         </button>
       )}
+      <button
+        onClick={onClose}
+        style={{
+          background: "transparent",
+          border: "none",
+          color: "#0ff",
+          fontSize: "18px",
+          marginLeft: "12px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "24px",
+          height: "24px",
+          padding: 0,
+          position: "relative",
+          zIndex: 2,
+          textShadow: "0 0 5px rgba(0, 255, 255, 0.5)",
+          transition: "all 0.2s ease",
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.transform = "scale(1.2)";
+          e.target.style.textShadow = "0 0 8px #0ff";
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.transform = "scale(1)";
+          e.target.style.textShadow = "0 0 5px rgba(0, 255, 255, 0.5)";
+        }}
+      >
+        ×
+      </button>
     </div>
   );
 }

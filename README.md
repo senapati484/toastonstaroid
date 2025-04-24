@@ -1,6 +1,6 @@
-# Toastonstaroid 🍞
+# ToastOnStaroid 🚀
 
-A beautiful, lightweight toast notification system for React applications.
+A powerful and customizable toast notification system for React with unique animated variants.
 
 ## Features ✨
 
@@ -32,40 +32,147 @@ yarn add toastonstaroid --ignore-peer-deps
 ## Basic Usage 🚀
 
 ```jsx
+import React from "react";
 import { ToastContainer, toast } from "toastonstaroid";
 
 function App() {
+  const showToast = () => {
+    toast("This is a basic toast message");
+  };
+
   return (
     <div>
-      {/* Add ToastContainer to your app */}
-      <ToastContainer />
-
-      {/* Your app content */}
+      <button onClick={showToast}>Show Toast</button>
+      <ToastContainer /> {/* Place this once in your app */}
     </div>
   );
 }
+```
 
-// Show different types of toasts
-function MyComponent() {
-  const showToasts = () => {
-    // Success toast
-    toast.success("Successfully saved!");
+## Toast Container
 
-    // Error toast
-    toast.error("Something went wrong");
+The `ToastContainer` component can be customized with the following props:
 
-    // Warning toast
-    toast.warning("Please check your input");
+```jsx
+<ToastContainer
+  position="bottom-right" // 'top-right', 'top-left', 'bottom-right', 'bottom-left', 'top-center', 'bottom-center'
+  containerStyle={
+    {
+      /* Custom styles for the container */
+    }
+  }
+/>
+```
 
-    // Info toast
-    toast.info("New updates available");
+## Basic Toast Types
 
-    // Default toast
-    toast("Hello world!");
-  };
+The library comes with standard toast types:
 
-  return <button onClick={showToasts}>Show Toasts</button>;
-}
+```jsx
+// Success toast
+toast.success("Operation completed successfully");
+
+// Error toast
+toast.error("An error occurred");
+
+// Warning toast
+toast.warning("Warning: This action cannot be undone");
+
+// Info toast
+toast.info("The system will undergo maintenance tonight");
+```
+
+## Special Animated Variants
+
+### Magic Toast
+
+A toast with a magical gradient background and blur effect.
+
+```jsx
+toast.magic("✨ Magic happens here!", {
+  description: "This toast has a magical appearance",
+  duration: 5000, // in milliseconds
+  action: {
+    label: "Abracadabra",
+    onClick: () => console.log("Magic action clicked"),
+  },
+});
+```
+
+### Fire Toast 🔥
+
+A toast with animated flame effects.
+
+```jsx
+toast.fire("🔥 Hot content alert!", {
+  description: "This message is on fire",
+  duration: 6000, // Flames need a bit more time to burn
+  action: {
+    label: "Extinguish",
+    onClick: () => console.log("Fire extinguished"),
+  },
+});
+```
+
+### Smoke Toast 💨
+
+A toast with drifting smoke particles.
+
+```jsx
+toast.smoke("💨 Message fading away...", {
+  description: "Like smoke in the wind",
+  duration: 7000, // Give time for smoke to drift
+  action: {
+    label: "Clear",
+    onClick: () => console.log("Smoke cleared"),
+  },
+});
+```
+
+### Cyberpunk Toast 🤖
+
+A futuristic toast with neon colors and glitch effects.
+
+```jsx
+toast.cyberpunk("SYSTEM ALERT", {
+  description: "Neural connection established",
+  duration: 6000,
+  action: {
+    label: "JACK IN",
+    onClick: () => console.log("Connected to the system"),
+  },
+});
+```
+
+## Customization Options
+
+All toast variants accept these common options:
+
+```jsx
+toast("Customizable message", {
+  // Basic options
+  duration: 5000, // Duration in milliseconds
+  description: "Additional details shown below the main message",
+
+  // Styling
+  style: {
+    // Custom styles to override defaults
+    background: "#000",
+    color: "#fff",
+    // ... any valid CSS properties
+  },
+
+  // Action button
+  action: {
+    label: "Action",
+    onClick: () => {
+      // Handle action click
+    },
+  },
+
+  // Position override (will be grouped with other toasts in that position)
+  position: "top-center", // Overrides the container's default position for this toast
+});
 ```
 
 ## Advanced Usage 🔧
@@ -217,3 +324,11 @@ toast.info(message: string, options?: ToastOptions)
 ## License 📄
 
 MIT © [Sayan Senapati]
+
+## Best Practices
+
+- Keep toast messages concise and actionable
+- Use the appropriate toast variant for the context
+- Don't overuse animated variants as they can be distracting
+- Consider placement carefully - bottom positions are less intrusive
+- Set appropriate duration based on the content and importance

@@ -76,6 +76,7 @@ export default function FireToast({
   style = {},
   description,
   action,
+  onClose,
   ...rest
 }) {
   const toastRef = useRef(null);
@@ -237,6 +238,38 @@ export default function FireToast({
           {action.label}
         </button>
       )}
+      <button
+        onClick={onClose}
+        style={{
+          background: "transparent",
+          border: "none",
+          color: "white",
+          fontSize: "18px",
+          marginLeft: "12px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "24px",
+          height: "24px",
+          padding: 0,
+          position: "relative",
+          zIndex: 2,
+          opacity: 0.7,
+          textShadow: "0 0 5px rgba(255, 87, 34, 0.8)",
+          transition: "all 0.2s ease",
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.textShadow = "0 0 8px rgba(255, 87, 34, 1)";
+          e.target.style.opacity = "1";
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.textShadow = "0 0 5px rgba(255, 87, 34, 0.8)";
+          e.target.style.opacity = "0.7";
+        }}
+      >
+        ×
+      </button>
     </div>
   );
 }
