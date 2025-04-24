@@ -1,97 +1,134 @@
-# toastonstaroid
+# Toastonstaroid 🍞
 
-A simple React toast notification package.
+A beautiful, lightweight toast notification system for React applications.
 
-## Installation
+## Features ✨
 
-```
+- 🚀 Easy to use
+- 🎨 Beautiful, modern design
+- 🎯 Multiple variants (success, error, warning, info)
+- ⚡️ Smooth animations
+- 📱 Responsive
+- 🎛 Customizable
+- 🪶 Lightweight
+
+## Installation 📦
+
+```bash
 npm install toastonstaroid
+# or
+yarn add toastonstaroid
 ```
 
-## Usage
-
-1. **Add `ToastContainer` to your root component (e.g., Home route):**
+## Basic Usage 🚀
 
 ```jsx
-import { ToastContainer } from 'toastonstaroid';
+import { ToastContainer, toast } from "toastonstaroid";
 
 function App() {
   return (
-    <>
+    <div>
+      {/* Add ToastContainer to your app */}
       <ToastContainer />
-      {/* your routes/components */}
-    </>
+
+      {/* Your app content */}
+    </div>
+  );
+}
+
+// Show different types of toasts
+function MyComponent() {
+  const showToasts = () => {
+    // Success toast
+    toast.success("Successfully saved!");
+
+    // Error toast
+    toast.error("Something went wrong");
+
+    // Warning toast
+    toast.warning("Please check your input");
+
+    // Info toast
+    toast.info("New updates available");
+
+    // Default toast
+    toast("Hello world!");
+  };
+
+  return <button onClick={showToasts}>Show Toasts</button>;
+}
+```
+
+## Advanced Usage 🔧
+
+```jsx
+// Toast with description and action
+toast.success("Changes saved!", {
+  description: "Your profile has been updated successfully",
+  duration: 5000,
+  action: {
+    label: "Undo",
+    onClick: () => {
+      console.log("Undo clicked");
+    },
+  },
+});
+
+// Custom styling
+toast.info("Custom styled toast", {
+  style: {
+    background: "linear-gradient(to right, #00b09b, #96c93d)",
+  },
+});
+
+// Positioning
+function App() {
+  return (
+    <ToastContainer
+      position="top-right" // 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'
+    />
   );
 }
 ```
 
-2. **Show a toast message from anywhere:**
+## API Reference 📚
 
-```jsx
-import { toast } from 'toastonstaroid';
+### ToastContainer Props
 
-toast('Hello, this is a toast!');
+| Prop           | Type   | Default        | Description                     |
+| -------------- | ------ | -------------- | ------------------------------- |
+| position       | string | 'bottom-right' | Position of the toast container |
+| containerStyle | object | {}             | Custom styles for the container |
+
+### Toast Function
+
+```typescript
+toast(message: string, options?: ToastOptions)
+
+// Variants
+toast.success(message: string, options?: ToastOptions)
+toast.error(message: string, options?: ToastOptions)
+toast.warning(message: string, options?: ToastOptions)
+toast.info(message: string, options?: ToastOptions)
 ```
 
-You can call `toast()` multiple times from anywhere in your app.
+### ToastOptions
 
-## Customization
+| Option      | Type   | Default   | Description                                                      |
+| ----------- | ------ | --------- | ---------------------------------------------------------------- |
+| description | string | -         | Additional description text                                      |
+| duration    | number | 5000      | Duration in milliseconds                                         |
+| variant     | string | 'default' | Toast variant ('success', 'error', 'warning', 'info', 'default') |
+| action      | object | -         | Action button configuration                                      |
+| style       | object | -         | Custom styles for the toast                                      |
 
-### Toast options
-You can pass options like `duration` and `variant`:
+### Action Object
 
-```js
-// Duration in ms
-toast('Short toast', { duration: 1500 });
+| Property | Type     | Description                  |
+| -------- | -------- | ---------------------------- |
+| label    | string   | Text for the action button   |
+| onClick  | function | Click handler for the action |
 
-// Variants: success, error, warning, info
-toast('Success!', { variant: 'success' });
-toast('Oops, error!', { variant: 'error' });
-toast('Be careful!', { variant: 'warning' });
-toast('FYI: Info', { variant: 'info' });
-```
+## License 📄
 
-Each variant has its own color and icon.
-
-### Full Customization
-You have full control over the toast container and toast appearance!
-
-#### Container position
-You can control the location of the toast container using the `position` prop:
-
-```jsx
-<ToastContainer position="bottom-center" />
-<ToastContainer position="top-center" />
-<ToastContainer position="top-right" />
-<ToastContainer position="bottom-left" />
-<ToastContainer position="top-left" />
-```
-
-Default is `bottom-right`.
-
-#### Container style
-```jsx
-<ToastContainer containerStyle={{ top: 40, right: 40, borderRadius: 12, width: 400 }} />
-```
-
-#### Toast style and props
-```jsx
-<ToastContainer toastProps={{ style: { fontSize: 20, borderRadius: 16 }, icon: '🔥' }} />
-```
-
-#### Custom render function
-```jsx
-<ToastContainer renderToast={(toast, idx) => (
-  <div key={idx} style={{ background: 'black', color: 'lime', padding: 24, border: '2px dashed lime' }}>
-    <b>{toast.message}</b>
-  </div>
-)} />
-```
-
-#### Advanced: Override variant components
-You can import and use your own variant components, or fork the provided ones (`ToastSuccess`, `ToastError`, etc.) for even more control.
-
-
----
-
-MIT License
+MIT © [Sayan Senapati]

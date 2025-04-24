@@ -7,11 +7,12 @@ export const useToastStore = create((set) => ({
       toasts: [
         {
           id: Date.now(),
-          duration: 4000,
+          duration: 5000,
+          variant: "default",
           ...toast,
         },
         ...state.toasts,
-      ],
+      ].slice(0, 10), // Limit maximum number of toasts
     })),
   removeToast: (id) =>
     set((state) => ({

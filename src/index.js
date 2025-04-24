@@ -1,26 +1,29 @@
 import { ToastContainer } from "./ToastContainer";
 import { useToastStore } from "./store";
 
-// Create a toast function that uses the store
-const toast = (options) => {
-  useToastStore.getState().addToast(options);
+const toast = (message, options = {}) => {
+  if (typeof message === "string") {
+    useToastStore.getState().addToast({ message, ...options });
+  } else {
+    useToastStore.getState().addToast(message);
+  }
 };
 
-// Add variant methods
+// Variant methods
 toast.success = (message, options = {}) => {
-  toast({ message, variant: "success", ...options });
+  toast(message, { variant: "success", ...options });
 };
 
 toast.error = (message, options = {}) => {
-  toast({ message, variant: "error", ...options });
+  toast(message, { variant: "error", ...options });
 };
 
 toast.warning = (message, options = {}) => {
-  toast({ message, variant: "warning", ...options });
+  toast(message, { variant: "warning", ...options });
 };
 
 toast.info = (message, options = {}) => {
-  toast({ message, variant: "info", ...options });
+  toast(message, { variant: "info", ...options });
 };
 
 export { ToastContainer, toast };

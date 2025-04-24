@@ -1,32 +1,21 @@
-import React, { useEffect, useState } from "react";
-import ToastSuccess from "./varients/ToastSuccess";
-import ToastError from "./varients/ToastError";
-import ToastWarning from "./varients/ToastWarning";
-import ToastInfo from "./varients/ToastInfo";
+import React, { useEffect } from "react";
 import ToastDefault from "./varients/ToastDefault";
 import { useToastStore } from "./store";
 
-const MAX_VISIBLE_TOASTS = 3;
-const TOAST_GAP = 12;
-const TOAST_HEIGHT = 72;
+const TOAST_LIMIT = 5;
+const TOAST_REMOVAL_DELAY = 300;
 
 /**
  * ToastContainer
  * @param {object} props
  * @param {object} [props.containerStyle] - Custom styles for the container
- * @param {function} [props.renderToast] - Custom render function for a toast: (toast, idx) => ReactNode
- * @param {object} [props.toastProps] - Default props for all toasts (e.g. shape, size, style)
  * @param {string} [props.position] - Position of the toast container. One of: 'bottom-right', 'bottom-center', 'top-right', 'top-center', 'bottom-left', 'top-left'. Default: 'bottom-right'.
  */
 export function ToastContainer({
-  containerStyle = {},
-  renderToast,
-  toastProps = {},
   position = "bottom-right",
+  containerStyle = {},
 }) {
   const { toasts, removeToast } = useToastStore();
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [expandedToasts, setExpandedToasts] = useState(false);
 
   useEffect(() => {
     toasts.forEach((toast) => {
@@ -39,116 +28,53 @@ export function ToastContainer({
     });
   }, [toasts, removeToast]);
 
-  // Compute position style
-  let positionStyle = {
-    position: "fixed",
-    zIndex: 9999,
-    display: "flex",
-    flexDirection: "column-reverse",
-    padding: "16px",
-    pointerEvents: "none",
-    transition: "all 0.2s ease",
+  const positionStyles = {
+    "top-right": { top: 0, right: 0 },
+    "top-left": { top: 0, left: 0 },
+    "bottom-right": { bottom: 0, right: 0 },
+    "bottom-left": { bottom: 0, left: 0 },
+    "top-center": { top: 0, left: "50%", transform: "translateX(-50%)" },
+    "bottom-center": { bottom: 0, left: "50%", transform: "translateX(-50%)" },
   };
 
-  switch (position) {
-    case "bottom-center":
-      positionStyle = {
-        ...positionStyle,
-        left: "50%",
-        bottom: 0,
-        transform: "translateX(-50%)",
-      };
-      break;
-    case "top-center":
-      positionStyle = {
-        ...positionStyle,
-        left: "50%",
-        top: 0,
-        transform: "translateX(-50%)",
-      };
-      break;
-    case "top-right":
-      positionStyle = { ...positionStyle, top: 0, right: 0 };
-      break;
-    case "bottom-left":
-      positionStyle = { ...positionStyle, bottom: 0, left: 0 };
-      break;
-    case "top-left":
-      positionStyle = { ...positionStyle, top: 0, left: 0 };
-      break;
-    case "bottom-right":
-    default:
-      positionStyle = { ...positionStyle, bottom: 0, right: 0 };
-      break;
-  }
-
-  const getToastStyle = (index) => {
-    const isHovered = hoveredIndex === index || expandedToasts;
-    const visibleToasts = Math.min(toasts.length, MAX_VISIBLE_TOASTS);
-    const baseTransform = `translateY(${index * -TOAST_GAP}px)`;
-
-    if (index >= MAX_VISIBLE_TOASTS) {
-      return {
-        transform: expandedToasts
-          ? `translateY(${index * -(TOAST_HEIGHT + TOAST_GAP)}px)`
-          : `translateY(${(MAX_VISIBLE_TOASTS - 1) * -TOAST_GAP - 10}px)`,
-        opacity: expandedToasts ? 1 : 0,
-        pointerEvents: expandedToasts ? "auto" : "none",
-      };
-    }
-
-    const scale = isHovered ? 1 : 1 - index * 0.05;
-    const opacity = isHovered ? 1 : 1 - index * 0.15;
-
-    return {
-      transform: `${baseTransform} scale(${scale})`,
-      opacity,
-      filter: `brightness(${1 - index * 0.1})`,
-    };
-  };
+  const visibleToasts = toasts.slice(0, TOAST_LIMIT);
 
   return (
     <div
-      style={{ ...positionStyle, ...containerStyle }}
-      data-testid="toast-container"
-      onMouseEnter={() => setExpandedToasts(true)}
-      onMouseLeave={() => {
-        setExpandedToasts(false);
-        setHoveredIndex(null);
+      style={{
+        position: "fixed",
+        zIndex: 9999,
+        padding: "16px",
+        maxHeight: "100vh",
+        overflow: "hidden",
+        ...positionStyles[position],
+        ...containerStyle,
       }}
     >
-      {toasts.map((toast, index) => {
-        // Allow custom render function
-        if (typeof renderToast === "function") {
-          return renderToast(toast, index);
-        }
-
-        const common = {
-          ...toastProps,
-          ...toast,
-          key: toast.id,
-          style: {
-            ...getToastStyle(index),
-            ...toastProps.style,
-            ...toast.style,
-          },
-          onMouseEnter: () => setHoveredIndex(index),
-          onMouseLeave: () => setHoveredIndex(null),
-        };
-
-        switch (toast.variant) {
-          case "success":
-            return <ToastSuccess {...common} />;
-          case "error":
-            return <ToastError {...common} />;
-          case "warning":
-            return <ToastWarning {...common} />;
-          case "info":
-            return <ToastInfo {...common} />;
-          default:
-            return <ToastDefault {...common} />;
-        }
-      })}
+      {visibleToasts.map((toast) => (
+        <ToastDefault
+          key={toast.id}
+          {...toast}
+          style={{
+            animation:
+              "0.35s cubic-bezier(.21,1.02,.73,1) forwards toast-enter",
+          }}
+        />
+      ))}
+      <style>
+        {`
+          @keyframes toast-enter {
+            0% {
+              opacity: 0;
+              transform: translateY(16px) scale(0.9);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
