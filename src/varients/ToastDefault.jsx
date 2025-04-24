@@ -2,29 +2,39 @@ import React from "react";
 
 const styles = {
   success: {
-    background: "#10B981",
-    color: "#FFFFFF",
+    background: "#ECFDF5",
+    borderColor: "#10B981",
+    color: "#065F46",
     icon: "✓",
+    iconColor: "#10B981",
   },
   error: {
-    background: "#EF4444",
-    color: "#FFFFFF",
+    background: "#FEF2F2",
+    borderColor: "#EF4444",
+    color: "#991B1B",
     icon: "✕",
+    iconColor: "#EF4444",
   },
   warning: {
-    background: "#F59E0B",
-    color: "#FFFFFF",
+    background: "#FFFBEB",
+    borderColor: "#F59E0B",
+    color: "#92400E",
     icon: "⚠",
+    iconColor: "#F59E0B",
   },
   info: {
-    background: "#3B82F6",
-    color: "#FFFFFF",
+    background: "#EFF6FF",
+    borderColor: "#3B82F6",
+    color: "#1E40AF",
     icon: "ℹ",
+    iconColor: "#3B82F6",
   },
   default: {
-    background: "#1F2937",
-    color: "#FFFFFF",
+    background: "#F9FAFB",
+    borderColor: "#E5E7EB",
+    color: "#1F2937",
     icon: "•",
+    iconColor: "#6B7280",
   },
 };
 
@@ -46,16 +56,17 @@ export default function ToastDefault({
         alignItems: "center",
         background: currentStyle.background,
         color: currentStyle.color,
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
         minWidth: "300px",
         maxWidth: "500px",
         minHeight: "48px",
-        borderRadius: "6px",
-        padding: "12px 24px",
+        borderRadius: "8px",
+        borderLeft: `4px solid ${currentStyle.borderColor}`,
+        padding: "12px 16px",
         margin: "8px",
-        fontSize: "16px",
+        fontSize: "14px",
         lineHeight: "1.5",
-        transition: "all 0.3s ease",
+        transition: "all 0.2s ease",
         transform: "translateY(0)",
         opacity: 1,
         ...style,
@@ -65,9 +76,10 @@ export default function ToastDefault({
       <span
         style={{
           marginRight: "12px",
-          fontSize: "20px",
+          fontSize: "18px",
           display: "flex",
           alignItems: "center",
+          color: currentStyle.iconColor,
         }}
       >
         {currentStyle.icon}
@@ -77,9 +89,9 @@ export default function ToastDefault({
         {description && (
           <div
             style={{
-              fontSize: "14px",
+              fontSize: "13px",
               marginTop: "4px",
-              opacity: 0.9,
+              opacity: 0.85,
             }}
           >
             {description}
@@ -90,19 +102,23 @@ export default function ToastDefault({
         <button
           onClick={action.onClick}
           style={{
-            background: "none",
+            background: "rgba(0, 0, 0, 0.05)",
             border: "none",
             color: "inherit",
-            padding: "8px",
+            padding: "6px 12px",
             marginLeft: "16px",
             cursor: "pointer",
-            fontSize: "14px",
+            fontSize: "13px",
             fontWeight: 500,
-            opacity: 0.9,
-            transition: "opacity 0.2s",
+            borderRadius: "4px",
+            transition: "background 0.2s",
           }}
-          onMouseEnter={(e) => (e.target.style.opacity = "1")}
-          onMouseLeave={(e) => (e.target.style.opacity = "0.9")}
+          onMouseEnter={(e) =>
+            (e.target.style.background = "rgba(0, 0, 0, 0.1)")
+          }
+          onMouseLeave={(e) =>
+            (e.target.style.background = "rgba(0, 0, 0, 0.05)")
+          }
         >
           {action.label}
         </button>
@@ -122,11 +138,11 @@ export default function ToastDefault({
           width: "24px",
           height: "24px",
           padding: 0,
-          opacity: 0.7,
+          opacity: 0.5,
           transition: "opacity 0.2s",
         }}
-        onMouseEnter={(e) => (e.target.style.opacity = "1")}
-        onMouseLeave={(e) => (e.target.style.opacity = "0.7")}
+        onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
+        onMouseLeave={(e) => (e.target.style.opacity = "0.5")}
       >
         ×
       </button>

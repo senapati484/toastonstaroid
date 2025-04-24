@@ -3,24 +3,39 @@ import anime from "animejs";
 
 const styles = {
   success: {
-    gradient: "linear-gradient(135deg, #00b09b, #96c93d)",
-    icon: "✨",
+    background: "#ECFDF5",
+    color: "#065F46",
+    borderColor: "#10B981",
+    icon: "✓",
+    iconColor: "#10B981",
   },
   error: {
-    gradient: "linear-gradient(135deg, #ff6b6b, #ff4757)",
-    icon: "💥",
+    background: "#FEF2F2",
+    color: "#991B1B",
+    borderColor: "#EF4444",
+    icon: "✕",
+    iconColor: "#EF4444",
   },
   warning: {
-    gradient: "linear-gradient(135deg, #ffd93d, #ff9f43)",
-    icon: "⚡",
+    background: "#FFFBEB",
+    color: "#92400E",
+    borderColor: "#F59E0B",
+    icon: "⚠",
+    iconColor: "#F59E0B",
   },
   info: {
-    gradient: "linear-gradient(135deg, #2196f3, #4fc3f7)",
-    icon: "🌟",
+    background: "#EFF6FF",
+    color: "#1E40AF",
+    borderColor: "#3B82F6",
+    icon: "ℹ",
+    iconColor: "#3B82F6",
   },
   magic: {
-    gradient: "linear-gradient(135deg, #8e2de2, #4a00e0)",
-    icon: "🔮",
+    background: "#F5F3FF",
+    color: "#5B21B6",
+    borderColor: "#8B5CF6",
+    icon: "✨",
+    iconColor: "#8B5CF6",
   },
 };
 
@@ -44,48 +59,48 @@ export default function AnimatedToast({
         case "ripple":
           anime({
             targets: toastRef.current,
-            scale: [0.9, 1],
+            scale: [0.95, 1],
             opacity: [0, 1],
-            translateY: [-20, 0],
-            duration: 800,
-            easing: "spring(1, 80, 10, 0)",
+            translateY: [-10, 0],
+            duration: 400,
+            easing: "easeOutCubic",
           });
           break;
         case "bounce":
           anime({
             targets: toastRef.current,
-            translateY: [-40, 0],
-            duration: 1200,
+            translateY: [-20, 0],
+            duration: 600,
             easing: "spring(1, 80, 10, 0)",
           });
           break;
         case "spin":
           anime({
             targets: toastRef.current,
-            rotateY: [90, 0],
+            rotateY: [40, 0],
             opacity: [0, 1],
-            duration: 800,
-            easing: "easeOutElastic(1, .6)",
+            duration: 600,
+            easing: "easeOutCubic",
           });
           break;
         case "glitch":
           anime
             .timeline({
               targets: toastRef.current,
-              duration: 800,
+              duration: 500,
             })
             .add({
-              translateX: [-10, 0],
+              translateX: [-5, 0],
               opacity: [0, 1],
-              skewX: [20, 0],
-              easing: "easeOutElastic(1, .6)",
+              skewX: [10, 0],
+              easing: "easeOutCubic",
             });
           break;
         default:
           anime({
             targets: toastRef.current,
             opacity: [0, 1],
-            duration: 400,
+            duration: 300,
             easing: "easeOutCubic",
           });
       }
@@ -107,20 +122,20 @@ export default function AnimatedToast({
       style={{
         display: "flex",
         alignItems: "center",
-        background: currentStyle.gradient,
-        color: "#FFFFFF",
-        boxShadow: "0 8px 16px rgba(0, 0, 0, 0.15)",
+        background: currentStyle.background,
+        color: currentStyle.color,
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
         minWidth: "300px",
         maxWidth: "500px",
-        minHeight: "60px",
-        borderRadius: "12px",
-        padding: "16px 24px",
+        minHeight: "48px",
+        borderRadius: "8px",
+        borderLeft: `4px solid ${currentStyle.borderColor}`,
+        padding: "12px 16px",
         margin: "8px",
-        fontSize: "16px",
+        fontSize: "14px",
         lineHeight: "1.5",
         position: "relative",
         overflow: "hidden",
-        backdropFilter: "blur(8px)",
         ...style,
       }}
       {...rest}
@@ -132,39 +147,37 @@ export default function AnimatedToast({
           left: 0,
           right: 0,
           height: "3px",
-          background: "rgba(255, 255, 255, 0.3)",
+          background: "rgba(0, 0, 0, 0.05)",
         }}
       >
         <div
           ref={progressRef}
           style={{
             height: "100%",
-            background: "rgba(255, 255, 255, 0.9)",
+            background: currentStyle.borderColor,
             width: "0%",
           }}
         />
       </div>
       <span
         style={{
-          marginRight: "16px",
-          fontSize: "24px",
-          filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.2))",
+          marginRight: "12px",
+          fontSize: "18px",
+          color: currentStyle.iconColor,
+          display: "flex",
+          alignItems: "center",
         }}
       >
         {currentStyle.icon}
       </span>
       <div style={{ flex: 1 }}>
-        <div
-          style={{ fontWeight: 600, textShadow: "0 1px 2px rgba(0,0,0,0.1)" }}
-        >
-          {message}
-        </div>
+        <div style={{ fontWeight: 500 }}>{message}</div>
         {description && (
           <div
             style={{
-              fontSize: "14px",
+              fontSize: "13px",
               marginTop: "4px",
-              opacity: 0.9,
+              opacity: 0.85,
             }}
           >
             {description}
@@ -175,25 +188,22 @@ export default function AnimatedToast({
         <button
           onClick={action.onClick}
           style={{
-            background: "rgba(255, 255, 255, 0.2)",
+            background: "rgba(0, 0, 0, 0.05)",
             border: "none",
             color: "inherit",
-            padding: "8px 16px",
+            padding: "6px 12px",
             marginLeft: "16px",
             cursor: "pointer",
-            fontSize: "14px",
+            fontSize: "13px",
             fontWeight: 500,
-            borderRadius: "6px",
-            transition: "all 0.2s ease",
-            backdropFilter: "blur(4px)",
+            borderRadius: "4px",
+            transition: "background 0.2s",
           }}
           onMouseEnter={(e) => {
-            e.target.style.background = "rgba(255, 255, 255, 0.3)";
-            e.target.style.transform = "scale(1.05)";
+            e.target.style.background = "rgba(0, 0, 0, 0.1)";
           }}
           onMouseLeave={(e) => {
-            e.target.style.background = "rgba(255, 255, 255, 0.2)";
-            e.target.style.transform = "scale(1)";
+            e.target.style.background = "rgba(0, 0, 0, 0.05)";
           }}
         >
           {action.label}
@@ -202,11 +212,11 @@ export default function AnimatedToast({
       <button
         onClick={onClose}
         style={{
-          background: "transparent",
+          background: "none",
           border: "none",
-          color: "white",
+          color: "inherit",
           fontSize: "18px",
-          marginLeft: "12px",
+          marginLeft: "8px",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
@@ -216,16 +226,14 @@ export default function AnimatedToast({
           padding: 0,
           position: "relative",
           zIndex: 2,
-          opacity: 0.7,
-          transition: "all 0.2s ease",
+          opacity: 0.5,
+          transition: "opacity 0.2s",
         }}
         onMouseEnter={(e) => {
-          e.target.style.opacity = "1";
-          e.target.style.transform = "scale(1.1)";
+          e.target.style.opacity = "0.8";
         }}
         onMouseLeave={(e) => {
-          e.target.style.opacity = "0.7";
-          e.target.style.transform = "scale(1)";
+          e.target.style.opacity = "0.5";
         }}
       >
         ×
