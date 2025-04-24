@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ToastDefault from "./varients/ToastDefault";
 import { useToastStore } from "./store";
 
-const TOAST_LIMIT = 5;
+const TOAST_LIMIT = 3;
 const TOAST_REMOVAL_DELAY = 300;
 
 /**

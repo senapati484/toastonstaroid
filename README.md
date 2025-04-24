@@ -100,6 +100,82 @@ function App() {
 }
 ```
 
+## ✨ Unique Animated Toasts
+
+Toastonstaroid comes with a set of unique, eye-catching animated toasts powered by Anime.js!
+
+### 🔥 Fire Toast
+
+The most eye-catching toast variant with animated flames and burning text effect:
+
+```jsx
+// Fire toast with animated flames
+toast.fire("🔥 This message is on fire!", {
+  description: "Watch out, it's getting hot in here!",
+  action: {
+    label: "Cool Down",
+    onClick: () => console.log("Cooling down..."),
+  },
+});
+```
+
+Features of the Fire Toast:
+
+- Animated flames using particle effects
+- Glowing text with burning animation
+- Dark theme with orange accents
+- Smooth entrance animation
+- Progress bar with fire effect
+- Interactive hover states with heat effect
+
+### ✨ Magic Toast
+
+```jsx
+// Magic toast with ripple effect and gradient background
+toast.magic("✨ Something magical happened!", {
+  description: "Your wishes have been granted",
+  action: {
+    label: "Cast Again",
+    onClick: () => console.log("Magic!"),
+  },
+});
+```
+
+### Available Animations
+
+- `ripple`: Smooth scale and fade entrance
+- `bounce`: Bouncy entrance from top
+- `spin`: 3D rotation entrance
+- `glitch`: Glitch effect entrance
+- `fire`: Animated flames effect (Fire toast only)
+- Default: Simple fade in
+
+### Animation Options
+
+You can customize any toast with these animations:
+
+```jsx
+toast.success("Custom Animation!", {
+  animation: "ripple", // Choose any animation
+  duration: 7000, // Duration in ms
+  style: {
+    background: "linear-gradient(135deg, #00b09b, #96c93d)",
+    backdropFilter: "blur(8px)", // Glass effect
+  },
+});
+```
+
+### Features of Animated Toasts
+
+- 🎨 Beautiful gradient backgrounds
+- ⚡️ Smooth animations powered by Anime.js
+- 🌟 Progress bar indicator
+- 🎭 Multiple animation styles
+- 💫 Glass morphism effects
+- 🎯 Interactive hover states
+- 🎪 Emoji indicators
+- 🌈 Custom styling support
+
 ## API Reference 📚
 
 ### ToastContainer Props
