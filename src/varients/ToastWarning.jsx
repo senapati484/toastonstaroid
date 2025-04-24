@@ -18,12 +18,15 @@ export default function ToastWarning({
         flexDirection: "column",
         background: styles.background,
         color: styles.color,
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        boxShadow: `0 4px 12px ${styles.shadowColor}, 0 1px 2px rgba(0, 0, 0, 0.04)`,
         width: "356px",
-        borderRadius: "12px",
-        padding: "16px",
+        borderRadius: "8px",
+        padding: "12px",
         gap: "4px",
         border: `1px solid ${styles.borderColor}`,
+        transition: "all 0.2s ease",
+        willChange: "transform, opacity, filter",
+        WebkitFontSmoothing: "antialiased",
         ...style,
       }}
       {...rest}
@@ -40,7 +43,7 @@ export default function ToastWarning({
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "4px",
+            gap: "2px",
           }}
         >
           <div
@@ -55,9 +58,10 @@ export default function ToastWarning({
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  fontSize: "16px",
+                  fontSize: "15px",
                   color: styles.iconColor,
                   fontWeight: "bold",
+                  lineHeight: "1",
                 }}
               >
                 {icon}
@@ -80,6 +84,7 @@ export default function ToastWarning({
                 fontSize: "13px",
                 color: styles.descriptionColor,
                 lineHeight: "1.4",
+                marginTop: "2px",
               }}
             >
               {description}
@@ -92,16 +97,16 @@ export default function ToastWarning({
             style={{
               background: "none",
               border: "none",
-              padding: "0",
+              padding: "2px 0",
               margin: "0",
               cursor: "pointer",
-              fontSize: "13px",
+              fontSize: "12px",
               fontWeight: 500,
               color: styles.color,
-              textDecoration: "underline",
               opacity: 0.8,
               transition: "opacity 0.2s",
-              ":hover": {
+              textDecoration: "none",
+              "&:hover": {
                 opacity: 1,
               },
             }}

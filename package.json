@@ -1,6 +1,6 @@
 {
   "name": "toastonstaroid",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple toast notification library for React",
   "source": "src/index.js",
   "main": "dist/index.js",
