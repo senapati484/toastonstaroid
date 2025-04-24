@@ -31,6 +31,7 @@ export default function AnimatedToast({
   description,
   action,
   animation = "ripple",
+  onClose,
   ...rest
 }) {
   const toastRef = useRef(null);
@@ -198,6 +199,37 @@ export default function AnimatedToast({
           {action.label}
         </button>
       )}
+      <button
+        onClick={onClose}
+        style={{
+          background: "transparent",
+          border: "none",
+          color: "white",
+          fontSize: "18px",
+          marginLeft: "12px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "24px",
+          height: "24px",
+          padding: 0,
+          position: "relative",
+          zIndex: 2,
+          opacity: 0.7,
+          transition: "all 0.2s ease",
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.opacity = "1";
+          e.target.style.transform = "scale(1.1)";
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.opacity = "0.7";
+          e.target.style.transform = "scale(1)";
+        }}
+      >
+        ×
+      </button>
     </div>
   );
 }

@@ -34,6 +34,7 @@ export default function ToastDefault({
   style = {},
   description,
   action,
+  onClose,
   ...rest
 }) {
   const currentStyle = styles[variant] || styles.default;
@@ -106,6 +107,29 @@ export default function ToastDefault({
           {action.label}
         </button>
       )}
+      <button
+        onClick={onClose}
+        style={{
+          background: "none",
+          border: "none",
+          color: "inherit",
+          fontSize: "18px",
+          marginLeft: "8px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "24px",
+          height: "24px",
+          padding: 0,
+          opacity: 0.7,
+          transition: "opacity 0.2s",
+        }}
+        onMouseEnter={(e) => (e.target.style.opacity = "1")}
+        onMouseLeave={(e) => (e.target.style.opacity = "0.7")}
+      >
+        ×
+      </button>
     </div>
   );
 }
