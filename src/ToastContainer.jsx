@@ -4,6 +4,11 @@ import ToastError from "./varients/ToastError";
 import ToastWarning from "./varients/ToastWarning";
 import ToastInfo from "./varients/ToastInfo";
 import ToastDefault from "./varients/ToastDefault";
+import { useToastStore } from "./store";
+
+const MAX_VISIBLE_TOASTS = 3;
+const TOAST_GAP = 12;
+const TOAST_HEIGHT = 72;
 
 /**
  * ToastContainer
@@ -19,37 +24,32 @@ export function ToastContainer({
   toastProps = {},
   position = "bottom-right",
 }) {
-  const [toasts, setToasts] = useState([]);
+  const { toasts, removeToast } = useToastStore();
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [expandedToasts, setExpandedToasts] = useState(false);
 
   useEffect(() => {
-    // Setup global update function for toast()
-    window.__TOAST_CONTAINER_UPDATE__ = (toast) => {
-      setToasts((prev) => [...prev, toast]);
-      setTimeout(() => {
-        setToasts((prev) => prev.slice(1));
-      }, toast.duration || 4000);
-    };
-    // Process any queued toasts
-    if (window.__TOAST_QUEUE__ && Array.isArray(window.__TOAST_QUEUE__)) {
-      window.__TOAST_QUEUE__.forEach(window.__TOAST_CONTAINER_UPDATE__);
-      window.__TOAST_QUEUE__ = [];
-    }
-    return () => {
-      window.__TOAST_CONTAINER_UPDATE__ = null;
-    };
-  }, []);
+    toasts.forEach((toast) => {
+      if (toast.duration) {
+        const timer = setTimeout(() => {
+          removeToast(toast.id);
+        }, toast.duration);
+        return () => clearTimeout(timer);
+      }
+    });
+  }, [toasts, removeToast]);
 
   // Compute position style
   let positionStyle = {
     position: "fixed",
     zIndex: 9999,
     display: "flex",
-    flexDirection: "column",
-    gap: "8px",
+    flexDirection: "column-reverse",
     padding: "16px",
-    maxHeight: "100vh",
     pointerEvents: "none",
+    transition: "all 0.2s ease",
   };
+
   switch (position) {
     case "bottom-center":
       positionStyle = {
@@ -82,13 +82,28 @@ export function ToastContainer({
       break;
   }
 
-  // Animation styles
-  const getAnimationStyle = (idx) => {
+  const getToastStyle = (index) => {
+    const isHovered = hoveredIndex === index || expandedToasts;
+    const visibleToasts = Math.min(toasts.length, MAX_VISIBLE_TOASTS);
+    const baseTransform = `translateY(${index * -TOAST_GAP}px)`;
+
+    if (index >= MAX_VISIBLE_TOASTS) {
+      return {
+        transform: expandedToasts
+          ? `translateY(${index * -(TOAST_HEIGHT + TOAST_GAP)}px)`
+          : `translateY(${(MAX_VISIBLE_TOASTS - 1) * -TOAST_GAP - 10}px)`,
+        opacity: expandedToasts ? 1 : 0,
+        pointerEvents: expandedToasts ? "auto" : "none",
+      };
+    }
+
+    const scale = isHovered ? 1 : 1 - index * 0.05;
+    const opacity = isHovered ? 1 : 1 - index * 0.15;
+
     return {
-      pointerEvents: "auto",
-      transform: `translateY(${idx * 8}px)`,
-      opacity: 1 - idx * 0.1,
-      transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+      transform: `${baseTransform} scale(${scale})`,
+      opacity,
+      filter: `brightness(${1 - index * 0.1})`,
     };
   };
 
@@ -96,22 +111,31 @@ export function ToastContainer({
     <div
       style={{ ...positionStyle, ...containerStyle }}
       data-testid="toast-container"
+      onMouseEnter={() => setExpandedToasts(true)}
+      onMouseLeave={() => {
+        setExpandedToasts(false);
+        setHoveredIndex(null);
+      }}
     >
-      {toasts.map((toast, idx) => {
+      {toasts.map((toast, index) => {
         // Allow custom render function
         if (typeof renderToast === "function") {
-          return renderToast(toast, idx);
+          return renderToast(toast, index);
         }
+
         const common = {
           ...toastProps,
           ...toast,
-          key: idx,
+          key: toast.id,
           style: {
-            ...getAnimationStyle(idx),
+            ...getToastStyle(index),
             ...toastProps.style,
             ...toast.style,
           },
+          onMouseEnter: () => setHoveredIndex(index),
+          onMouseLeave: () => setHoveredIndex(null),
         };
+
         switch (toast.variant) {
           case "success":
             return <ToastSuccess {...common} />;

@@ -7,6 +7,8 @@ export function toast(message, options = {}) {
     ...options,
     // Default options
     duration: options.duration || 4000,
+    description: options.description || "",
+    action: options.action || null,
     size: options.size || "large",
     // Add default icons based on variant
     icon:
@@ -14,13 +16,13 @@ export function toast(message, options = {}) {
       (() => {
         switch (options.variant) {
           case "success":
-            return "✅";
+            return "✓";
           case "error":
-            return "❌";
+            return "✕";
           case "warning":
-            return "⚠️";
+            return "⚠";
           case "info":
-            return "ℹ️";
+            return "ℹ";
           default:
             return "";
         }
