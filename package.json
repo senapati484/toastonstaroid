@@ -1,7 +1,7 @@
 {
   "name": "toastonstaroid",
-  "version": "1.0.4",
-  "description": "A simple toast notification library for React",
+  "version": "1.0.5",
+  "description": "A beautiful, lightweight toast notification system for React applications",
   "source": "src/index.js",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
@@ -13,17 +13,35 @@
   "keywords": [
     "react",
     "toast",
-    "notification"
+    "notification",
+    "alerts",
+    "messages"
   ],
   "author": "Sayan Senapati",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "microbundle": "^0.15.1"
-  }
+    "microbundle": "^0.15.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/toastonstaroid"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/toastonstaroid/issues"
+  },
+  "homepage": "https://github.com/yourusername/toastonstaroid#readme",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
 }

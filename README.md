@@ -11,6 +11,7 @@ A beautiful, lightweight toast notification system for React applications.
 - 📱 Responsive
 - 🎛 Customizable
 - 🪶 Lightweight
+- ⚛️ Compatible with React 16.8+ through React 19
 
 ## Installation 📦
 
@@ -18,6 +19,14 @@ A beautiful, lightweight toast notification system for React applications.
 npm install toastonstaroid
 # or
 yarn add toastonstaroid
+```
+
+If you're using React 19, you might need to use the `--legacy-peer-deps` flag:
+
+```bash
+npm install toastonstaroid --legacy-peer-deps
+# or
+yarn add toastonstaroid --ignore-peer-deps
 ```
 
 ## Basic Usage 🚀
