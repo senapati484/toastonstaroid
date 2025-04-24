@@ -17,7 +17,7 @@ export function ToastContainer({
   containerStyle = {},
   renderToast,
   toastProps = {},
-  position = 'bottom-right',
+  position = "bottom-right",
 }) {
   const [toasts, setToasts] = useState([]);
 
@@ -27,7 +27,7 @@ export function ToastContainer({
       setToasts((prev) => [...prev, toast]);
       setTimeout(() => {
         setToasts((prev) => prev.slice(1));
-      }, toast.duration || 3000);
+      }, toast.duration || 4000);
     };
     // Process any queued toasts
     if (window.__TOAST_QUEUE__ && Array.isArray(window.__TOAST_QUEUE__)) {
@@ -40,28 +40,57 @@ export function ToastContainer({
   }, []);
 
   // Compute position style
-  let positionStyle = { position: "fixed", zIndex: 9999 };
+  let positionStyle = {
+    position: "fixed",
+    zIndex: 9999,
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    padding: "16px",
+    maxHeight: "100vh",
+    pointerEvents: "none",
+  };
   switch (position) {
     case "bottom-center":
-      positionStyle = { ...positionStyle, left: '50%', bottom: 20, transform: 'translateX(-50%)' };
+      positionStyle = {
+        ...positionStyle,
+        left: "50%",
+        bottom: 0,
+        transform: "translateX(-50%)",
+      };
       break;
     case "top-center":
-      positionStyle = { ...positionStyle, left: '50%', top: 20, transform: 'translateX(-50%)' };
+      positionStyle = {
+        ...positionStyle,
+        left: "50%",
+        top: 0,
+        transform: "translateX(-50%)",
+      };
       break;
     case "top-right":
-      positionStyle = { ...positionStyle, top: 20, right: 20 };
+      positionStyle = { ...positionStyle, top: 0, right: 0 };
       break;
     case "bottom-left":
-      positionStyle = { ...positionStyle, bottom: 20, left: 20 };
+      positionStyle = { ...positionStyle, bottom: 0, left: 0 };
       break;
     case "top-left":
-      positionStyle = { ...positionStyle, top: 20, left: 20 };
+      positionStyle = { ...positionStyle, top: 0, left: 0 };
       break;
     case "bottom-right":
     default:
-      positionStyle = { ...positionStyle, bottom: 20, right: 20 };
+      positionStyle = { ...positionStyle, bottom: 0, right: 0 };
       break;
   }
+
+  // Animation styles
+  const getAnimationStyle = (idx) => {
+    return {
+      pointerEvents: "auto",
+      transform: `translateY(${idx * 8}px)`,
+      opacity: 1 - idx * 0.1,
+      transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+    };
+  };
 
   return (
     <div
@@ -73,7 +102,16 @@ export function ToastContainer({
         if (typeof renderToast === "function") {
           return renderToast(toast, idx);
         }
-        const common = { ...toastProps, ...toast, key: idx };
+        const common = {
+          ...toastProps,
+          ...toast,
+          key: idx,
+          style: {
+            ...getAnimationStyle(idx),
+            ...toastProps.style,
+            ...toast.style,
+          },
+        };
         switch (toast.variant) {
           case "success":
             return <ToastSuccess {...common} />;

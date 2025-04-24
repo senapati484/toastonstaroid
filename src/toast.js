@@ -1,7 +1,32 @@
 // toast.js
 export function toast(message, options = {}) {
-  if (typeof window === 'undefined') return;
-  const toastObj = { message, ...options };
+  if (typeof window === "undefined") return;
+
+  const toastObj = {
+    message,
+    ...options,
+    // Default options
+    duration: options.duration || 4000,
+    size: options.size || "large",
+    // Add default icons based on variant
+    icon:
+      options.icon ||
+      (() => {
+        switch (options.variant) {
+          case "success":
+            return "✅";
+          case "error":
+            return "❌";
+          case "warning":
+            return "⚠️";
+          case "info":
+            return "ℹ️";
+          default:
+            return "";
+        }
+      })(),
+  };
+
   if (window.__TOAST_UPDATE__) {
     window.__TOAST_UPDATE__(toastObj);
   } else {
@@ -11,7 +36,7 @@ export function toast(message, options = {}) {
 }
 
 // Hook into ToastContainer
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.__TOAST_UPDATE__ = (toast) => {
     if (window.__TOAST_CONTAINER_UPDATE__) {
       window.__TOAST_CONTAINER_UPDATE__(toast);

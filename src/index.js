@@ -1,2 +1,4 @@
-export { ToastContainer } from './ToastContainer';
-export { toast } from './toast';
+import { ToastContainer } from "./ToastContainer";
+import { toast } from "./toast";
+
+export { ToastContainer, toast };

@@ -1,7 +1,28 @@
 {
-  "devDependencies": {
-    "microbundle": "^0.15.1"
-  },
+  "name": "toastonstaroid",
+  "version": "1.0.0",
+  "description": "A simple React toast notification package.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "author": "Sayan senapati",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+  },
+  "scripts": {
+    "build": "microbundle --jsx React.createElement",
+    "dev": "microbundle watch --jsx React.createElement",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "license": "MIT"
 }
