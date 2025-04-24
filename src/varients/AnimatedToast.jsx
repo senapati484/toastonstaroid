@@ -236,7 +236,7 @@ export default function AnimatedToast({
           e.target.style.opacity = "0.5";
         }}
       >
-        ×
+        X
       </button>
     </div>
   );

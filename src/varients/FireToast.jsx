@@ -136,8 +136,7 @@ export default function FireToast({
         color: "#FFFFFF",
         boxShadow:
           "0 8px 16px rgba(255, 87, 34, 0.2), 0 0 20px rgba(255, 87, 34, 0.4)",
-        width: "420px",
-        maxWidth: "90vw",
+        width: "320px",
         minHeight: "60px",
         borderRadius: "12px",
         padding: "16px 24px",
@@ -171,7 +170,7 @@ export default function FireToast({
           }}
         />
       </div>
-      <span
+      {/* <span
         style={{
           marginRight: "16px",
           fontSize: "24px",
@@ -179,7 +178,7 @@ export default function FireToast({
         }}
       >
         🔥
-      </span>
+      </span> */}
       <div
         ref={contentRef}
         style={{
@@ -242,17 +241,17 @@ export default function FireToast({
         onClick={onClose}
         style={{
           background: "transparent",
-          border: "none",
           color: "white",
           fontSize: "18px",
           marginLeft: "12px",
+          width: "24px",
+          height: "24px",
+          padding: 0,
+          border: "none",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width: "24px",
-          height: "24px",
-          padding: 0,
           position: "relative",
           zIndex: 2,
           opacity: 0.7,
@@ -268,8 +267,35 @@ export default function FireToast({
           e.target.style.opacity = "0.7";
         }}
       >
-        ×
+        X
       </button>
+      {/* <button
+        onClick={close}
+        style={{
+          background: "rgba(255, 87, 34, 0.2)",
+          border: "1px solid rgba(255, 87, 34, 0.3)",
+          color: "inherit",
+          padding: "8px 16px",
+          marginLeft: "16px",
+          cursor: "pointer",
+          fontSize: "14px",
+          fontWeight: 500,
+          borderRadius: "6px",
+          transition: "all 0.2s ease",
+          position: "relative",
+          zIndex: 1,
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.background = "rgba(255, 87, 34, 0.3)";
+          e.target.style.transform = "scale(1.05)";
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.background = "rgba(255, 87, 34, 0.2)";
+          e.target.style.transform = "scale(1)";
+        }}
+      >
+        Close
+      </button> */}
     </div>
   );
 }

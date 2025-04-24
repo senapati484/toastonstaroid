@@ -44,7 +44,7 @@ const ToastDefault = ({
       ref={toastRef}
       style={{
         position: "relative",
-        width: "420px",
+        width: "320px",
         maxWidth: "90vw",
         padding: "16px",
         borderRadius: "12px",
@@ -93,7 +93,7 @@ const ToastDefault = ({
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
           >
-            ✕
+            X
           </button>
         </div>
         {description && (

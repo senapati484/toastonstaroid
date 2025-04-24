@@ -4,7 +4,7 @@ import { variantStyles } from "./styles";
 export default function ToastWarning({
   message,
   style = {},
-  icon = variantStyles.warning.icon,
+
   description,
   action,
   ...rest
@@ -19,7 +19,7 @@ export default function ToastWarning({
         background: styles.background,
         color: styles.color,
         boxShadow: `0 4px 12px ${styles.shadowColor}, 0 1px 2px rgba(0, 0, 0, 0.04)`,
-        width: "356px",
+        width: "320px",
         borderRadius: "8px",
         padding: "12px",
         gap: "4px",
@@ -53,20 +53,7 @@ export default function ToastWarning({
               gap: "8px",
             }}
           >
-            {icon && (
-              <span
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  fontSize: "15px",
-                  color: styles.iconColor,
-                  fontWeight: "bold",
-                  lineHeight: "1",
-                }}
-              >
-                {icon}
-              </span>
-            )}
+
             <span
               style={{
                 fontWeight: 500,

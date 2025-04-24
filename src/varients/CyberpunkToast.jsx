@@ -173,7 +173,7 @@ export default function CyberpunkToast({
         background: "rgba(10, 12, 18, 0.95)",
         color: "#fff",
         boxShadow: "0 8px 32px rgba(0, 255, 255, 0.2)",
-        width: "420px",
+        width: "320px",
         maxWidth: "90vw",
         minHeight: "60px",
         borderRadius: "12px",
@@ -209,7 +209,7 @@ export default function CyberpunkToast({
           }}
         />
       </div>
-      <span
+      {/* <span
         style={{
           marginRight: "16px",
           fontSize: "24px",
@@ -217,7 +217,7 @@ export default function CyberpunkToast({
         }}
       >
         🤖
-      </span>
+      </span> */}
       <div style={{ flex: 1, position: "relative", zIndex: 1 }}>
         <GlitchText text={message} />
         {description && (
@@ -296,7 +296,7 @@ export default function CyberpunkToast({
           e.target.style.textShadow = "0 0 5px rgba(0, 255, 255, 0.5)";
         }}
       >
-        ×
+        X
       </button>
     </div>
   );

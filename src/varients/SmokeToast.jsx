@@ -145,7 +145,7 @@ export default function SmokeToast({
         background: "linear-gradient(135deg, #2c3e50, #34495e)",
         color: "#FFFFFF",
         boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1)",
-        width: "420px",
+        width: "320px",
         maxWidth: "90vw",
         minHeight: "60px",
         borderRadius: "12px",
@@ -181,7 +181,7 @@ export default function SmokeToast({
           }}
         />
       </div>
-      <span
+      {/* <span
         style={{
           marginRight: "16px",
           fontSize: "24px",
@@ -190,7 +190,7 @@ export default function SmokeToast({
         }}
       >
         💨
-      </span>
+      </span> */}
       <div
         ref={contentRef}
         style={{
@@ -277,8 +277,36 @@ export default function SmokeToast({
           e.target.style.opacity = "0.7";
         }}
       >
-        ×
+        X
       </button>
+      {/* <button
+        onClick={onClose}
+        style={{
+          background: "rgba(255, 255, 255, 0.1)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          color: "inherit",
+          padding: "8px 16px",
+          marginLeft: "16px",
+          cursor: "pointer",
+          fontSize: "14px",
+          fontWeight: 500,
+          borderRadius: "6px",
+          transition: "all 0.3s ease",
+          position: "relative",
+          zIndex: 1,
+          backdropFilter: "blur(5px)",
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.background = "rgba(255, 255, 255, 0.2)";
+          e.target.style.transform = "translateY(-1px)";
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.background = "rgba(255, 255, 255, 0.1)";
+          e.target.style.transform = "translateY(0)";
+        }}
+      >
+        {action.label}
+      </button> */}
     </div>
   );
 }

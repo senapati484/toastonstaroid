@@ -62,7 +62,7 @@ export default function GlassToast({
         background: currentStyle.background,
         color: currentStyle.color,
         border: currentStyle.border,
-        width: "420px",
+        width: "320px",
         minHeight: "48px",
         borderRadius: "16px",
         padding: "16px 20px",
@@ -161,7 +161,7 @@ export default function GlassToast({
           e.target.style.transform = "scale(1) rotate(0deg)";
         }}
       >
-        ×
+        X
       </button>
     </div>
   );
