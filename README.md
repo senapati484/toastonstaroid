@@ -1,14 +1,20 @@
 # ToastOnStaroid 🚀
 
-A powerful and customizable toast notification system for React with unique animated variants.
+A modern, customizable toast notification system for React applications with beautiful animations and multiple variants.
 
 ## Features ✨
 
-- 🚀 Easy to use
-- 🎨 Beautiful, modern design
-- 🎯 Multiple variants (success, error, warning, info)
-- ⚡️ Smooth animations
-- 📱 Responsive
+- 🚀 Easy to use with simple API
+- 🎨 Multiple variants: Default, Glass, and more
+- 🎯 Customizable styles
+- 🔥 Hover effects
+- 📦 Lightweight
+- 💫 Glass morphism effects
+- 🎨 Gradient backgrounds
+- ⚡️ Smooth transitions
+- 📱 Responsive design
+- 🎭 Beautiful animations
+- 🎯 Customizable styles
 - 🎛 Customizable
 - 🪶 Lightweight
 - ⚛️ Compatible with React 16.8+ through React 19
@@ -29,290 +35,139 @@ npm install toastonstaroid --legacy-peer-deps
 yarn add toastonstaroid --ignore-peer-deps
 ```
 
-## Basic Usage 🚀
+## Quick Start
+
+1. First, wrap your app with the `ToastContainer`:
 
 ```jsx
-import React from "react";
-import { ToastContainer, toast } from "toastonstaroid";
+import { ToastContainer } from "toastonstaroid";
 
 function App() {
-  const showToast = () => {
-    toast("This is a basic toast message");
-  };
-
   return (
-    <div>
-      <button onClick={showToast}>Show Toast</button>
-      <ToastContainer /> {/* Place this once in your app */}
-    </div>
+    <>
+      <YourApp />
+      <ToastContainer position="bottom-right" />
+    </>
   );
 }
 ```
 
-## Toast Container
-
-The `ToastContainer` component can be customized with the following props:
+2. Then use the toast methods anywhere in your app:
 
 ```jsx
-<ToastContainer
-  position="bottom-right" // 'top-right', 'top-left', 'bottom-right', 'bottom-left', 'top-center', 'bottom-center'
-  containerStyle={
-    {
-      /* Custom styles for the container */
-    }
-  }
-/>
+import { useToastStore } from "toastonstaroid";
+
+function YourComponent() {
+  const { success, error, warning, info } = useToastStore();
+
+  const handleClick = () => {
+    success("Operation completed successfully!");
+    // or
+    error("Something went wrong!");
+    // or
+    warning("Please be careful!");
+    // or
+    info("Here's some information!");
+  };
+
+  return <button onClick={handleClick}>Show Toast</button>;
+}
 ```
 
-## Basic Toast Types
+## Toast Variants
 
-The library comes with standard toast types:
+### Default Toast
 
-```jsx
-// Success toast
-toast.success("Operation completed successfully");
-
-// Error toast
-toast.error("An error occurred");
-
-// Warning toast
-toast.warning("Warning: This action cannot be undone");
-
-// Info toast
-toast.info("The system will undergo maintenance tonight");
-```
-
-## Special Animated Variants
-
-### Magic Toast
-
-A toast with a magical gradient background and blur effect.
+The default toast variant features a modern design with gradient backgrounds and smooth animations.
 
 ```jsx
-toast.magic("✨ Magic happens here!", {
-  description: "This toast has a magical appearance",
-  duration: 5000, // in milliseconds
-  action: {
-    label: "Abracadabra",
-    onClick: () => console.log("Magic action clicked"),
-  },
-});
-```
-
-### Fire Toast 🔥
-
-A toast with animated flame effects.
-
-```jsx
-toast.fire("🔥 Hot content alert!", {
-  description: "This message is on fire",
-  duration: 6000, // Flames need a bit more time to burn
-  action: {
-    label: "Extinguish",
-    onClick: () => console.log("Fire extinguished"),
-  },
-});
-```
-
-### Smoke Toast 💨
-
-A toast with drifting smoke particles.
-
-```jsx
-toast.smoke("💨 Message fading away...", {
-  description: "Like smoke in the wind",
-  duration: 7000, // Give time for smoke to drift
-  action: {
-    label: "Clear",
-    onClick: () => console.log("Smoke cleared"),
-  },
-});
-```
-
-### Cyberpunk Toast 🤖
-
-A futuristic toast with neon colors and glitch effects.
-
-```jsx
-toast.cyberpunk("SYSTEM ALERT", {
-  description: "Neural connection established",
-  duration: 6000,
-  action: {
-    label: "JACK IN",
-    onClick: () => console.log("Connected to the system"),
-  },
-});
-```
-
-## Customization Options
-
-All toast variants accept these common options:
-
-```jsx
-toast("Customizable message", {
-  // Basic options
-  duration: 5000, // Duration in milliseconds
-  description: "Additional details shown below the main message",
-
-  // Styling
-  style: {
-    // Custom styles to override defaults
-    background: "#000",
-    color: "#fff",
-    // ... any valid CSS properties
-  },
-
-  // Action button
-  action: {
-    label: "Action",
-    onClick: () => {
-      // Handle action click
-    },
-  },
-
-  // Position override (will be grouped with other toasts in that position)
-  position: "top-center", // Overrides the container's default position for this toast
-});
-```
-
-## Advanced Usage 🔧
-
-```jsx
-// Toast with description and action
-toast.success("Changes saved!", {
-  description: "Your profile has been updated successfully",
+success("Success message", {
+  description: "Additional information",
   duration: 5000,
   action: {
     label: "Undo",
-    onClick: () => {
-      console.log("Undo clicked");
-    },
+    onClick: () => console.log("Undo clicked"),
   },
 });
-
-// Custom styling
-toast.info("Custom styled toast", {
-  style: {
-    background: "linear-gradient(to right, #00b09b, #96c93d)",
-  },
-});
-
-// Positioning
-function App() {
-  return (
-    <ToastContainer
-      position="top-right" // 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'
-    />
-  );
-}
 ```
 
-## ✨ Unique Animated Toasts
+Features:
 
-Toastonstaroid comes with a set of unique, eye-catching animated toasts powered by Anime.js!
+- Gradient backgrounds
+- Smooth hover animations
+- Rotating close button
+- Responsive design
+- Customizable styles
 
-### 🔥 Fire Toast
+### Glass Toast
 
-The most eye-catching toast variant with animated flames and burning text effect:
+A modern glass morphism variant with blur effects and semi-transparent backgrounds.
 
 ```jsx
-// Fire toast with animated flames
-toast.fire("🔥 This message is on fire!", {
-  description: "Watch out, it's getting hot in here!",
+success("Success message", {
+  variant: "glass",
+  description: "Additional information",
+  duration: 5000,
   action: {
-    label: "Cool Down",
-    onClick: () => console.log("Cooling down..."),
+    label: "Undo",
+    onClick: () => console.log("Undo clicked"),
   },
 });
 ```
 
-Features of the Fire Toast:
+Features:
 
-- Animated flames using particle effects
-- Glowing text with burning animation
-- Dark theme with orange accents
-- Smooth entrance animation
-- Progress bar with fire effect
-- Interactive hover states with heat effect
-
-### ✨ Magic Toast
-
-```jsx
-// Magic toast with ripple effect and gradient background
-toast.magic("✨ Something magical happened!", {
-  description: "Your wishes have been granted",
-  action: {
-    label: "Cast Again",
-    onClick: () => console.log("Magic!"),
-  },
-});
-```
-
-### Available Animations
-
-- `ripple`: Smooth scale and fade entrance
-- `bounce`: Bouncy entrance from top
-- `spin`: 3D rotation entrance
-- `glitch`: Glitch effect entrance
-- `fire`: Animated flames effect (Fire toast only)
-- Default: Simple fade in
-
-### Animation Options
-
-You can customize any toast with these animations:
-
-```jsx
-toast.success("Custom Animation!", {
-  animation: "ripple", // Choose any animation
-  duration: 7000, // Duration in ms
-  style: {
-    background: "linear-gradient(135deg, #00b09b, #96c93d)",
-    backdropFilter: "blur(8px)", // Glass effect
-  },
-});
-```
-
-### Features of Animated Toasts
-
-- 🎨 Beautiful gradient backgrounds
-- ⚡️ Smooth animations powered by Anime.js
-- 🌟 Progress bar indicator
-- 🎭 Multiple animation styles
-- 💫 Glass morphism effects
-- 🎯 Interactive hover states
-- 🎪 Emoji indicators
-- 🌈 Custom styling support
+- Glass morphism effect with backdrop blur
+- Semi-transparent backgrounds
+- Subtle borders
+- Smooth entrance animations
+- Interactive hover states
 
 ## API Reference 📚
 
 ### ToastContainer Props
 
-| Prop           | Type   | Default        | Description                     |
-| -------------- | ------ | -------------- | ------------------------------- |
-| position       | string | 'bottom-right' | Position of the toast container |
-| containerStyle | object | {}             | Custom styles for the container |
+| Prop           | Type   | Default        | Description                                                                                                                     |
+| -------------- | ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| position       | string | "bottom-right" | Position of the toast container. Options: "top-right", "top-left", "bottom-right", "bottom-left", "top-center", "bottom-center" |
+| containerStyle | object | {}             | Custom styles for the container                                                                                                 |
 
-### Toast Function
+### Toast Methods
 
-```typescript
-toast(message: string, options?: ToastOptions)
+```jsx
+const { success, error, warning, info } = useToastStore();
 
-// Variants
-toast.success(message: string, options?: ToastOptions)
-toast.error(message: string, options?: ToastOptions)
-toast.warning(message: string, options?: ToastOptions)
-toast.info(message: string, options?: ToastOptions)
+// Basic usage
+success("Success message");
+error("Error message");
+warning("Warning message");
+info("Info message");
+
+// With options
+success("Success message", {
+  duration: 5000, // Duration in milliseconds
+  description: "Additional information",
+  action: {
+    label: "Undo",
+    onClick: () => console.log("Undo clicked"),
+  },
+  variant: "glass", // Optional: "default" or "glass"
+  style: {
+    // Custom styles
+    background: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+  },
+});
 ```
 
-### ToastOptions
+### Toast Options
 
-| Option      | Type   | Default   | Description                                                      |
-| ----------- | ------ | --------- | ---------------------------------------------------------------- |
-| description | string | -         | Additional description text                                      |
-| duration    | number | 5000      | Duration in milliseconds                                         |
-| variant     | string | 'default' | Toast variant ('success', 'error', 'warning', 'info', 'default') |
-| action      | object | -         | Action button configuration                                      |
-| style       | object | -         | Custom styles for the toast                                      |
+| Option      | Type   | Default   | Description                          |
+| ----------- | ------ | --------- | ------------------------------------ |
+| duration    | number | 5000      | Duration in milliseconds             |
+| description | string | -         | Additional description text          |
+| action      | object | -         | Action button configuration          |
+| variant     | string | "default" | Toast variant ("default" or "glass") |
+| style       | object | -         | Custom styles for the toast          |
 
 ### Action Object
 
@@ -321,14 +176,108 @@ toast.info(message: string, options?: ToastOptions)
 | label    | string   | Text for the action button   |
 | onClick  | function | Click handler for the action |
 
-## License 📄
+## Styling
 
-MIT © [Sayan Senapati]
+### Default Variant Styles
+
+```jsx
+const styles = {
+  success: {
+    background: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+    color: "#FFFFFF",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+  },
+  error: {
+    background: "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
+    color: "#FFFFFF",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+  },
+  warning: {
+    background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+    color: "#FFFFFF",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+  },
+  info: {
+    background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
+    color: "#FFFFFF",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+  },
+  default: {
+    background: "linear-gradient(135deg, #1F2937 0%, #111827 100%)",
+    color: "#FFFFFF",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+  },
+};
+```
+
+### Glass Variant Styles
+
+```jsx
+const styles = {
+  success: {
+    background: "rgba(16, 185, 129, 0.1)",
+    color: "#10B981",
+    border: "1px solid rgba(16, 185, 129, 0.2)",
+  },
+  error: {
+    background: "rgba(239, 68, 68, 0.1)",
+    color: "#EF4444",
+    border: "1px solid rgba(239, 68, 68, 0.2)",
+  },
+  warning: {
+    background: "rgba(245, 158, 11, 0.1)",
+    color: "#F59E0B",
+    border: "1px solid rgba(245, 158, 11, 0.2)",
+  },
+  info: {
+    background: "rgba(59, 130, 246, 0.1)",
+    color: "#3B82F6",
+    border: "1px solid rgba(59, 130, 246, 0.2)",
+  },
+  default: {
+    background: "rgba(31, 41, 55, 0.1)",
+    color: "#1F2937",
+    border: "1px solid rgba(31, 41, 55, 0.2)",
+  },
+};
+```
 
 ## Best Practices
 
-- Keep toast messages concise and actionable
-- Use the appropriate toast variant for the context
-- Don't overuse animated variants as they can be distracting
-- Consider placement carefully - bottom positions are less intrusive
-- Set appropriate duration based on the content and importance
+1. **Message Length**
+
+   - Keep messages concise and clear
+   - Use description for additional details
+   - Avoid long messages that might wrap
+
+2. **Duration**
+
+   - Success messages: 3-5 seconds
+   - Error messages: 5-7 seconds
+   - Warning messages: 4-6 seconds
+   - Info messages: 3-5 seconds
+
+3. **Positioning**
+
+   - Use bottom positions for less intrusive notifications
+   - Use top positions for critical alerts
+   - Consider mobile responsiveness
+
+4. **Actions**
+
+   - Use clear, actionable labels
+   - Keep actions simple and direct
+   - Use actions sparingly
+
+5. **Variants**
+   - Use default variant for most cases
+   - Use glass variant for a modern, translucent look
+   - Match variant to your app's design system
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License 📄
+
+MIT © [Sayan Senapati]

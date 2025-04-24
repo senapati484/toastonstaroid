@@ -1,34 +1,35 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import anime from "animejs";
 
 const styles = {
   success: {
-    background: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
+    background: "rgba(16, 185, 129, 0.1)",
+    color: "#10B981",
+    border: "1px solid rgba(16, 185, 129, 0.2)",
   },
   error: {
-    background: "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
+    background: "rgba(239, 68, 68, 0.1)",
+    color: "#EF4444",
+    border: "1px solid rgba(239, 68, 68, 0.2)",
   },
   warning: {
-    background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
+    background: "rgba(245, 158, 11, 0.1)",
+    color: "#F59E0B",
+    border: "1px solid rgba(245, 158, 11, 0.2)",
   },
   info: {
-    background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
+    background: "rgba(59, 130, 246, 0.1)",
+    color: "#3B82F6",
+    border: "1px solid rgba(59, 130, 246, 0.2)",
   },
   default: {
-    background: "linear-gradient(135deg, #1F2937 0%, #111827 100%)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
+    background: "rgba(31, 41, 55, 0.1)",
+    color: "#1F2937",
+    border: "1px solid rgba(31, 41, 55, 0.2)",
   },
 };
 
-export default function ToastDefault({
+export default function GlassToast({
   message,
   variant = "default",
   style = {},
@@ -37,10 +38,24 @@ export default function ToastDefault({
   onClose,
   ...rest
 }) {
+  const toastRef = useRef(null);
   const currentStyle = styles[variant] || styles.default;
+
+  useEffect(() => {
+    if (toastRef.current) {
+      anime({
+        targets: toastRef.current,
+        translateY: [-20, 0],
+        opacity: [0, 1],
+        duration: 600,
+        easing: "cubicBezier(.21,1.02,.73,1)",
+      });
+    }
+  }, []);
 
   return (
     <div
+      ref={toastRef}
       style={{
         display: "flex",
         alignItems: "center",
@@ -56,6 +71,7 @@ export default function ToastDefault({
         lineHeight: "1.5",
         position: "relative",
         overflow: "hidden",
+        backdropFilter: "blur(12px)",
         boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
         transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         "@media (max-width: 640px)": {
@@ -92,9 +108,9 @@ export default function ToastDefault({
         <button
           onClick={action.onClick}
           style={{
-            background: "rgba(255, 255, 255, 0.15)",
+            background: "rgba(255, 255, 255, 0.2)",
             backdropFilter: "blur(8px)",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
+            border: "1px solid rgba(255, 255, 255, 0.3)",
             color: "inherit",
             padding: "8px 16px",
             marginLeft: "16px",
@@ -106,11 +122,11 @@ export default function ToastDefault({
             letterSpacing: "0.3px",
           }}
           onMouseEnter={(e) => {
-            e.target.style.background = "rgba(255, 255, 255, 0.25)";
+            e.target.style.background = "rgba(255, 255, 255, 0.3)";
             e.target.style.transform = "translateY(-1px)";
           }}
           onMouseLeave={(e) => {
-            e.target.style.background = "rgba(255, 255, 255, 0.15)";
+            e.target.style.background = "rgba(255, 255, 255, 0.2)";
             e.target.style.transform = "translateY(0)";
           }}
         >
@@ -120,9 +136,9 @@ export default function ToastDefault({
       <button
         onClick={onClose}
         style={{
-          background: "rgba(255, 255, 255, 0.15)",
+          background: "rgba(255, 255, 255, 0.2)",
           backdropFilter: "blur(8px)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
+          border: "1px solid rgba(255, 255, 255, 0.3)",
           color: "inherit",
           width: "28px",
           height: "28px",
@@ -137,11 +153,11 @@ export default function ToastDefault({
           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
         onMouseEnter={(e) => {
-          e.target.style.background = "rgba(255, 255, 255, 0.25)";
+          e.target.style.background = "rgba(255, 255, 255, 0.3)";
           e.target.style.transform = "scale(1.1) rotate(90deg)";
         }}
         onMouseLeave={(e) => {
-          e.target.style.background = "rgba(255, 255, 255, 0.15)";
+          e.target.style.background = "rgba(255, 255, 255, 0.2)";
           e.target.style.transform = "scale(1) rotate(0deg)";
         }}
       >
