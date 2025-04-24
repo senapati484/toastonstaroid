@@ -16,13 +16,13 @@ export function toast(message, options = {}) {
       (() => {
         switch (options.variant) {
           case "success":
-            return "✓";
+          // return "✓";
           case "error":
-            return "✕";
+          // return "✕";
           case "warning":
-            return "⚠";
+          // return "⚠";
           case "info":
-            return "ℹ";
+          // return "ℹ";
           default:
             return "";
         }

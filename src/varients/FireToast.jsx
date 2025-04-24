@@ -136,8 +136,8 @@ export default function FireToast({
         color: "#FFFFFF",
         boxShadow:
           "0 8px 16px rgba(255, 87, 34, 0.2), 0 0 20px rgba(255, 87, 34, 0.4)",
-        minWidth: "300px",
-        maxWidth: "500px",
+        width: "420px",
+        maxWidth: "90vw",
         minHeight: "60px",
         borderRadius: "12px",
         padding: "16px 24px",
@@ -155,7 +155,7 @@ export default function FireToast({
       <div
         style={{
           position: "absolute",
-          top: 0,
+          bottom: 0,
           left: 0,
           right: 0,
           height: "3px",

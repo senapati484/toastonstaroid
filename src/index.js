@@ -1,9 +1,12 @@
 import React from "react";
 import { ToastContainer } from "./ToastContainer";
 import { useToastStore } from "./store";
+import ToastDefault from "./varients/ToastDefault";
+import GlassToast from "./varients/GlassToast";
+import SmokeToast from "./varients/SmokeToast";
+import ShadowToast from "./varients/ShadowToast";
 import AnimatedToast from "./varients/AnimatedToast";
 import FireToast from "./varients/FireToast";
-import SmokeToast from "./varients/SmokeToast";
 import CyberpunkToast from "./varients/CyberpunkToast";
 
 const toast = (message, options = {}) => {
@@ -11,14 +14,18 @@ const toast = (message, options = {}) => {
     useToastStore.getState().addToast({
       message,
       component:
-        options.variant === "fire" ? (
-          <FireToast message={message} {...options} />
+        options.variant === "glass" ? (
+          <GlassToast message={message} {...options} />
         ) : options.variant === "smoke" ? (
           <SmokeToast message={message} {...options} />
+        ) : options.variant === "shadow" ? (
+          <ShadowToast message={message} {...options} />
+        ) : options.variant === "fire" ? (
+          <FireToast message={message} {...options} />
         ) : options.variant === "cyberpunk" ? (
           <CyberpunkToast message={message} {...options} />
         ) : (
-          <AnimatedToast message={message} {...options} />
+          <ToastDefault message={message} {...options} />
         ),
       ...options,
     });
@@ -29,19 +36,32 @@ const toast = (message, options = {}) => {
 
 // Variant methods
 toast.success = (message, options = {}) => {
-  toast(message, { variant: "success", animation: "ripple", ...options });
+  toast(message, { variant: "success", ...options });
 };
 
 toast.error = (message, options = {}) => {
-  toast(message, { variant: "error", animation: "glitch", ...options });
+  toast(message, { variant: "error", ...options });
 };
 
 toast.warning = (message, options = {}) => {
-  toast(message, { variant: "warning", animation: "bounce", ...options });
+  toast(message, { variant: "warning", ...options });
 };
 
 toast.info = (message, options = {}) => {
-  toast(message, { variant: "info", animation: "spin", ...options });
+  toast(message, { variant: "info", ...options });
+};
+
+// Special variants
+toast.glass = (message, options = {}) => {
+  toast(message, { variant: "glass", ...options });
+};
+
+toast.smoke = (message, options = {}) => {
+  toast(message, { variant: "smoke", ...options });
+};
+
+toast.shadow = (message, options = {}) => {
+  toast(message, { variant: "shadow", ...options });
 };
 
 // Special animated variants
@@ -62,15 +82,6 @@ toast.fire = (message, options = {}) => {
   toast(message, {
     variant: "fire",
     duration: 6000, // Slightly longer duration for the fire effect
-    ...options,
-  });
-};
-
-// Smoke variant with drifting particles
-toast.smoke = (message, options = {}) => {
-  toast(message, {
-    variant: "smoke",
-    duration: 7000, // Longer duration for the smoke effect
     ...options,
   });
 };

@@ -1,8 +1,35 @@
 import React, { useEffect, useRef } from "react";
 import anime from "animejs";
-import { variantStyles } from "./styles";
 
-const ToastDefault = ({
+const variantStyles = {
+  success: {
+    background: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+    color: "#FFFFFF",
+    shadow: "0 8px 32px rgba(16, 185, 129, 0.3)",
+  },
+  error: {
+    background: "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
+    color: "#FFFFFF",
+    shadow: "0 8px 32px rgba(239, 68, 68, 0.3)",
+  },
+  warning: {
+    background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+    color: "#FFFFFF",
+    shadow: "0 8px 32px rgba(245, 158, 11, 0.3)",
+  },
+  info: {
+    background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
+    color: "#FFFFFF",
+    shadow: "0 8px 32px rgba(59, 130, 246, 0.3)",
+  },
+  default: {
+    background: "linear-gradient(135deg, #1F2937 0%, #111827 100%)",
+    color: "#FFFFFF",
+    shadow: "0 8px 32px rgba(31, 41, 55, 0.3)",
+  },
+};
+
+const ShadowToast = ({
   message,
   description,
   action,
@@ -148,4 +175,4 @@ const ToastDefault = ({
   );
 };
 
-export default ToastDefault;
+export default ShadowToast;

@@ -173,8 +173,8 @@ export default function CyberpunkToast({
         background: "rgba(10, 12, 18, 0.95)",
         color: "#fff",
         boxShadow: "0 8px 32px rgba(0, 255, 255, 0.2)",
-        minWidth: "300px",
-        maxWidth: "500px",
+        width: "420px",
+        maxWidth: "90vw",
         minHeight: "60px",
         borderRadius: "12px",
         padding: "16px 24px",
@@ -192,7 +192,7 @@ export default function CyberpunkToast({
       <div
         style={{
           position: "absolute",
-          top: 0,
+          bottom: 0,
           left: 0,
           right: 0,
           height: "2px",
