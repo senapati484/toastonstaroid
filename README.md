@@ -4,7 +4,20 @@
 
 [![npm version](https://img.shields.io/npm/v/toastonstaroid.svg?style=flat-square)](https://www.npmjs.com/package/toastonstaroid)
 [![npm downloads](https://img.shields.io/npm/dm/toastonstaroid.svg?style=flat-square)](https://www.npmjs.com/package/toastonstaroid)
-[![license](https://img.shields.io/npm/l/toastonstaroid.svg?style=flat-square)](https://github.com/yourusername/toastonstaroid/blob/main/LICENSE)
+[![license](https://img.shields.io/npm/l/toastonstaroid.svg?style=flat-square)](https://github.com/senapati484/toastonstaroid/blob/main/LICENSE)
+[![Website](https://img.shields.io/badge/website-sayan4.vercel.app-blue?style=flat-square)](https://sayan4.vercel.app)
+
+<div align="center">
+  <img src="./assets/demo.gif" alt="Toastonstaroid Demo" width="600px" />
+  
+  <p align="center">
+    <a href="#-features">Features</a> •
+    <a href="#-installation">Installation</a> •
+    <a href="#-quick-start">Quick Start</a> •
+    <a href="#-variants">Variants</a> •
+    <a href="#-docs">Documentation</a>
+  </p>
+</div>
 
 ## ✨ Features
 
@@ -19,6 +32,23 @@
 - 🌓 **Theme Support**: Light/Dark modes + custom themes
 - 🎭 **Rich Animations**: 10+ animation presets
 - ⚛️ **React 16.8+ Compatible**: Supports all modern React versions
+
+## 🎯 Why Toastonstaroid?
+
+- 🎨 **Beautiful By Default**: No configuration needed for stunning toasts
+- 🔌 **Plugin & Play**: Works instantly with any React project
+- 🎮 **Interactive**: Rich interaction effects and animations
+- 📱 **Responsive**: Perfect on all devices
+- 🎛 **Customizable**: Every aspect can be customized
+- 🚀 **Optimized**: High performance with minimal bundle size
+
+## 🛠 Tech Stack
+
+- ⚛️ React 16.8+ (Hooks)
+- 💫 Anime.js for animations
+- 🏪 Zustand for state management
+- 📦 Rollup for bundling
+- 🎨 CSS-in-JS for styling
 
 ## 📦 Installation
 
@@ -246,6 +276,10 @@ Available animations:
 - `elastic` - Springy motion
 - `rotate` - Spin effect
 
+## 🎨 Live Demo
+
+Check out our interactive demo at [Toastonstaroid Playground](https://sayan4.vercel.app/projects/toastonstaroid)
+
 ## 🛠 Advanced Usage
 
 ### Custom Variants
@@ -329,14 +363,32 @@ addToast({
    - Toast container has z-index: 9999
    - Use custom z-index if needed
 
+## 💖 Support
+
+If you like this project, please consider:
+- Giving it a ⭐️ on GitHub
+- Sharing it with friends
+- [Following me](https://sayan4.vercel.app) for updates
+
 ## 🤝 Contributing
 
-We welcome contributions! Please check our [Contributing Guide](CONTRIBUTING.md) for details.
+We love contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+## 👨‍💻 Author
+
+**Sayan Senapati**
+- Website: [sayan4.vercel.app](https://sayan4.vercel.app)
+- GitHub: [@senapati484](https://github.com/senapati484)
+- LinkedIn: [Sayan Senapati](https://linkedin.com/in/your-profile)
 
 ## 📝 License
 
-MIT © [Your Name]
+MIT © [Sayan Senapati](https://sayan4.vercel.app)
 
 ---
 
-Made with ❤️ by [Your Name]
+<div align="center">
+  <strong>Made with ❤️ by <a href="https://sayan4.vercel.app">Sayan Senapati</a></strong>
+  <br />
+  <sub>Want to create amazing libraries? <a href="https://sayan4.vercel.app/contact">Let's talk!</a></sub>
+</div>
