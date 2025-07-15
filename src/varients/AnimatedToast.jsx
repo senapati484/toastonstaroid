@@ -1,120 +1,238 @@
 import React, { useEffect, useRef } from "react";
 import anime from "animejs";
+import { variantStyles, animations, dimensions, effects } from "./styles";
 
-const styles = {
-  success: {
-    background: "#ECFDF5",
-    color: "#065F46",
-    borderColor: "#10B981",
-    icon: "✓",
-    iconColor: "#10B981",
-  },
-  error: {
-    background: "#FEF2F2",
-    color: "#991B1B",
-    borderColor: "#EF4444",
-    icon: "✕",
-    iconColor: "#EF4444",
-  },
-  warning: {
-    background: "#FFFBEB",
-    color: "#92400E",
-    borderColor: "#F59E0B",
-    icon: "⚠",
-    iconColor: "#F59E0B",
-  },
-  info: {
-    background: "#EFF6FF",
-    color: "#1E40AF",
-    borderColor: "#3B82F6",
-    icon: "ℹ",
-    iconColor: "#3B82F6",
-  },
-  magic: {
-    background: "#F5F3FF",
-    color: "#5B21B6",
-    borderColor: "#8B5CF6",
-    icon: "✨",
-    iconColor: "#8B5CF6",
-  },
+const RippleEffect = ({ color }) => {
+  const rippleRef = useRef(null);
+
+  useEffect(() => {
+    const timeline = anime.timeline({
+      targets: ".ripple-circle",
+      loop: true,
+    });
+
+    timeline.add({
+      scale: [0, 3.5],
+      opacity: [1, 0],
+      easing: "easeOutCubic",
+      duration: 1000,
+      delay: anime.stagger(200),
+    });
+
+    return () => timeline.pause();
+  }, []);
+
+  return (
+    <div ref={rippleRef} className="ripple-container">
+      {[...Array(3)].map((_, i) => (
+        <div key={i} className="ripple-circle" />
+      ))}
+      <style>
+        {`
+          .ripple-container {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            pointer-events: none;
+          }
+
+          .ripple-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid ${color};
+            border-radius: ${dimensions.borderRadius};
+            opacity: 0;
+          }
+        `}
+      </style>
+    </div>
+  );
 };
+
+const GlitchEffect = ({ text, delay = 0 }) => (
+  <div className="glitch-text" style={{ animationDelay: `${delay}ms` }}>
+    <div className="glitch-main">{text}</div>
+    <div className="glitch-before" data-text={text}></div>
+    <div className="glitch-after" data-text={text}></div>
+    <style>
+      {`
+        .glitch-text {
+          position: relative;
+          animation: glitch-skew 1s infinite linear alternate-reverse;
+        }
+
+        .glitch-main {
+          position: relative;
+          z-index: 1;
+        }
+
+        .glitch-before,
+        .glitch-after {
+          content: attr(data-text);
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        .glitch-before {
+          animation: glitch-before 2s infinite linear alternate-reverse;
+          clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+        }
+
+        .glitch-after {
+          animation: glitch-after 3s infinite linear alternate-reverse;
+          clip-path: polygon(0 60%, 100% 60%, 100% 70%, 0 70%);
+        }
+
+        @keyframes glitch-skew {
+          0% { transform: skew(0deg); }
+          20% { transform: skew(2deg); }
+          40% { transform: skew(-2deg); }
+          60% { transform: skew(1deg); }
+          80% { transform: skew(-1deg); }
+          100% { transform: skew(0deg); }
+        }
+
+        @keyframes glitch-before {
+          0% { transform: translateX(0); }
+          80% { transform: translateX(0); }
+          85% { transform: translateX(-2px); }
+          90% { transform: translateX(2px); }
+          95% { transform: translateX(-2px); }
+          100% { transform: translateX(0); }
+        }
+
+        @keyframes glitch-after {
+          0% { transform: translateX(0); }
+          80% { transform: translateX(0); }
+          85% { transform: translateX(2px); }
+          90% { transform: translateX(-2px); }
+          95% { transform: translateX(2px); }
+          100% { transform: translateX(0); }
+        }
+      `}
+    </style>
+  </div>
+);
+
+const BounceText = ({ text, delay = 0 }) => (
+  <div className="bounce-container">
+    {text.split("").map((char, i) => (
+      <span
+        key={i}
+        className="bounce-char"
+        style={{
+          animationDelay: `${delay + i * 50}ms`,
+          display: char === " " ? "inline-block" : "inline-block",
+        }}
+      >
+        {char}
+      </span>
+    ))}
+    <style>
+      {`
+        .bounce-char {
+          animation: bounce-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        @keyframes bounce-in {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}
+    </style>
+  </div>
+);
 
 export default function AnimatedToast({
   message,
-  variant = "info",
-  style = {},
   description,
   action,
+  variant = "default",
   animation = "ripple",
   onClose,
+  style = {},
   ...rest
 }) {
   const toastRef = useRef(null);
   const progressRef = useRef(null);
-  const currentStyle = styles[variant] || styles.info;
+  const currentStyle =
+    variantStyles.glass[variant] || variantStyles.glass.default;
 
   useEffect(() => {
-    if (toastRef.current) {
-      switch (animation) {
-        case "ripple":
-          anime({
-            targets: toastRef.current,
-            scale: [0.95, 1],
-            opacity: [0, 1],
-            translateY: [-10, 0],
-            duration: 400,
-            easing: "easeOutCubic",
-          });
-          break;
-        case "bounce":
-          anime({
-            targets: toastRef.current,
-            translateY: [-20, 0],
-            duration: 600,
-            easing: "spring(1, 80, 10, 0)",
-          });
-          break;
-        case "spin":
-          anime({
-            targets: toastRef.current,
-            rotateY: [40, 0],
-            opacity: [0, 1],
-            duration: 600,
-            easing: "easeOutCubic",
-          });
-          break;
-        case "glitch":
-          anime
-            .timeline({
-              targets: toastRef.current,
-              duration: 500,
-            })
-            .add({
-              translateX: [-5, 0],
-              opacity: [0, 1],
-              skewX: [10, 0],
-              easing: "easeOutCubic",
-            });
-          break;
-        default:
-          anime({
-            targets: toastRef.current,
-            opacity: [0, 1],
-            duration: 300,
-            easing: "easeOutCubic",
-          });
-      }
-    }
+    // Entrance animation
+    anime({
+      targets: toastRef.current,
+      translateY: [-20, 0],
+      opacity: [0, 1],
+      duration: animations.slideIn.duration,
+      easing: animations.slideIn.easing,
+    });
 
+    // Progress bar
     if (progressRef.current) {
       anime({
         targets: progressRef.current,
         width: ["0%", "100%"],
-        duration: rest.duration || 5000,
-        easing: "linear",
+        duration: animations.progressBar.duration,
+        easing: animations.progressBar.easing,
       });
     }
-  }, [animation]);
+
+    // Add floating animation
+    anime({
+      targets: toastRef.current,
+      translateY: [0, -4, 0],
+      duration: 2000,
+      direction: "alternate",
+      loop: true,
+      easing: "easeInOutSine",
+    });
+  }, []);
+
+  const renderContent = () => {
+    switch (animation) {
+      case "glitch":
+        return (
+          <>
+            <GlitchEffect text={message} />
+            {description && <GlitchEffect text={description} delay={200} />}
+          </>
+        );
+      case "bounce":
+        return (
+          <>
+            <BounceText text={message} />
+            {description && <BounceText text={description} delay={200} />}
+          </>
+        );
+      default:
+        return (
+          <>
+            <div style={{ fontWeight: 600 }}>{message}</div>
+            {description && (
+              <div style={{ fontSize: "14px", marginTop: "4px", opacity: 0.8 }}>
+                {description}
+              </div>
+            )}
+          </>
+        );
+    }
+  };
 
   return (
     <div
@@ -122,88 +240,57 @@ export default function AnimatedToast({
       style={{
         display: "flex",
         alignItems: "center",
+        width: dimensions.width,
+        maxWidth: dimensions.maxWidth,
+        minHeight: dimensions.minHeight,
+        padding: dimensions.padding,
+        margin: dimensions.margin,
+        borderRadius: dimensions.borderRadius,
         background: currentStyle.background,
+        backdropFilter: `blur(${effects.blur.medium})`,
         color: currentStyle.color,
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
-        minWidth: "300px",
-        maxWidth: "500px",
-        minHeight: "48px",
-        borderRadius: "8px",
-        borderLeft: `4px solid ${currentStyle.borderColor}`,
-        padding: "12px 16px",
-        margin: "8px",
-        fontSize: "14px",
-        lineHeight: "1.5",
+        boxShadow: effects.shadow.lg,
+        border: currentStyle.border,
         position: "relative",
         overflow: "hidden",
         ...style,
       }}
       {...rest}
     >
+      {animation === "ripple" && <RippleEffect color={currentStyle.color} />}
       <div
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "3px",
-          background: "rgba(0, 0, 0, 0.05)",
+          flex: 1,
+          position: "relative",
+          zIndex: 1,
         }}
       >
-        <div
-          ref={progressRef}
-          style={{
-            height: "100%",
-            background: currentStyle.borderColor,
-            width: "0%",
-          }}
-        />
-      </div>
-      <span
-        style={{
-          marginRight: "12px",
-          fontSize: "18px",
-          color: currentStyle.iconColor,
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        {currentStyle.icon}
-      </span>
-      <div style={{ flex: 1 }}>
-        <div style={{ fontWeight: 500 }}>{message}</div>
-        {description && (
-          <div
-            style={{
-              fontSize: "13px",
-              marginTop: "4px",
-              opacity: 0.85,
-            }}
-          >
-            {description}
-          </div>
-        )}
+        {renderContent()}
       </div>
       {action && (
         <button
           onClick={action.onClick}
           style={{
-            background: "rgba(0, 0, 0, 0.05)",
-            border: "none",
+            background: "rgba(255, 255, 255, 0.1)",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
             color: "inherit",
-            padding: "6px 12px",
-            marginLeft: "16px",
+            padding: "8px 16px",
+            marginLeft: dimensions.spacing.buttons,
+            borderRadius: "6px",
             cursor: "pointer",
-            fontSize: "13px",
+            fontSize: "14px",
             fontWeight: 500,
-            borderRadius: "4px",
-            transition: "background 0.2s",
+            position: "relative",
+            zIndex: 1,
+            transition: "all 0.3s ease",
           }}
           onMouseEnter={(e) => {
-            e.target.style.background = "rgba(0, 0, 0, 0.1)";
+            e.target.style.background = "rgba(255, 255, 255, 0.2)";
+            e.target.style.transform = "translateY(-1px)";
           }}
           onMouseLeave={(e) => {
-            e.target.style.background = "rgba(0, 0, 0, 0.05)";
+            e.target.style.background = "rgba(255, 255, 255, 0.1)";
+            e.target.style.transform = "translateY(0)";
           }}
         >
           {action.label}
@@ -212,32 +299,41 @@ export default function AnimatedToast({
       <button
         onClick={onClose}
         style={{
-          background: "none",
+          background: "transparent",
           border: "none",
           color: "inherit",
-          fontSize: "18px",
-          marginLeft: "8px",
+          marginLeft: dimensions.spacing.buttons,
           cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "24px",
-          height: "24px",
-          padding: 0,
+          fontSize: "18px",
+          opacity: 0.7,
           position: "relative",
-          zIndex: 2,
-          opacity: 0.5,
+          zIndex: 1,
           transition: "opacity 0.2s",
         }}
-        onMouseEnter={(e) => {
-          e.target.style.opacity = "0.8";
-        }}
-        onMouseLeave={(e) => {
-          e.target.style.opacity = "0.5";
+        onMouseEnter={(e) => (e.target.style.opacity = "1")}
+        onMouseLeave={(e) => (e.target.style.opacity = "0.7")}
+      >
+        ✕
+      </button>
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "3px",
+          background: "rgba(255, 255, 255, 0.1)",
         }}
       >
-        X
-      </button>
+        <div
+          ref={progressRef}
+          style={{
+            height: "100%",
+            background: currentStyle.color,
+            width: "0%",
+          }}
+        />
+      </div>
     </div>
   );
 }

@@ -1,22 +1,21 @@
-# ToastOnStaroid 🚀
+# Toastonstaroid
 
-A modern, customizable toast notification system for React applications with beautiful animations and multiple variants.
+A modern, customizable toast notification library for React with beautiful animations and variants.
 
 ## Features ✨
 
 - 🚀 Easy to use with simple API
-- 🎨 Multiple variants: Default, Glass, and more
-- 🎯 Customizable styles
-- 🔥 Hover effects
-- 📦 Lightweight
-- 💫 Glass morphism effects
-- 🎨 Gradient backgrounds
-- ⚡️ Smooth transitions
-- 📱 Responsive design
-- 🎭 Beautiful animations
-- 🎯 Customizable styles
-- 🎛 Customizable
-- 🪶 Lightweight
+- 🎨 Multiple creative variants with stunning effects
+- 🎯 Fully customizable styles and animations
+- 🔥 Interactive hover effects
+- 📦 Lightweight (~12KB gzipped)
+- 💫 Glass morphism and modern design effects
+- 🌈 Beautiful gradient backgrounds
+- ⚡️ Smooth transitions and animations
+- 📱 Responsive and mobile-friendly
+- 🎭 Multiple animation types
+- 🎨 Theme support (Light/Dark)
+- 🎛 Customizable positioning
 - ⚛️ Compatible with React 16.8+ through React 19
 
 ## Installation 📦
@@ -27,257 +26,408 @@ npm install toastonstaroid
 yarn add toastonstaroid
 ```
 
-If you're using React 19, you might need to use the `--legacy-peer-deps` flag:
-
-```bash
-npm install toastonstaroid --legacy-peer-deps
-# or
-yarn add toastonstaroid --ignore-peer-deps
-```
-
-## Quick Start
-
-1. First, wrap your app with the `ToastContainer`:
+## Basic Usage
 
 ```jsx
-import { ToastContainer } from "toastonstaroid";
+import { ToastContainer, useToastStore } from "toastonstaroid";
 
 function App() {
   return (
     <>
       <YourApp />
-      <ToastContainer position="bottom-right" />
+      <ToastContainer position="top-right" />
     </>
   );
 }
-```
-
-2. Then use the toast methods anywhere in your app:
-
-```jsx
-import { useToastStore } from "toastonstaroid";
 
 function YourComponent() {
-  const { success, error, warning, info } = useToastStore();
+  const { addToast } = useToastStore();
 
-  const handleClick = () => {
-    success("Operation completed successfully!");
-    // or
-    error("Something went wrong!");
-    // or
-    warning("Please be careful!");
-    // or
-    info("Here's some information!");
+  const showToast = () => {
+    addToast({
+      message: "Hello World!",
+      variant: "success",
+      type: "glass", // Choose your preferred variant
+      duration: 5000
+    });
   };
 
-  return <button onClick={handleClick}>Show Toast</button>;
+  return <button onClick={showToast}>Show Toast</button>;
 }
 ```
 
-## Toast Variants
+## Toast Variants 🎨
 
-### Default Toast
-
-The default toast variant features a modern design with gradient backgrounds and smooth animations.
+### 1. Glass Toast 🌟
+Modern glassmorphism effect with blur backdrop and elegant transparency.
 
 ```jsx
-success("Success message", {
-  description: "Additional information",
-  duration: 5000,
-  action: {
-    label: "Undo",
-    onClick: () => console.log("Undo clicked"),
-  },
+addToast({
+  type: "glass",
+  message: "Data saved successfully",
+  variant: "success",
+  description: "Your changes have been saved to the cloud",
+  backdrop: true, // Enables backdrop blur
+  blurAmount: "10px", // Customize blur intensity
+  transparency: 0.8 // Adjust transparency
 });
 ```
 
-Features:
-
-- Gradient backgrounds
-- Smooth hover animations
-- Rotating close button
-- Responsive design
-- Customizable styles
-
-### Glass Toast
-
-A modern glass morphism variant with blur effects and semi-transparent backgrounds.
+### 2. Shadow Toast 🎭
+Elegant toasts with dynamic gradient backgrounds and smooth shadows.
 
 ```jsx
-success("Success message", {
-  variant: "glass",
-  description: "Additional information",
-  duration: 5000,
-  action: {
-    label: "Undo",
-    onClick: () => console.log("Undo clicked"),
-  },
-});
-```
-
-Features:
-
-- Glass morphism effect with backdrop blur
-- Semi-transparent backgrounds
-- Subtle borders
-- Smooth entrance animations
-- Interactive hover states
-
-## API Reference 📚
-
-### ToastContainer Props
-
-| Prop           | Type   | Default        | Description                                                                                                                     |
-| -------------- | ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| position       | string | "bottom-right" | Position of the toast container. Options: "top-right", "top-left", "bottom-right", "bottom-left", "top-center", "bottom-center" |
-| containerStyle | object | {}             | Custom styles for the container                                                                                                 |
-
-### Toast Methods
-
-```jsx
-const { success, error, warning, info } = useToastStore();
-
-// Basic usage
-success("Success message");
-error("Error message");
-warning("Warning message");
-info("Info message");
-
-// With options
-success("Success message", {
-  duration: 5000, // Duration in milliseconds
-  description: "Additional information",
-  action: {
-    label: "Undo",
-    onClick: () => console.log("Undo clicked"),
-  },
-  variant: "glass", // Optional: "default" or "glass"
+addToast({
+  type: "shadow",
+  message: "Profile updated",
+  variant: "info",
   style: {
-    // Custom styles
-    background: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
-  },
+    gradient: "cosmic" // Available: cosmic, sunset, ocean, forest
+    shadowIntensity: "high", // low, medium, high
+    pulseEffect: true // Enable shadow pulsing
+  }
 });
 ```
 
-### Toast Options
-
-| Option      | Type   | Default   | Description                          |
-| ----------- | ------ | --------- | ------------------------------------ |
-| duration    | number | 5000      | Duration in milliseconds             |
-| description | string | -         | Additional description text          |
-| action      | object | -         | Action button configuration          |
-| variant     | string | "default" | Toast variant ("default" or "glass") |
-| style       | object | -         | Custom styles for the toast          |
-
-### Action Object
-
-| Property | Type     | Description                  |
-| -------- | -------- | ---------------------------- |
-| label    | string   | Text for the action button   |
-| onClick  | function | Click handler for the action |
-
-## Styling
-
-### Default Variant Styles
+### 3. Fire Toast 🔥
+Dynamic fire effect animation with particle system for impactful notifications.
 
 ```jsx
-const styles = {
-  success: {
-    background: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-  },
-  error: {
-    background: "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-  },
-  warning: {
-    background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-  },
-  info: {
-    background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-  },
-  default: {
-    background: "linear-gradient(135deg, #1F2937 0%, #111827 100%)",
-    color: "#FFFFFF",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-  },
-};
+addToast({
+  type: "fire",
+  message: "Critical Update!",
+  variant: "warning",
+  intensity: "high", // Controls fire effect intensity
+  particleCount: 30, // Number of fire particles
+  windEffect: true // Add wind effect to flames
+});
 ```
 
-### Glass Variant Styles
+### 4. Smoke Toast 💨
+Ethereal smoke animation effect for subtle notifications.
 
 ```jsx
-const styles = {
-  success: {
-    background: "rgba(16, 185, 129, 0.1)",
-    color: "#10B981",
-    border: "1px solid rgba(16, 185, 129, 0.2)",
-  },
-  error: {
-    background: "rgba(239, 68, 68, 0.1)",
-    color: "#EF4444",
-    border: "1px solid rgba(239, 68, 68, 0.2)",
-  },
-  warning: {
-    background: "rgba(245, 158, 11, 0.1)",
-    color: "#F59E0B",
-    border: "1px solid rgba(245, 158, 11, 0.2)",
-  },
-  info: {
-    background: "rgba(59, 130, 246, 0.1)",
-    color: "#3B82F6",
-    border: "1px solid rgba(59, 130, 246, 0.2)",
-  },
-  default: {
-    background: "rgba(31, 41, 55, 0.1)",
-    color: "#1F2937",
-    border: "1px solid rgba(31, 41, 55, 0.2)",
-  },
-};
+addToast({
+  type: "smoke",
+  message: "Processing request...",
+  variant: "default",
+  density: "medium", // Controls smoke density
+  turbulence: 0.5, // Add turbulence to smoke
+  colorShift: true // Enable color shifting effect
+});
 ```
 
-## Best Practices
+### 5. Neon Toast 🌈
+Vibrant neon effect with pulsing glow and color transitions.
 
-1. **Message Length**
+```jsx
+addToast({
+  type: "neon",
+  message: "Achievement Unlocked!",
+  variant: "success",
+  glowIntensity: "high", // Controls neon glow
+  pulseRate: 1.5, // Speed of pulsing effect
+  rainbow: true // Enable rainbow color cycle
+});
+```
 
-   - Keep messages concise and clear
-   - Use description for additional details
-   - Avoid long messages that might wrap
+### 6. Matrix Toast 🖥️
+Digital rain effect inspired by The Matrix.
 
-2. **Duration**
+```jsx
+addToast({
+  type: "matrix",
+  message: "System Update",
+  variant: "info",
+  rainSpeed: "fast", // Controls digital rain speed
+  density: "high", // Character density
+  glowColor: "#00ff00" // Custom matrix glow color
+});
+```
 
-   - Success messages: 3-5 seconds
-   - Error messages: 5-7 seconds
-   - Warning messages: 4-6 seconds
-   - Info messages: 3-5 seconds
+### 7. Hologram Toast 👾
+Futuristic holographic display with glitch and scan effects.
 
-3. **Positioning**
+```jsx
+addToast({
+  type: "hologram",
+  message: "New Message",
+  variant: "info",
+  scanlineEffect: true, // Add scanning effect
+  glitchAmount: 0.3, // Control glitch intensity
+  flickerRate: 2 // Rate of hologram flicker
+});
+```
 
-   - Use bottom positions for less intrusive notifications
-   - Use top positions for critical alerts
-   - Consider mobile responsiveness
+### 8. Pixel Toast 🎮
+Retro pixel art style with optional 8-bit animations.
 
-4. **Actions**
+```jsx
+addToast({
+  type: "pixel",
+  message: "Level Complete!",
+  variant: "success",
+  pixelSize: 4, // Size of pixels
+  dithering: true, // Add dithering effect
+  animation: "slideIn8Bit" // Special 8-bit animations
+});
+```
 
-   - Use clear, actionable labels
-   - Keep actions simple and direct
-   - Use actions sparingly
+### 9. Liquid Toast 💧
+Fluid animation effects with dynamic color blending.
 
-5. **Variants**
-   - Use default variant for most cases
-   - Use glass variant for a modern, translucent look
-   - Match variant to your app's design system
+```jsx
+addToast({
+  type: "liquid",
+  message: "Downloading...",
+  variant: "info",
+  viscosity: 0.8, // Control fluid movement
+  rippleEffect: true, // Add ripple on appear
+  colorBlend: ["#4a90e2", "#67b26f"] // Gradient colors
+});
+```
 
-## Contributing
+### 10. Aurora Toast 🌌
+Northern lights inspired effect with flowing colors.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+```jsx
+addToast({
+  type: "aurora",
+  message: "Magic Happening",
+  variant: "default",
+  waveSpeed: 2, // Speed of color waves
+  colorPalette: "twilight", // preset color schemes
+  intensity: 0.7 // Aurora effect intensity
+});
+```
 
-## License 📄
+### 11. Cyberpunk Toast 🌐
+Futuristic cyberpunk design with neon effects and glitch animations.
 
-MIT © [Sayan Senapati]
+```jsx
+addToast({
+  type: "cyberpunk",
+  message: "System Override",
+  variant: "error",
+  glitchIntensity: 0.5, // Controls glitch effect
+  neonRim: true, // Add neon border
+  scanlines: true, // Add CRT scanlines
+  cyberTheme: "neon" // neon, tech, hack themes
+});
+```
+
+### 12. Paper Toast 📜
+Elegant paper-like effect with fold animations.
+
+```jsx
+addToast({
+  type: "paper",
+  message: "New Note",
+  variant: "default",
+  foldEffect: true, // Add unfolding animation
+  paperTexture: "rough", // paper texture type
+  inkEffect: true // Add ink spread effect
+});
+```
+
+### 13. Cosmic Toast 🌠
+Space-themed toast with star particles and nebula effects.
+
+```jsx
+addToast({
+  type: "cosmic",
+  message: "Launch Successful",
+  variant: "success",
+  starDensity: "high", // Amount of stars
+  nebulaEffect: true, // Add nebula background
+  meteorShowers: true // Add shooting stars
+});
+```
+
+### 14. Wind Toast 🌪
+Elegant wind-like particle animations with dynamic flow.
+
+```jsx
+addToast({
+  type: "wind",
+  message: "Refreshing Feed",
+  variant: "info",
+  direction: "left", // Wind direction
+  intensity: "medium", // Wind strength
+  particleType: "leaves" // leaves, petals, dust
+});
+```
+
+### 15. Crystal Toast 💎
+Crystal-like transparent effect with light refraction.
+
+```jsx
+addToast({
+  type: "crystal",
+  message: "Premium Activated",
+  variant: "success",
+  facets: 8, // Number of crystal faces
+  refractionAmount: 0.5, // Light refraction
+  shimmerEffect: true // Add shimmer animation
+});
+```
+
+### 16. Rain Toast 🌧️
+Beautiful rain effect with customizable droplets and colors.
+
+```jsx
+addToast({
+  type: "rain",
+  message: "Syncing Data",
+  variant: "info",
+  dropletCount: 30, // Number of raindrops
+  dropletSpeed: "medium", // slow, medium, fast
+  thunder: true // Add thunder effect
+});
+```
+
+### 17. Sparkle Toast ✨
+Elegant sparkle animation with star-shaped particles.
+
+```jsx
+addToast({
+  type: "sparkle",
+  message: "Achievement Unlocked!",
+  variant: "success",
+  sparkleCount: 15, // Number of sparkles
+  sparkleSize: "medium", // small, medium, large
+  glowIntensity: 0.5 // Intensity of the glow effect
+});
+```
+
+Each variant comes with its own set of customizable properties and can be combined with standard toast options like `duration`, `position`, and `onClose`. You can also create custom variants by extending these base variants or creating entirely new ones using our variant API.
+
+## Animation Presets 🎭
+
+All variants support these base animations:
+- `fade` - Simple fade in/out
+- `slide` - Sliding entrance/exit
+- `bounce` - Bouncy effect
+- `flip` - 3D flip animation
+- `zoom` - Scale in/out
+- `rotate` - Rotation effect
+- `glitch` - Digital glitch effect
+- `elastic` - Elastic bounce
+- `fold` - Paper fold effect
+- `float` - Floating animation
+
+## Positioning Options 📍
+
+```jsx
+<ToastContainer 
+  position="top-right" // Default position
+  gutter={8} // Space between toasts
+/>
+```
+
+Available positions:
+- `top-right` (default)
+- `top-left`
+- `top-center`
+- `bottom-right`
+- `bottom-left`
+- `bottom-center`
+
+## Customization Options 🎨
+
+### Duration Control
+```jsx
+addToast({
+  message: "Custom duration",
+  duration: 5000, // Duration in milliseconds
+  infinite: false // Set true for persistent toast
+});
+```
+
+### Theme Support
+```jsx
+import { ThemeProvider } from "toastonstaroid";
+
+<ThemeProvider theme="dark"> // or "light", "auto"
+  <App />
+</ThemeProvider>
+```
+
+### Custom Styling
+```jsx
+addToast({
+  message: "Styled toast",
+  style: {
+    background: "linear-gradient(45deg, #FF6B6B, #4ECDC4)",
+    color: "#fff",
+    borderRadius: "12px",
+    padding: "16px 24px"
+  }
+});
+```
+
+### Interactive Actions
+```jsx
+addToast({
+  message: "Update available",
+  description: "A new version is ready to install",
+  action: {
+    label: "Update now",
+    onClick: () => handleUpdate()
+  }
+});
+```
+
+## Progress Bars and Loading States
+
+```jsx
+addToast({
+  message: "Uploading file...",
+  variant: "info",
+  progress: 45, // Show progress (0-100)
+  loading: true, // Shows loading spinner
+  hideProgressBar: false // Control progress bar visibility
+});
+```
+
+## Event Handling
+
+```jsx
+addToast({
+  message: "Interactive toast",
+  onOpen: () => console.log("Toast shown"),
+  onClose: () => console.log("Toast hidden"),
+  onClick: () => console.log("Toast clicked"),
+  closeOnClick: true, // Close when clicked
+  pauseOnHover: true // Pause duration on hover
+});
+```
+
+## Advanced Usage
+
+### Custom Variants
+```jsx
+import { createCustomVariant } from "toastonstaroid";
+
+const pulseVariant = createCustomVariant({
+  name: "pulse",
+  animation: {
+    keyframes: {/* Your keyframes */},
+    duration: 1000
+  },
+  style: {/* Your styles */}
+});
+```
+
+### Dynamic Content
+```jsx
+addToast({
+  message: "Live updates",
+  dynamic: true,
+  render: (props) => (
+    <CustomToastContent {...props} />
+  )
+});
+```
+
+For more examples and detailed documentation, visit our [GitHub repository](https://github.com/yourusername/toastonstaroid).

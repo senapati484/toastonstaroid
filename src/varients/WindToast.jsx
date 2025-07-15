@@ -2,33 +2,32 @@ import React, { useEffect, useRef } from "react";
 import anime from "animejs";
 import { variantStyles, animations, dimensions, effects } from "./styles";
 
-const SmokeEffect = ({ variant = "default" }) => {
-  const smokeRef = useRef(null);
+const WindParticles = ({ variant = "default" }) => {
+  const particleRef = useRef(null);
 
   useEffect(() => {
-    const particles = Array.from({ length: 15 }).map(() => {
+    const particles = Array.from({ length: 20 }).map(() => {
       const particle = document.createElement("div");
-      particle.className = "smoke-particle";
-      smokeRef.current?.appendChild(particle);
+      particle.className = "wind-particle";
+      particleRef.current?.appendChild(particle);
       return particle;
     });
 
     const animations = particles.map((particle) => {
       return anime({
         targets: particle,
-        translateY: [60, -100],
-        translateX: () => anime.random(-50, 50),
-        scale: [0.5, 3],
+        translateX: [-300, window.innerWidth + 300],
+        translateY: () => anime.random(-20, 20),
         opacity: [
           { value: 0, duration: 0 },
-          { value: 0.5, duration: 200 },
+          { value: 0.8, duration: 200 },
           { value: 0, duration: 800 },
         ],
-        rotate: () => anime.random(-360, 360),
-        duration: () => anime.random(2000, 3000),
-        easing: "easeOutExpo",
-        loop: true,
+        scale: () => anime.random(0.5, 2),
+        easing: "cubicBezier(.21,1.02,.73,1)",
+        duration: () => anime.random(1000, 2000),
         delay: () => anime.random(0, 2000),
+        loop: true,
       });
     });
 
@@ -36,11 +35,11 @@ const SmokeEffect = ({ variant = "default" }) => {
   }, []);
 
   return (
-    <div className="smoke-container">
-      <div ref={smokeRef} className="particles" />
+    <div className="wind-effect">
+      <div ref={particleRef} className="particles" />
       <style>
         {`
-          .smoke-container {
+          .wind-effect {
             position: absolute;
             inset: 0;
             overflow: hidden;
@@ -48,27 +47,26 @@ const SmokeEffect = ({ variant = "default" }) => {
             z-index: 0;
           }
 
-          .smoke-particle {
+          .wind-particle {
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            background: ${variantStyles.smoke.particleColor};
-            border-radius: 50%;
-            filter: blur(8px);
+            width: 40px;
+            height: 2px;
+            background: ${variantStyles.wind.particleColors[variant]};
+            filter: blur(3px);
+            transform-origin: left center;
+            opacity: 0;
           }
 
-          .smoke-container::before {
+          .wind-effect::before {
             content: '';
             position: absolute;
             inset: 0;
             background: radial-gradient(
               circle at center,
               transparent 30%,
-              rgba(0, 0, 0, 0.2) 60%
+              ${variantStyles.wind.particleColors[variant]} 100%
             );
-            z-index: 1;
+            opacity: 0.1;
           }
         `}
       </style>
@@ -76,44 +74,7 @@ const SmokeEffect = ({ variant = "default" }) => {
   );
 };
 
-const RevealText = ({ text, color = "#fff", delay = 0 }) => {
-  return (
-    <div className="reveal-text">
-      {text.split("").map((char, i) => (
-        <span
-          key={i}
-          style={{
-            display: "inline-block",
-            opacity: 0,
-            animation: "reveal 1s forwards",
-            animationDelay: `${delay + i * 0.1}s`,
-            color,
-          }}
-        >
-          {char}
-        </span>
-      ))}
-      <style>
-        {`
-          @keyframes reveal {
-            0% {
-              opacity: 0;
-              transform: rotateY(90deg);
-              filter: blur(10px);
-            }
-            100% {
-              opacity: 1;
-              transform: rotateY(0);
-              filter: blur(0);
-            }
-          }
-        `}
-      </style>
-    </div>
-  );
-};
-
-export default function SmokeToast({
+export default function WindToast({
   message,
   description,
   action,
@@ -124,16 +85,29 @@ export default function SmokeToast({
 }) {
   const toastRef = useRef(null);
   const progressRef = useRef(null);
+  const contentRef = useRef(null);
 
   useEffect(() => {
+    // Entrance animation
     anime({
       targets: toastRef.current,
-      translateY: [20, 0],
+      translateX: [100, 0],
       opacity: [0, 1],
       duration: animations.slideIn.duration,
       easing: animations.slideIn.easing,
     });
 
+    // Content swaying animation
+    anime({
+      targets: contentRef.current,
+      translateX: [-5, 0],
+      duration: 1500,
+      direction: "alternate",
+      loop: true,
+      easing: "easeInOutSine",
+    });
+
+    // Progress bar
     if (progressRef.current) {
       anime({
         targets: progressRef.current,
@@ -157,7 +131,7 @@ export default function SmokeToast({
         margin: dimensions.margin,
         borderRadius: dimensions.borderRadius,
         background:
-          "linear-gradient(135deg, rgba(0,0,0,0.9), rgba(20,20,20,0.95))",
+          "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
         backdropFilter: `blur(${effects.blur.medium})`,
         color: "#FFFFFF",
         boxShadow: effects.shadow.lg,
@@ -168,7 +142,7 @@ export default function SmokeToast({
       }}
       {...rest}
     >
-      <SmokeEffect variant={variant} />
+      <WindParticles variant={variant} />
       <div
         style={{
           position: "absolute",
@@ -189,27 +163,32 @@ export default function SmokeToast({
         />
       </div>
       <div
+        ref={contentRef}
         style={{
           flex: 1,
           position: "relative",
           zIndex: 1,
         }}
       >
-        <RevealText text={message} color={variantStyles.smoke.text[variant]} />
+        <div style={{ fontWeight: 500 }}>{message}</div>
         {description && (
-          <RevealText
-            text={description}
-            color="rgba(255, 255, 255, 0.8)"
-            delay={0.5}
-          />
+          <div
+            style={{
+              fontSize: "14px",
+              marginTop: "4px",
+              opacity: 0.8,
+            }}
+          >
+            {description}
+          </div>
         )}
       </div>
       {action && (
         <button
           onClick={action.onClick}
           style={{
-            background: "rgba(255, 255, 255, 0.1)",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
+            background: "rgba(255,255,255,0.1)",
+            border: "1px solid rgba(255,255,255,0.2)",
             color: "#fff",
             padding: "8px 16px",
             marginLeft: dimensions.spacing.buttons,
@@ -217,18 +196,18 @@ export default function SmokeToast({
             cursor: "pointer",
             fontSize: "14px",
             fontWeight: 500,
+            transition: "all 0.3s ease",
             position: "relative",
             zIndex: 1,
-            transition: "all 0.3s ease",
             backdropFilter: `blur(${effects.blur.light})`,
           }}
           onMouseEnter={(e) => {
-            e.target.style.background = "rgba(255, 255, 255, 0.2)";
-            e.target.style.transform = "translateY(-1px)";
+            e.target.style.background = "rgba(255,255,255,0.2)";
+            e.target.style.transform = "translateX(-2px)";
           }}
           onMouseLeave={(e) => {
-            e.target.style.background = "rgba(255, 255, 255, 0.1)";
-            e.target.style.transform = "translateY(0)";
+            e.target.style.background = "rgba(255,255,255,0.1)";
+            e.target.style.transform = "translateX(0)";
           }}
         >
           {action.label}
@@ -244,9 +223,9 @@ export default function SmokeToast({
           cursor: "pointer",
           fontSize: "18px",
           opacity: 0.7,
+          transition: "opacity 0.2s",
           position: "relative",
           zIndex: 1,
-          transition: "opacity 0.2s",
         }}
         onMouseEnter={(e) => (e.target.style.opacity = "1")}
         onMouseLeave={(e) => (e.target.style.opacity = "0.7")}

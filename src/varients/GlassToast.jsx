@@ -45,7 +45,7 @@ export default function GlassToast({
     if (toastRef.current) {
       anime({
         targets: toastRef.current,
-        translateY: [-20, 0],
+        translateX: [-320, 0], // Changed from translateY to translateX for better entry
         opacity: [0, 1],
         duration: 600,
         easing: "cubicBezier(.21,1.02,.73,1)",
@@ -70,12 +70,16 @@ export default function GlassToast({
         fontSize: "14px",
         lineHeight: "1.5",
         position: "relative",
-        overflow: "hidden",
+        overflow: "visible", // Changed from hidden to visible
         backdropFilter: "blur(12px)",
         boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
         transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        transform: "translateX(0)", // Ensure initial position
+        maxWidth: "90vw", // Added maxWidth for better mobile responsiveness
+        wordBreak: "break-word", // Added to handle long text
         "@media (max-width: 640px)": {
           width: "calc(100vw - 32px)",
+          margin: "8px auto", // Center on mobile
         },
         ...style,
       }}

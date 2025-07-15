@@ -1,98 +1,59 @@
-import React, { useEffect } from "react";
-import ToastDefault from "./varients/ToastDefault";
+import React from "react";
 import { useToastStore } from "./store";
+import { createPortal } from "react-dom";
 
-const TOAST_LIMIT = 3;
-const TOAST_REMOVAL_DELAY = 300;
-
-/**
- * ToastContainer
- * @param {object} props
- * @param {object} [props.containerStyle] - Custom styles for the container
- * @param {string} [props.position] - Position of the toast container. One of: 'bottom-right', 'bottom-center', 'top-right', 'top-center', 'bottom-left', 'top-left'. Default: 'bottom-right'.
- */
-export function ToastContainer({
-  position = "bottom-right",
+const ToastContainer = ({
+  position = "top-right",
+  gutter = 8,
   containerStyle = {},
-}) {
-  const { toasts, removeToast } = useToastStore();
-
-  useEffect(() => {
-    toasts.forEach((toast) => {
-      if (toast.duration) {
-        const timer = setTimeout(() => {
-          removeToast(toast.id);
-        }, toast.duration);
-        return () => clearTimeout(timer);
-      }
-    });
-  }, [toasts, removeToast]);
+}) => {
+  const toasts = useToastStore((state) => state.toasts);
 
   const positionStyles = {
-    "top-right": { top: 0, right: 0 },
     "top-left": { top: 0, left: 0 },
-    "bottom-right": { bottom: 0, right: 0 },
+    "top-right": { top: 0, right: 0 },
     "bottom-left": { bottom: 0, left: 0 },
+    "bottom-right": { bottom: 0, right: 0 },
     "top-center": { top: 0, left: "50%", transform: "translateX(-50%)" },
     "bottom-center": { bottom: 0, left: "50%", transform: "translateX(-50%)" },
   };
 
-  const visibleToasts = toasts.slice(0, TOAST_LIMIT);
-
-  return (
+  return createPortal(
     <div
       style={{
         position: "fixed",
         zIndex: 9999,
-        padding: "16px",
-        maxHeight: "100vh",
-        overflow: "hidden",
-        ...positionStyles[position],
-        ...containerStyle,
+        [position.includes("bottom") ? "bottom" : "top"]: "20px",
+        [position.includes("right") ? "right" : "left"]: "20px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: position.includes("center")
+          ? "center"
+          : position.includes("right")
+            ? "flex-end"
+            : "flex-start",
+        gap: "10px",
+        maxWidth: "100%",
+        padding: "10px",
+        pointerEvents: "none",
       }}
     >
-      {visibleToasts.map((toast) => {
-        // If component is provided, use it
-        if (toast.component) {
-          return React.cloneElement(toast.component, {
-            key: toast.id,
-            onClose: () => removeToast(toast.id),
-            style: {
-              animation:
-                "0.35s cubic-bezier(.21,1.02,.73,1) forwards toast-enter",
-              ...toast.component.props.style,
-            },
-          });
-        }
-
-        // Otherwise, fall back to ToastDefault
-        return (
-          <ToastDefault
-            key={toast.id}
-            {...toast}
-            onClose={() => removeToast(toast.id)}
-            style={{
-              animation:
-                "0.35s cubic-bezier(.21,1.02,.73,1) forwards toast-enter",
-              ...toast.style,
-            }}
-          />
-        );
-      })}
-      <style>
-        {`
-          @keyframes toast-enter {
-            0% {
-              opacity: 0;
-              transform: translateY(16px) scale(0.9);
-            }
-            100% {
-              opacity: 1;
-              transform: translateY(0) scale(1);
-            }
-          }
-        `}
-      </style>
-    </div>
+      {toasts.map((toast) => (
+        <div
+          key={toast.id}
+          style={{
+            pointerEvents: "auto",
+            width: "100%",
+            maxWidth: "420px",
+            minWidth: "300px",
+          }}
+        >
+          {toast.component}
+        </div>
+      ))}
+    </div>,
+    document.body
   );
-}
+};
+
+export default ToastContainer;

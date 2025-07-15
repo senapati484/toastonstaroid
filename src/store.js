@@ -1,52 +1,103 @@
 import { create } from "zustand";
+import { nanoid } from "nanoid";
 
-// Create a store instance with fallbacks for safety
-const createStore = () => {
-  try {
-    return create((set) => ({
-      toasts: [],
-      addToast: (toast) =>
-        set((state) => ({
-          toasts: [
-            {
-              id: Date.now(),
-              duration: 5000,
-              variant: "default",
-              ...toast,
-            },
-            ...state.toasts,
-          ].slice(0, 10), // Limit maximum number of toasts
-        })),
-      removeToast: (id) =>
-        set((state) => ({
-          toasts: state.toasts.filter((toast) => toast.id !== id),
-        })),
-    }));
-  } catch (error) {
-    console.error("Error creating toast store:", error);
+const createToastStore = (config = {}) =>
+  create((set, get) => ({
+    toasts: [],
+    pausedToasts: new Set(),
+    config: {
+      maxToasts: 3,
+      ...config,
+    },
 
-    // Fallback store implementation
-    let toasts = [];
-    return {
-      getState: () => ({
-        toasts,
-        addToast: (toast) => {
-          const newToast = {
-            id: Date.now(),
-            duration: 5000,
-            variant: "default",
-            ...toast,
-          };
-          toasts = [newToast, ...toasts].slice(0, 10);
-          return newToast;
+    addToast: (toast) => {
+      const id = toast.id || nanoid();
+      const newToast = {
+        id,
+        createdAt: Date.now(),
+        isPaused: false,
+        progress: 0,
+        ...toast,
+      };
+
+      set((state) => {
+        const toasts = [...state.toasts];
+        if (toasts.length >= state.config.maxToasts) {
+          toasts.shift();
+        }
+        return { toasts: [...toasts, newToast] };
+      });
+
+      return id;
+    },
+
+    updateToast: (id, updates) => {
+      set((state) => ({
+        toasts: state.toasts.map((toast) =>
+          toast.id === id ? { ...toast, ...updates } : toast
+        ),
+      }));
+    },
+
+    removeToast: (id) => {
+      set((state) => ({
+        toasts: state.toasts.filter((toast) => toast.id !== id),
+        pausedToasts: new Set(
+          [...state.pausedToasts].filter((toastId) => toastId !== id)
+        ),
+      }));
+    },
+
+    clearAll: () => {
+      set({ toasts: [], pausedToasts: new Set() });
+    },
+
+    pauseToast: (id) => {
+      set((state) => {
+        const pausedToasts = new Set(state.pausedToasts);
+        pausedToasts.add(id);
+        return {
+          pausedToasts,
+          toasts: state.toasts.map((toast) =>
+            toast.id === id ? { ...toast, isPaused: true } : toast
+          ),
+        };
+      });
+    },
+
+    resumeToast: (id) => {
+      set((state) => {
+        const pausedToasts = new Set(state.pausedToasts);
+        pausedToasts.delete(id);
+        return {
+          pausedToasts,
+          toasts: state.toasts.map((toast) =>
+            toast.id === id ? { ...toast, isPaused: false } : toast
+          ),
+        };
+      });
+    },
+
+    updateProgress: (id, progress) => {
+      set((state) => ({
+        toasts: state.toasts.map((toast) =>
+          toast.id === id ? { ...toast, progress } : toast
+        ),
+      }));
+    },
+
+    getToast: (id) => {
+      return get().toasts.find((toast) => toast.id === id);
+    },
+
+    setConfig: (newConfig) => {
+      set((state) => ({
+        config: {
+          ...state.config,
+          ...newConfig,
         },
-        removeToast: (id) => {
-          toasts = toasts.filter((toast) => toast.id !== id);
-        },
-      }),
-      subscribe: () => () => {}, // Noop unsubscribe
-    };
-  }
-};
+      }));
+    },
+  }));
 
-export const useToastStore = createStore();
+export const useToastStore = createToastStore();
