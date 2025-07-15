@@ -59,7 +59,7 @@ const Sparkles = ({ variant = "default" }) => {
             position: absolute;
             width: 8px;
             height: 8px;
-            background: ${variantStyles.sparkle?.colors?.[variant] || '#FFD700'};
+            background: ${variantStyles.sparkle?.colors?.[variant] || "#FFD700"};
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             transform-origin: center;
             opacity: 0;
@@ -116,11 +116,7 @@ export default function SparkleToast({
     // Subtle sparkle effect on content
     anime({
       targets: contentRef.current,
-      filter: [
-        "brightness(1)",
-        "brightness(1.2)",
-        "brightness(1)",
-      ],
+      filter: ["brightness(1)", "brightness(1.2)", "brightness(1)"],
       duration: 2000,
       direction: "alternate",
       loop: true,
@@ -140,7 +136,8 @@ export default function SparkleToast({
         padding: dimensions.padding,
         margin: dimensions.margin,
         borderRadius: dimensions.borderRadius,
-        background: "linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 223, 67, 0.1) 100%)",
+        background:
+          "linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 223, 67, 0.1) 100%)",
         backdropFilter: `blur(${effects.blur.medium})`,
         color: "#FFFFFF",
         boxShadow: "0 8px 32px rgba(255, 215, 0, 0.2), " + effects.shadow.lg,

@@ -1,4 +1,4 @@
-# Toastonstaroid
+# Toastonstaroid 🚀
 
 A modern, customizable toast notification library for React with beautiful animations and variants.
 
@@ -48,7 +48,7 @@ function YourComponent() {
       message: "Hello World!",
       variant: "success",
       type: "glass", // Choose your preferred variant
-      duration: 5000
+      duration: 5000,
     });
   };
 
@@ -59,6 +59,7 @@ function YourComponent() {
 ## Toast Variants 🎨
 
 ### 1. Glass Toast 🌟
+
 Modern glassmorphism effect with blur backdrop and elegant transparency.
 
 ```jsx
@@ -69,11 +70,12 @@ addToast({
   description: "Your changes have been saved to the cloud",
   backdrop: true, // Enables backdrop blur
   blurAmount: "10px", // Customize blur intensity
-  transparency: 0.8 // Adjust transparency
+  transparency: 0.8, // Adjust transparency
 });
 ```
 
 ### 2. Shadow Toast 🎭
+
 Elegant toasts with dynamic gradient backgrounds and smooth shadows.
 
 ```jsx
@@ -90,6 +92,7 @@ addToast({
 ```
 
 ### 3. Fire Toast 🔥
+
 Dynamic fire effect animation with particle system for impactful notifications.
 
 ```jsx
@@ -99,11 +102,12 @@ addToast({
   variant: "warning",
   intensity: "high", // Controls fire effect intensity
   particleCount: 30, // Number of fire particles
-  windEffect: true // Add wind effect to flames
+  windEffect: true, // Add wind effect to flames
 });
 ```
 
 ### 4. Smoke Toast 💨
+
 Ethereal smoke animation effect for subtle notifications.
 
 ```jsx
@@ -113,11 +117,12 @@ addToast({
   variant: "default",
   density: "medium", // Controls smoke density
   turbulence: 0.5, // Add turbulence to smoke
-  colorShift: true // Enable color shifting effect
+  colorShift: true, // Enable color shifting effect
 });
 ```
 
 ### 5. Neon Toast 🌈
+
 Vibrant neon effect with pulsing glow and color transitions.
 
 ```jsx
@@ -127,11 +132,12 @@ addToast({
   variant: "success",
   glowIntensity: "high", // Controls neon glow
   pulseRate: 1.5, // Speed of pulsing effect
-  rainbow: true // Enable rainbow color cycle
+  rainbow: true, // Enable rainbow color cycle
 });
 ```
 
 ### 6. Matrix Toast 🖥️
+
 Digital rain effect inspired by The Matrix.
 
 ```jsx
@@ -141,11 +147,12 @@ addToast({
   variant: "info",
   rainSpeed: "fast", // Controls digital rain speed
   density: "high", // Character density
-  glowColor: "#00ff00" // Custom matrix glow color
+  glowColor: "#00ff00", // Custom matrix glow color
 });
 ```
 
 ### 7. Hologram Toast 👾
+
 Futuristic holographic display with glitch and scan effects.
 
 ```jsx
@@ -155,11 +162,12 @@ addToast({
   variant: "info",
   scanlineEffect: true, // Add scanning effect
   glitchAmount: 0.3, // Control glitch intensity
-  flickerRate: 2 // Rate of hologram flicker
+  flickerRate: 2, // Rate of hologram flicker
 });
 ```
 
 ### 8. Pixel Toast 🎮
+
 Retro pixel art style with optional 8-bit animations.
 
 ```jsx
@@ -169,11 +177,12 @@ addToast({
   variant: "success",
   pixelSize: 4, // Size of pixels
   dithering: true, // Add dithering effect
-  animation: "slideIn8Bit" // Special 8-bit animations
+  animation: "slideIn8Bit", // Special 8-bit animations
 });
 ```
 
 ### 9. Liquid Toast 💧
+
 Fluid animation effects with dynamic color blending.
 
 ```jsx
@@ -183,11 +192,12 @@ addToast({
   variant: "info",
   viscosity: 0.8, // Control fluid movement
   rippleEffect: true, // Add ripple on appear
-  colorBlend: ["#4a90e2", "#67b26f"] // Gradient colors
+  colorBlend: ["#4a90e2", "#67b26f"], // Gradient colors
 });
 ```
 
 ### 10. Aurora Toast 🌌
+
 Northern lights inspired effect with flowing colors.
 
 ```jsx
@@ -197,11 +207,12 @@ addToast({
   variant: "default",
   waveSpeed: 2, // Speed of color waves
   colorPalette: "twilight", // preset color schemes
-  intensity: 0.7 // Aurora effect intensity
+  intensity: 0.7, // Aurora effect intensity
 });
 ```
 
 ### 11. Cyberpunk Toast 🌐
+
 Futuristic cyberpunk design with neon effects and glitch animations.
 
 ```jsx
@@ -212,11 +223,12 @@ addToast({
   glitchIntensity: 0.5, // Controls glitch effect
   neonRim: true, // Add neon border
   scanlines: true, // Add CRT scanlines
-  cyberTheme: "neon" // neon, tech, hack themes
+  cyberTheme: "neon", // neon, tech, hack themes
 });
 ```
 
 ### 12. Paper Toast 📜
+
 Elegant paper-like effect with fold animations.
 
 ```jsx
@@ -226,11 +238,12 @@ addToast({
   variant: "default",
   foldEffect: true, // Add unfolding animation
   paperTexture: "rough", // paper texture type
-  inkEffect: true // Add ink spread effect
+  inkEffect: true, // Add ink spread effect
 });
 ```
 
 ### 13. Cosmic Toast 🌠
+
 Space-themed toast with star particles and nebula effects.
 
 ```jsx
@@ -240,11 +253,12 @@ addToast({
   variant: "success",
   starDensity: "high", // Amount of stars
   nebulaEffect: true, // Add nebula background
-  meteorShowers: true // Add shooting stars
+  meteorShowers: true, // Add shooting stars
 });
 ```
 
 ### 14. Wind Toast 🌪
+
 Elegant wind-like particle animations with dynamic flow.
 
 ```jsx
@@ -254,11 +268,12 @@ addToast({
   variant: "info",
   direction: "left", // Wind direction
   intensity: "medium", // Wind strength
-  particleType: "leaves" // leaves, petals, dust
+  particleType: "leaves", // leaves, petals, dust
 });
 ```
 
 ### 15. Crystal Toast 💎
+
 Crystal-like transparent effect with light refraction.
 
 ```jsx
@@ -268,11 +283,12 @@ addToast({
   variant: "success",
   facets: 8, // Number of crystal faces
   refractionAmount: 0.5, // Light refraction
-  shimmerEffect: true // Add shimmer animation
+  shimmerEffect: true, // Add shimmer animation
 });
 ```
 
 ### 16. Rain Toast 🌧️
+
 Beautiful rain effect with customizable droplets and colors.
 
 ```jsx
@@ -282,11 +298,12 @@ addToast({
   variant: "info",
   dropletCount: 30, // Number of raindrops
   dropletSpeed: "medium", // slow, medium, fast
-  thunder: true // Add thunder effect
+  thunder: true, // Add thunder effect
 });
 ```
 
 ### 17. Sparkle Toast ✨
+
 Elegant sparkle animation with star-shaped particles.
 
 ```jsx
@@ -296,7 +313,7 @@ addToast({
   variant: "success",
   sparkleCount: 15, // Number of sparkles
   sparkleSize: "medium", // small, medium, large
-  glowIntensity: 0.5 // Intensity of the glow effect
+  glowIntensity: 0.5, // Intensity of the glow effect
 });
 ```
 
@@ -305,6 +322,7 @@ Each variant comes with its own set of customizable properties and can be combin
 ## Animation Presets 🎭
 
 All variants support these base animations:
+
 - `fade` - Simple fade in/out
 - `slide` - Sliding entrance/exit
 - `bounce` - Bouncy effect
@@ -319,13 +337,14 @@ All variants support these base animations:
 ## Positioning Options 📍
 
 ```jsx
-<ToastContainer 
+<ToastContainer
   position="top-right" // Default position
   gutter={8} // Space between toasts
 />
 ```
 
 Available positions:
+
 - `top-right` (default)
 - `top-left`
 - `top-center`
@@ -336,24 +355,29 @@ Available positions:
 ## Customization Options 🎨
 
 ### Duration Control
+
 ```jsx
 addToast({
   message: "Custom duration",
   duration: 5000, // Duration in milliseconds
-  infinite: false // Set true for persistent toast
+  infinite: false, // Set true for persistent toast
 });
 ```
 
 ### Theme Support
+
 ```jsx
 import { ThemeProvider } from "toastonstaroid";
 
-<ThemeProvider theme="dark"> // or "light", "auto"
+<ThemeProvider theme="dark">
+  {" "}
+  // or "light", "auto"
   <App />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 ### Custom Styling
+
 ```jsx
 addToast({
   message: "Styled toast",
@@ -361,20 +385,21 @@ addToast({
     background: "linear-gradient(45deg, #FF6B6B, #4ECDC4)",
     color: "#fff",
     borderRadius: "12px",
-    padding: "16px 24px"
-  }
+    padding: "16px 24px",
+  },
 });
 ```
 
 ### Interactive Actions
+
 ```jsx
 addToast({
   message: "Update available",
   description: "A new version is ready to install",
   action: {
     label: "Update now",
-    onClick: () => handleUpdate()
-  }
+    onClick: () => handleUpdate(),
+  },
 });
 ```
 
@@ -386,7 +411,7 @@ addToast({
   variant: "info",
   progress: 45, // Show progress (0-100)
   loading: true, // Shows loading spinner
-  hideProgressBar: false // Control progress bar visibility
+  hideProgressBar: false, // Control progress bar visibility
 });
 ```
 
@@ -399,34 +424,38 @@ addToast({
   onClose: () => console.log("Toast hidden"),
   onClick: () => console.log("Toast clicked"),
   closeOnClick: true, // Close when clicked
-  pauseOnHover: true // Pause duration on hover
+  pauseOnHover: true, // Pause duration on hover
 });
 ```
 
 ## Advanced Usage
 
 ### Custom Variants
+
 ```jsx
 import { createCustomVariant } from "toastonstaroid";
 
 const pulseVariant = createCustomVariant({
   name: "pulse",
   animation: {
-    keyframes: {/* Your keyframes */},
-    duration: 1000
+    keyframes: {
+      /* Your keyframes */
+    },
+    duration: 1000,
   },
-  style: {/* Your styles */}
+  style: {
+    /* Your styles */
+  },
 });
 ```
 
 ### Dynamic Content
+
 ```jsx
 addToast({
   message: "Live updates",
   dynamic: true,
-  render: (props) => (
-    <CustomToastContent {...props} />
-  )
+  render: (props) => <CustomToastContent {...props} />,
 });
 ```
 
