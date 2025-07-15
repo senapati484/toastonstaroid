@@ -1,6 +1,6 @@
 {
   "name": "toastonstaroid",
-  "version": "1.0.2",
+  "version": "1.1.1",
   "description": "A modern, animated toast notification library for React with stunning effects",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
