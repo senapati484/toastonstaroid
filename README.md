@@ -5,7 +5,7 @@
 [![npm version](https://img.shields.io/npm/v/toastonstaroid.svg?style=flat-square)](https://www.npmjs.com/package/toastonstaroid)
 [![npm downloads](https://img.shields.io/npm/dm/toastonstaroid.svg?style=flat-square)](https://www.npmjs.com/package/toastonstaroid)
 [![license](https://img.shields.io/npm/l/toastonstaroid.svg?style=flat-square)](https://github.com/senapati484/toastonstaroid/blob/main/LICENSE)
-[![Website](https://img.shields.io/badge/website-sayan4.vercel.app-blue?style=flat-square)](https://sayan4.vercel.app)
+[![Website](https://img.shields.io/badge/website-toastonstaroid.vercel.app-blue?style=flat-square)](https://toastonstaroid.vercel.app)
 
 <div align="center">
   <img src="./assets/demo.gif" alt="Toastonstaroid Demo" width="600px" />
@@ -366,7 +366,8 @@ addToast({
 ## 💖 Support
 
 If you like this project, please consider:
-- Giving it a ⭐️ on GitHub
+
+- Giving it a ⭐️ on [GitHub](https://github.com/senapati484/toastonstaroid.git)
 - Sharing it with friends
 - [Following me](https://sayan4.vercel.app) for updates
 
@@ -377,9 +378,10 @@ We love contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for 
 ## 👨‍💻 Author
 
 **Sayan Senapati**
+
 - Website: [sayan4.vercel.app](https://sayan4.vercel.app)
 - GitHub: [@senapati484](https://github.com/senapati484)
-- LinkedIn: [Sayan Senapati](https://linkedin.com/in/your-profile)
+- LinkedIn: [Sayan Senapati](https://www.linkedin.com/in/sayan-senapati-430833211/)
 
 ## 📝 License
 

@@ -19,6 +19,7 @@ This project and everyone participating in it are governed by our Code of Conduc
 ## 🚀 Getting Started
 
 1. **Fork the repository**
+
 ```bash
 # Clone your fork
 git clone https://github.com/your-username/toastonstaroid.git
@@ -33,6 +34,7 @@ yarn install
 ```
 
 2. **Create a branch**
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
@@ -40,11 +42,13 @@ git checkout -b feature/your-feature-name
 ## 💻 Development Setup
 
 1. **Install dependencies**
+
 ```bash
 npm install --legacy-peer-deps
 ```
 
 2. **Start development environment**
+
 ```bash
 # Watch mode
 npm run watch
@@ -62,10 +66,11 @@ npm run format
 ## 🎨 Creating New Variants
 
 1. **Create a new variant file**
+
 ```jsx
 // src/variants/YourVariant.jsx
-import React from 'react';
-import { animations, dimensions } from '../styles';
+import React from "react";
+import { animations, dimensions } from "../styles";
 
 const YourVariant = ({ message, ...props }) => {
   // Your implementation
@@ -75,19 +80,21 @@ export default YourVariant;
 ```
 
 2. **Add variant styles**
+
 ```jsx
 // src/variants/styles.js
 export const variantStyles = {
   yourVariant: {
     // Your styles
-  }
+  },
 };
 ```
 
 3. **Export your variant**
+
 ```jsx
 // src/index.js
-export { default as YourVariant } from './variants/YourVariant';
+export { default as YourVariant } from "./variants/YourVariant";
 ```
 
 ### 🎯 Variant Guidelines
@@ -102,12 +109,14 @@ export { default as YourVariant } from './variants/YourVariant';
 ## 📝 Submitting Changes
 
 1. **Commit your changes**
+
 ```bash
 git add .
 git commit -m "feat: add awesome new feature"
 ```
 
 2. **Push to your fork**
+
 ```bash
 git push origin feature/your-feature-name
 ```
@@ -144,13 +153,13 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```jsx
 // Template for new components
-import React, { useEffect, useRef } from 'react';
-import { animations, dimensions } from '../styles';
+import React, { useEffect, useRef } from "react";
+import { animations, dimensions } from "../styles";
 
 const YourComponent = ({
   message,
   description,
-  variant = 'default',
+  variant = "default",
   onClose,
   style,
   ...props
@@ -167,11 +176,7 @@ const YourComponent = ({
   }, []);
 
   // Render
-  return (
-    <div>
-      {/* Your JSX */}
-    </div>
-  );
+  return <div>{/* Your JSX */}</div>;
 };
 
 export default YourComponent;
@@ -186,16 +191,19 @@ export default YourComponent;
 ## 🎯 What to Contribute?
 
 1. **New Toast Variants**
+
    - Creative animations
    - Unique effects
    - Theme integration
 
 2. **Performance Improvements**
+
    - Animation optimization
    - Bundle size reduction
    - Render performance
 
 3. **Documentation**
+
    - Examples
    - Use cases
    - Tutorials
@@ -208,6 +216,7 @@ export default YourComponent;
 ## 🌟 Recognition
 
 Contributors will be:
+
 - Listed in our README
 - Mentioned in release notes
 - Given credit in documentation
@@ -215,6 +224,7 @@ Contributors will be:
 ## ❓ Questions?
 
 Feel free to:
+
 - Open an issue
 - Contact maintainers
 - Join our community channels
