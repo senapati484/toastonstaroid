@@ -123,7 +123,11 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
         </span>
       </div>
       <button
-        onClick={handleClose}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          removeToast(toast.id);
+        }}
         style={{
           background: 'transparent',
           border: 'none',
@@ -135,16 +139,23 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: '4px',
-          transition: 'color 0.2s',
+          transition: 'all 0.2s ease',
           flexShrink: 0,
+          outline: 'none',
         }}
         onMouseOver={(e) => {
           e.currentTarget.style.color = 'white';
+          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
         }}
         onMouseOut={(e) => {
           e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)';
+          e.currentTarget.style.background = 'transparent';
         }}
-        aria-label="Close"
+        onFocus={(e) => {
+          e.currentTarget.style.outline = '2px solid rgba(255, 255, 255, 0.3)';
+        }}
+        aria-label="Close toast"
+        type="button"
       >
         <FaTimes style={{ width: '16px', height: '16px' }} />
       </button>
