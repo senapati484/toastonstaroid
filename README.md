@@ -3,8 +3,10 @@
 > A modern, beautiful toast notification library for React with smooth GSAP animations and elegant design.
 
 [![npm version](https://img.shields.io/npm/v/toastonstaroid.svg?style=flat-square)](https://www.npmjs.com/package/toastonstaroid)
+[![npm downloads](https://img.shields.io/npm/dm/toastonstaroid.svg?style=flat-square)](https://www.npmjs.com/package/toastonstaroid)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/senapati484/toastonstaroid?style=social)](https://github.com/senapati484/toastonstaroid)
+[![Website](https://img.shields.io/badge/website-toastonstaroid.vercel.app-blue?style=flat-square)](https://toastonstaroid.vercel.app)
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/senapati484/toastonstaroid/main/assets/demo.gif" alt="Toast Notification Demo" width="600" />
@@ -25,7 +27,7 @@
 - 🎯 **Multiple Positions**: Display toasts at any corner of the screen
 - 🔥 **Interactive**: Hover effects and click handling
 - 📱 **Fully Responsive**: Works on all device sizes
-- 🎭 **Variants**: Success, Error, Warning, Info, Fire, Rain, Smoke, and Cyberpunk styles
+- 🎭 **Variants**: Success, Error, Warning, Info, Fire, Rain, Smoke, Cyberpunk, Dragon Ball, and Water Flow styles
 - ⚡ **Lightweight**: Minimal bundle size impact
 - 🎨 **Customizable**: Full control over appearance and behavior
 - 🔄 **Queue System**: Handles multiple toasts gracefully
@@ -64,8 +66,8 @@ Make sure you have these peer dependencies installed:
 1. First, wrap your app with the `ToastContainer` component:
 
 ```jsx
-import React from 'react';
-import { ToastContainer } from 'toastonstaroid';
+import React from "react";
+import { ToastContainer } from "toastonstaroid";
 
 function App() {
   return (
@@ -82,29 +84,29 @@ export default App;
 2. Use the `toast` function to show notifications:
 
 ```jsx
-import React from 'react';
-import { toast } from 'toastonstaroid';
+import React from "react";
+import { toast } from "toastonstaroid";
 
 function MyComponent() {
   const showToast = () => {
     // Success toast
-    toast.success('Operation completed successfully!');
-    
+    toast.success("Operation completed successfully!");
+
     // Error toast
-    toast.error('Something went wrong!');
-    
+    toast.error("Something went wrong!");
+
     // Warning toast
-    toast.warning('This action cannot be undone');
-    
+    toast.warning("This action cannot be undone");
+
     // Info toast
-    toast.info('New update available');
-    
+    toast.info("New update available");
+
     // With custom duration (5 seconds)
-    toast.success('Changes saved!', 5000);
+    toast.success("Changes saved!", 5000);
   };
 
   return (
-    <button 
+    <button
       onClick={showToast}
       className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
     >
@@ -120,75 +122,145 @@ export default MyComponent;
 
 ```jsx
 // Success toast
-toast.success('Operation completed successfully!');
+toast.success("Operation completed successfully!");
 
 // Error toast
-toast.error('Something went wrong!');
+toast.error("Something went wrong!");
 
 // Warning toast
-toast.warning('This action cannot be undone');
+toast.warning("This action cannot be undone");
 
 // Info toast
-toast.info('New update available');
+toast.info("New update available");
 
 // Fire toast (for important alerts)
-toast.fire('Critical system update required!');
+toast.fire("Critical system update required!");
 
 // Rain toast (for notifications)
-toast.rain('New message received');
+toast.rain("New message received");
 
 // Smoke toast (for subtle notifications)
-toast.smoke('Settings saved');
+toast.smoke("Settings saved");
 
 // Cyberpunk toast (for futuristic UI)
-toast.cyberpunk('System initialized');
+toast.cyberpunk("System initialized");
+
+// Dragon Ball Z style
+toast.dragonball("Power level over 9000!");
+
+// Water Flow style
+toast.waterflow("Your changes have been saved");
 ```
 
 ### Customizing Duration
 
 ```jsx
 // Show for 5 seconds (default is 3000ms)
-toast.success('Profile updated!', 5000);
+toast.success("Profile updated!", 5000);
 
 // Show until manually closed
-toast.info('Processing...', 0);
+toast.info("Processing...", 0);
 ```
 
 ## 🎨 Toast Variants
 
-Toastonstaroid comes with several built-in variants:
+Toastonstaroid comes with a variety of beautiful toast variants, each with unique animations and styles:
 
-- `success` - For successful operations
-- `error` - For error messages
-- `warning` - For warning messages
-- `info` - For informational messages
-- `fire` - For important alerts with flame animation
-- `rain` - For notifications with falling rain effect
-- `smoke` - For subtle notifications with smoke effect
-- `cyberpunk` - For futuristic notifications with glitch effect
+| Variant      | Description                                   | Example                                         |
+| ------------ | --------------------------------------------- | ----------------------------------------------- |
+| `success`    | Indicates a successful operation              | `toast.success('Operation completed!')`         |
+| `error`      | Indicates an error that needs attention       | `toast.error('Something went wrong!')`          |
+| `warning`    | For warning messages                          | `toast.warning('This action cannot be undone')` |
+| `info`       | General information                           | `toast.info('New message received')`            |
+| `fire`       | Fiery animation for important alerts          | `toast.fire('Hot! New message')`                |
+| `rain`       | Rain effect for notifications                 | `toast.rain('Don\'t forget your umbrella!')`    |
+| `smoke`      | Smoke effect for subtle notifications         | `toast.smoke('Poof! It\'s gone')`               |
+| `cyberpunk`  | Futuristic cyberpunk style                    | `toast.cyberpunk('Access granted')`             |
+| `dragonball` | Anime-inspired with energy aura and particles | `toast.dragonball('Power level over 9000!')`    |
+| `waterflow`  | Smooth flowing water animation with bubbles   | `toast.waterflow('Changes saved successfully')` |
 
-### Success Toast
+### Basic Variants
+
+#### Success Toast
+
+Indicates a successful operation.
 
 ```jsx
 toast.success("Operation completed successfully!");
 ```
 
-### Error Toast
+#### Error Toast
+
+Indicates an error that needs attention.
 
 ```jsx
 toast.error("Failed to save changes");
 ```
 
-### Warning Toast
+#### Warning Toast
+
+For warning messages.
 
 ```jsx
 toast.warning("This action cannot be undone");
 ```
 
-### Info Toast
+#### Info Toast
+
+For general information.
 
 ```jsx
 toast.info("New message received");
+```
+
+### Animated Variants
+
+#### Fire Toast
+
+Fiery animation for important alerts.
+
+```jsx
+toast.fire("Hot! New message");
+```
+
+#### Rain Toast
+
+Rain effect for notifications.
+
+```jsx
+toast.rain("Don't forget your umbrella!");
+```
+
+#### Smoke Toast
+
+Smoke effect for subtle notifications.
+
+```jsx
+toast.smoke("Poof! It's gone");
+```
+
+#### Cyberpunk Toast
+
+Futuristic cyberpunk style.
+
+```jsx
+toast.cyberpunk("Access granted");
+```
+
+#### Dragon Ball Z Style
+
+Anime-inspired with energy aura and particles.
+
+```jsx
+toast.dragonball("Power level over 9000!");
+```
+
+#### Water Flow
+
+Smooth flowing water animation with bubbles.
+
+```jsx
+toast.waterflow("Changes saved successfully");
 ```
 
 ### Custom Duration
@@ -205,14 +277,14 @@ toast.info("Processing...", 0);
 
 ### ToastContainer Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `position` | `string` | `'top-right'` | Position of the toast container. Options: `'top-left'`, `'top-center'`, `'top-right'`, `'bottom-left'`, `'bottom-center'`, `'bottom-right'` |
-| `autoClose` | `number` | `3000` | Auto close timeout in milliseconds (`0` to disable) |
-| `closeOnClick` | `boolean` | `true` | Close toast when clicked |
-| `pauseOnHover` | `boolean` | `true` | Pause toast timer on hover |
-| `className` | `string` | `''` | Additional CSS class for the container |
-| `style` | `React.CSSProperties` | `{}` | Inline styles for the container |
+| Prop           | Type                  | Default       | Description                                                                                                                                 |
+| -------------- | --------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `position`     | `string`              | `'top-right'` | Position of the toast container. Options: `'top-left'`, `'top-center'`, `'top-right'`, `'bottom-left'`, `'bottom-center'`, `'bottom-right'` |
+| `autoClose`    | `number`              | `3000`        | Auto close timeout in milliseconds (`0` to disable)                                                                                         |
+| `closeOnClick` | `boolean`             | `true`        | Close toast when clicked                                                                                                                    |
+| `pauseOnHover` | `boolean`             | `true`        | Pause toast timer on hover                                                                                                                  |
+| `className`    | `string`              | `''`          | Additional CSS class for the container                                                                                                      |
+| `style`        | `React.CSSProperties` | `{}`          | Inline styles for the container                                                                                                             |
 
 ### Toast Methods
 
@@ -239,14 +311,14 @@ toast.update(toastId: string, options: ToastOptions): void;
 
 ### Toast Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `toastId` | `string` | Random ID | Custom ID for the toast |
-| `duration` | `number` | `3000` | Display duration in ms |
-| `onClose` | `() => void` | - | Callback when toast closes |
-| `onOpen` | `() => void` | - | Callback when toast opens |
-| `className` | `string` | - | Additional CSS class |
-| `style` | `React.CSSProperties` | - | Inline styles |
+| Option      | Type                  | Default   | Description                |
+| ----------- | --------------------- | --------- | -------------------------- |
+| `toastId`   | `string`              | Random ID | Custom ID for the toast    |
+| `duration`  | `number`              | `3000`    | Display duration in ms     |
+| `onClose`   | `() => void`          | -         | Callback when toast closes |
+| `onOpen`    | `() => void`          | -         | Callback when toast opens  |
+| `className` | `string`              | -         | Additional CSS class       |
+| `style`     | `React.CSSProperties` | -         | Inline styles              |
 
 ## 🎨 Customization
 
@@ -261,19 +333,19 @@ Customize the look using these CSS variables:
   --toast-text: #ffffff;
   --toast-border: rgba(255, 255, 255, 0.1);
   --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  
+
   /* Layout */
   --toast-padding: 12px 16px;
   --toast-spacing: 16px;
   --toast-border-radius: 8px;
-  
+
   /* Typography */
   --toast-font-size: 14px;
   --toast-line-height: 1.5;
-  
+
   /* Icons */
   --toast-icon-size: 20px;
-  
+
   /* Animations */
   --toast-animation-duration: 300ms;
 }
@@ -305,28 +377,24 @@ You can customize the enter/exit animations by providing your own CSS classes:
 ### Programmatic Control
 
 ```jsx
-import { useToastStore } from 'toastonstaroid';
+import { useToastStore } from "toastonstaroid";
 
 function MyComponent() {
   const { toasts, removeToast } = useToastStore();
-  
+
   const showTemporaryToast = () => {
-    const toastId = toast.info('This will be removed in 2 seconds');
-    
+    const toastId = toast.info("This will be removed in 2 seconds");
+
     setTimeout(() => {
       removeToast(toastId);
     }, 2000);
   };
-  
+
   return (
     <div>
-      <button onClick={showTemporaryToast}>
-        Show Temporary Toast
-      </button>
-      
-      <div>
-        {toasts.length} active toasts
-      </div>
+      <button onClick={showTemporaryToast}>Show Temporary Toast</button>
+
+      <div>{toasts.length} active toasts</div>
     </div>
   );
 }
@@ -335,20 +403,24 @@ function MyComponent() {
 ### Custom Toast Component
 
 ```jsx
-import { useToastStore } from 'toastonstaroid';
+import { useToastStore } from "toastonstaroid";
 
 function CustomToast() {
   const { toasts, removeToast } = useToastStore();
-  
+
   return (
     <div className="fixed bottom-4 right-4 space-y-2 z-50">
       {toasts.map((toast) => (
         <div
           key={toast.id}
           className={`p-4 rounded-lg shadow-lg flex items-center ${
-            toast.type === 'success' ? 'bg-green-500' :
-            toast.type === 'error' ? 'bg-red-500' :
-            toast.type === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'
+            toast.type === "success"
+              ? "bg-green-500"
+              : toast.type === "error"
+              ? "bg-red-500"
+              : toast.type === "warning"
+              ? "bg-yellow-500"
+              : "bg-blue-500"
           } text-white`}
         >
           <span className="flex-1">{toast.message}</span>
@@ -380,11 +452,13 @@ Toasts are fully responsive and adapt to different screen sizes:
 ### Common Issues
 
 1. **Toasts not showing up?**
+
    - Ensure `<ToastContainer />` is rendered in your app
    - Check for z-index conflicts
    - Verify no `overflow: hidden` is hiding toasts
 
 2. **Animations not working?**
+
    - Make sure GSAP is installed
    - Check browser console for errors
    - Verify you're not calling toast functions during SSR
@@ -395,13 +469,23 @@ Toasts are fully responsive and adapt to different screen sizes:
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how to get started:
+We welcome contributions from the community! Before you start, please take a moment to read our [Contribution Guidelines](CONTRIBUTING.md) which includes detailed information on:
+
+- 🛠️ Setting up your development environment
+- 📝 Code style and conventions
+- 🧪 Testing your changes
+- 💡 Proposing new features
+- 🐛 Reporting bugs
+
+### Quick Start
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+For more details, please see our [Contribution Guidelines](CONTRIBUTING.md).
 
 ## 📄 License
 
@@ -426,4 +510,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## License
 
 MIT
-````
+
+```
+
+```

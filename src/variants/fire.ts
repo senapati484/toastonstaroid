@@ -11,6 +11,12 @@ const createFireEffect = (element: HTMLElement) => {
   fireContainer.style.height = '4px';
   fireContainer.style.overflow = 'hidden';
   fireContainer.style.borderRadius = '0 0 8px 8px';
+  fireContainer.style.pointerEvents = 'none';
+  fireContainer.style.zIndex = '0';
+  fireContainer.style.borderRadius = '8px';
+  fireContainer.style.background = 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%)';
+  fireContainer.style.overflow = 'visible';
+  fireContainer.style.clipPath = 'inset(0 0 0 0)';
   
   for (let i = 0; i < 5; i++) {
     const flame = document.createElement('div');
@@ -33,6 +39,27 @@ const createFireEffect = (element: HTMLElement) => {
     });
     
     fireContainer.appendChild(flame);
+  }
+  
+  // Ensure the element has relative positioning
+  element.style.position = 'relative';
+  element.style.overflow = 'visible';
+  
+  // Ensure close button is clickable
+  const closeButton = element.querySelector('button[aria-label="Close toast"]');
+  if (closeButton) {
+    const button = closeButton as HTMLElement;
+    button.style.position = 'relative';
+    button.style.zIndex = '1000';
+    button.style.pointerEvents = 'auto';
+    
+    // Make sure the button's parent container doesn't block events
+    const buttonContainer = button.parentElement;
+    if (buttonContainer) {
+      buttonContainer.style.position = 'relative';
+      buttonContainer.style.zIndex = '1000';
+      buttonContainer.style.pointerEvents = 'auto';
+    }
   }
   
   element.appendChild(fireContainer);

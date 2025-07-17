@@ -10,9 +10,10 @@ const createRainEffect = (element: HTMLElement) => {
   rainContainer.style.width = '100%';
   rainContainer.style.height = '100%';
   rainContainer.style.overflow = 'hidden';
-  rainContainer.style.pointerEvents = 'none';
   rainContainer.style.borderRadius = '8px';
+  rainContainer.style.pointerEvents = 'none';
   rainContainer.style.zIndex = '0';
+  rainContainer.style.clipPath = 'inset(0 0 0 0)';
   
   // Create multiple rain drops
   for (let i = 0; i < 15; i++) {
@@ -37,7 +38,24 @@ const createRainEffect = (element: HTMLElement) => {
   }
   
   element.style.position = 'relative';
-  element.style.overflow = 'hidden';
+  element.style.overflow = 'visible';
+  
+  // Ensure close button is clickable
+  const closeButton = element.querySelector('button[aria-label="Close toast"]');
+  if (closeButton) {
+    const button = closeButton as HTMLElement;
+    button.style.position = 'relative';
+    button.style.zIndex = '1000';
+    button.style.pointerEvents = 'auto';
+    
+    // Make sure the button's parent container doesn't block events
+    const buttonContainer = button.parentElement;
+    if (buttonContainer) {
+      buttonContainer.style.position = 'relative';
+      buttonContainer.style.zIndex = '1000';
+      buttonContainer.style.pointerEvents = 'auto';
+    }
+  }
   
   // Insert rain effect at the beginning to ensure it's behind content
   if (element.firstChild) {

@@ -11,6 +11,8 @@ import {
   rainToast,
   smokeToast,
   cyberpunkToast,
+  dragonballToast,
+  waterflowToast,
 } from './variants';
 
 // React Icons
@@ -23,7 +25,9 @@ import {
   FaCloudRain,
   FaSmog,
   FaRobot,
-  FaTimes
+  FaTimes,
+  FaDragon,
+  FaWater
 } from 'react-icons/fa';
 
 const Icons = {
@@ -35,6 +39,8 @@ const Icons = {
   rain: <FaCloudRain className="w-5 h-5" />,
   smoke: <FaSmog className="w-5 h-5" />,
   cyberpunk: <FaRobot className="w-5 h-5" />,
+  dragonball: <FaDragon className="w-5 h-5" />,
+  waterflow: <FaWater className="w-5 h-5" />,
 };
 
 const variantMap = {
@@ -46,6 +52,8 @@ const variantMap = {
   rain: rainToast,
   smoke: smokeToast,
   cyberpunk: cyberpunkToast,
+  dragonball: dragonballToast,
+  waterflow: waterflowToast,
 };
 
 interface ToastProps {
@@ -101,6 +109,8 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '12px 16px',
+        position: 'relative',
+        zIndex: 1,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -138,43 +148,50 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
           {toast.message}
         </span>
       </div>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          removeToast(toast.id);
-        }}
-        style={{
-          background: 'transparent',
-          border: 'none',
-          color: 'rgba(255, 255, 255, 0.6)',
-          cursor: 'pointer',
-          padding: '4px',
-          marginLeft: '12px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: '4px',
-          transition: 'all 0.2s ease',
-          flexShrink: 0,
-          outline: 'none',
-        }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.color = 'white';
-          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)';
-          e.currentTarget.style.background = 'transparent';
-        }}
-        onFocus={(e) => {
-          e.currentTarget.style.outline = '2px solid rgba(255, 255, 255, 0.3)';
-        }}
-        aria-label="Close toast"
-        type="button"
-      >
-        <FaTimes style={{ width: '16px', height: '16px' }} />
-      </button>
+      <div style={{
+        position: 'relative',
+        zIndex: 1000,
+      }}>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            removeToast(toast.id);
+          }}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            color: 'rgba(255, 255, 255, 0.6)',
+            cursor: 'pointer',
+            padding: '4px',
+            marginLeft: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '4px',
+            transition: 'all 0.2s ease',
+            flexShrink: 0,
+            outline: 'none',
+            position: 'relative',
+            zIndex: 1000,
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.color = 'white';
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)';
+            e.currentTarget.style.background = 'transparent';
+          }}
+          onFocus={(e) => {
+            e.currentTarget.style.outline = '2px solid rgba(255, 255, 255, 0.3)';
+          }}
+          aria-label="Close toast"
+          type="button"
+        >
+          <FaTimes style={{ width: '16px', height: '16px', position: 'relative', zIndex: 1000 }} />
+        </button>
+      </div>
     </div>
   );
 };
@@ -231,5 +248,13 @@ export const toast = {
   },
   cyberpunk(message: string, duration: number = 5000) {
     useToastStore.getState().addToast({ type: 'cyberpunk', message, duration });
+  },
+  
+  dragonball(message: string, duration: number = 5000) {
+    useToastStore.getState().addToast({ type: 'dragonball', message, duration });
+  },
+  
+  waterflow(message: string, duration: number = 5000) {
+    useToastStore.getState().addToast({ type: 'waterflow', message, duration });
   },
 };

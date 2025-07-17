@@ -12,6 +12,8 @@ const createSmokeEffect = (element: HTMLElement) => {
   smokeContainer.style.overflow = 'hidden';
   smokeContainer.style.pointerEvents = 'none';
   smokeContainer.style.borderRadius = '8px';
+  smokeContainer.style.zIndex = '0';
+  smokeContainer.style.clipPath = 'inset(0 0 0 0)';
   
   // Create smoke particles
   for (let i = 0; i < 8; i++) {
@@ -41,7 +43,27 @@ const createSmokeEffect = (element: HTMLElement) => {
     smokeContainer.appendChild(smoke);
   }
   
+  // Ensure the element has relative positioning
   element.style.position = 'relative';
+  element.style.overflow = 'visible';
+  
+  // Ensure close button is clickable
+  const closeButton = element.querySelector('button[aria-label="Close toast"]');
+  if (closeButton) {
+    const button = closeButton as HTMLElement;
+    button.style.position = 'relative';
+    button.style.zIndex = '1000';
+    button.style.pointerEvents = 'auto';
+    
+    // Make sure the button's parent container doesn't block events
+    const buttonContainer = button.parentElement;
+    if (buttonContainer) {
+      buttonContainer.style.position = 'relative';
+      buttonContainer.style.zIndex = '1000';
+      buttonContainer.style.pointerEvents = 'auto';
+    }
+  }
+  
   element.appendChild(smokeContainer);
   return smokeContainer;
 };

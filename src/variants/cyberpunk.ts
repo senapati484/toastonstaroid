@@ -12,7 +12,8 @@ const createCyberpunkEffect = (element: HTMLElement) => {
   container.style.overflow = 'hidden';
   container.style.pointerEvents = 'none';
   container.style.borderRadius = '8px';
-  container.style.zIndex = '-1';
+  container.style.zIndex = '0';
+  container.style.clipPath = 'inset(0 0 0 0)';
   
   // Create scanlines
     const scanlines = document.createElement('div');
@@ -95,7 +96,27 @@ const createCyberpunkEffect = (element: HTMLElement) => {
   container.appendChild(createCorner('bottom-left'));
   container.appendChild(createCorner('bottom-right'));
   
+  // Ensure the element has relative positioning
   element.style.position = 'relative';
+  element.style.overflow = 'visible';
+  
+  // Ensure close button is clickable
+  const closeButton = element.querySelector('button[aria-label="Close toast"]');
+  if (closeButton) {
+    const button = closeButton as HTMLElement;
+    button.style.position = 'relative';
+    button.style.zIndex = '1000';
+    button.style.pointerEvents = 'auto';
+    
+    // Make sure the button's parent container doesn't block events
+    const buttonContainer = button.parentElement;
+    if (buttonContainer) {
+      buttonContainer.style.position = 'relative';
+      buttonContainer.style.zIndex = '1000';
+      buttonContainer.style.pointerEvents = 'auto';
+    }
+  }
+  
   element.appendChild(container);
   return container;
 };
@@ -110,16 +131,13 @@ export const cyberpunkToast: ToastConfig = {
       opacity: 0, 
       y: fromY, 
       x: fromX,
-      filter: 'hue-rotate(0deg)'
     });
     
+    // Add cyberpunk effect
+    createCyberpunkEffect(element);
+    
     // Create timeline for the animation sequence
-    const tl = gsap.timeline({
-      onStart: () => {
-        // Add cyberpunk effect when animation starts
-        createCyberpunkEffect(element);
-      }
-    });
+    const tl = gsap.timeline();
     
     // Add the animation to the timeline
     tl.to(element, {
@@ -130,43 +148,24 @@ export const cyberpunkToast: ToastConfig = {
       ease: 'power2.out',
     });
     
-    // Add glitch effect
-    tl.to(element, {
-      keyframes: [
-        { x: '-=2', y: '+=2', duration: 0.02 },
-        { x: '+=4', y: '-=4', duration: 0.02 },
-        { x: '-=2', y: '+=2', duration: 0.02 },
-      ],
-      repeat: -1,
-      repeatDelay: 3,
-      yoyo: true,
-      ease: 'none',
-    }, 0);
-    
-    // Color shift effect
-    tl.to(element, {
-      filter: 'hue-rotate(360deg)',
-      duration: 20,
-      repeat: -1,
-      ease: 'none',
-    }, 0);
-    
     return tl;
   },
   containerStyles: {
     ...glassEffect,
     '--toast-bg': 'rgba(6, 2, 23, 0.7)',
     '--toast-border': '1px solid rgba(0, 255, 255, 0.3)',
-    '--toast-shadow': '0 0 15px rgba(0, 255, 255, 0.3), 0 0 30px rgba(0, 255, 255, 0.1)',
+    '--toast-shadow': '0 0 15px rgba(0, 255, 255, 0.3)',
     color: '#00ffff',
-    textShadow: '0 0 5px rgba(0, 255, 255, 0.5)',
+    textShadow: '0 0 5px rgba(0, 255, 255, 0.7)',
     padding: '12px 16px',
-    '&::before': {
-      background: 'linear-gradient(90deg, #ff00ff, #00ffff)',
-    },
+    borderRadius: '4px',
+    background: 'linear-gradient(135deg, rgba(6, 2, 23, 0.9) 0%, rgba(22, 11, 57, 0.9) 100%)',
+    backdropFilter: 'blur(4px)',
+    boxShadow: '0 0 15px rgba(0, 255, 255, 0.3)',
+    transition: 'all 0.3s ease',
     '&:hover': {
-      boxShadow: '0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.2)',
       transform: 'translateY(-2px)',
-    },
-  },
+      boxShadow: '0 0 20px rgba(0, 255, 255, 0.5)'
+    }
+  } as const,
 };

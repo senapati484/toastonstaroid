@@ -7,3 +7,5 @@ export * from './fire';
 export * from './rain';
 export * from './smoke';
 export * from './cyberpunk';
+export * from './dragonball';
+export * from './waterflow';
