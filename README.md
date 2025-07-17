@@ -9,7 +9,7 @@
 [![Website](https://img.shields.io/badge/website-toastonstaroid.vercel.app-blue?style=flat-square)](https://toastonstaroid.vercel.app)
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/senapati484/toastonstaroid/main/assets/demo.gif" alt="Toast Notification Demo" width="600" />
+  <img src="https://raw.githubusercontent.com/senapati484/toastonstaroid/sayan/data/exmple1.mov" alt="Toast Notification Demo" width="600" />
   
   <p align="center">
     <a href="#-features">Features</a> •
