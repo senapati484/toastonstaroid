@@ -10,7 +10,7 @@
 
 <div align="center">
   <video width="600" controls>
-  <source src="https://raw.githubusercontent.com/senapati484/toastonstaroid/main/data/example1.mp4" type="video/mp4">
+  <source src="https://raw.githubusercontent.com/senapati484/toastonstaroid/new/data/example1.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
