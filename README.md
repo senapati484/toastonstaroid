@@ -8,7 +8,9 @@
 [![GitHub stars](https://img.shields.io/github/stars/senapati484/toastonstaroid?style=social)](https://github.com/senapati484/toastonstaroid)
 [![Website](https://img.shields.io/badge/website-toastonstaroid.vercel.app-blue?style=flat-square)](https://toastonstaroid.vercel.app)
 
-[![Watch the video](https://img.youtube.com/vi/Uuxnm6ARe0I/maxresdefault.jpg)](https://youtu.be/Uuxnm6ARe0I)
+<!-- [![Watch the video](https://img.youtube.com/vi/Uuxnm6ARe0I/maxresdefault.jpg)](https://youtu.be/Uuxnm6ARe0I) -->
+
+[![Watch the video](https://img.youtube.com/vi/Uuxnm6ARe0I/maxresdefault.jpg)](https://raw.githubusercontent.com/senapati484/toastonstaroid/new/data/example1.mp4)
 
 <div align="center">
   <p align="center">
