@@ -1,0 +1,45 @@
+{
+  "name": "toastonstaroid",
+  "version": "1.0.0",
+  "description": "A simple and beautiful toast notification library for React",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.tsx --format cjs,esm --dts --external react",
+    "dev": "tsup src/index.tsx --format cjs,esm --dts --external react --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "react",
+    "toast",
+    "notification",
+    "alert",
+    "gsap",
+    "animation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-icons": ">=4.0.0"
+  },
+  "dependencies": {
+    "@types/uuid": "^10.0.0",
+    "gsap": "^3.13.0",
+    "nanoid": "^5.1.5",
+    "react": ">=16.8.0",
+    "react-icons": "^5.5.0",
+    "uuid": "^11.1.0",
+    "zustand": "^5.0.6"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.12.14",
+    "@types/react": "^19.1.8",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  }
+}
