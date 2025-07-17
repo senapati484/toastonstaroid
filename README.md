@@ -25,7 +25,7 @@
 - 🎯 **Multiple Positions**: Display toasts at any corner of the screen
 - 🔥 **Interactive**: Hover effects and click handling
 - 📱 **Fully Responsive**: Works on all device sizes
-- 🎭 **Variants**: Success, Error, Warning, and Info styles
+- 🎭 **Variants**: Success, Error, Warning, Info, Fire, Rain, Smoke, and Cyberpunk styles
 - ⚡ **Lightweight**: Minimal bundle size impact
 - 🎨 **Customizable**: Full control over appearance and behavior
 - 🔄 **Queue System**: Handles multiple toasts gracefully
@@ -120,16 +120,28 @@ export default MyComponent;
 
 ```jsx
 // Success toast
-toast.success('Operation completed!');
+toast.success('Operation completed successfully!');
 
 // Error toast
-toast.error('Failed to save changes');
+toast.error('Something went wrong!');
 
 // Warning toast
 toast.warning('This action cannot be undone');
 
 // Info toast
-toast.info('New message received');
+toast.info('New update available');
+
+// Fire toast (for important alerts)
+toast.fire('Critical system update required!');
+
+// Rain toast (for notifications)
+toast.rain('New message received');
+
+// Smoke toast (for subtle notifications)
+toast.smoke('Settings saved');
+
+// Cyberpunk toast (for futuristic UI)
+toast.cyberpunk('System initialized');
 ```
 
 ### Customizing Duration
@@ -143,6 +155,17 @@ toast.info('Processing...', 0);
 ```
 
 ## 🎨 Toast Variants
+
+Toastonstaroid comes with several built-in variants:
+
+- `success` - For successful operations
+- `error` - For error messages
+- `warning` - For warning messages
+- `info` - For informational messages
+- `fire` - For important alerts with flame animation
+- `rain` - For notifications with falling rain effect
+- `smoke` - For subtle notifications with smoke effect
+- `cyberpunk` - For futuristic notifications with glitch effect
 
 ### Success Toast
 
@@ -199,6 +222,10 @@ toast.success(message: string, options?: ToastOptions): string;
 toast.error(message: string, options?: ToastOptions): string;
 toast.warning(message: string, options?: ToastOptions): string;
 toast.info(message: string, options?: ToastOptions): string;
+toast.fire(message: string, options?: ToastOptions): string;
+toast.rain(message: string, options?: ToastOptions): string;
+toast.smoke(message: string, options?: ToastOptions): string;
+toast.cyberpunk(message: string, options?: ToastOptions): string;
 
 // Remove a toast
 toast.dismiss(toastId: string): void;

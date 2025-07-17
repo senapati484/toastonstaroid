@@ -8,7 +8,7 @@ export type ToastPosition =
   | 'bottom-center'
   | 'bottom-right';
 
-export type ToastType = 'success' | 'error' | 'warning' | 'info';
+export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'fire' | 'rain' | 'smoke' | 'cyberpunk';
 
 type CSSCustomProperties = {
   '--toast-bg'?: string;
@@ -16,9 +16,13 @@ type CSSCustomProperties = {
   '--toast-shadow'?: string;
 };
 
-export interface ToastStyles extends CSSProperties, CSSCustomProperties {
+export interface PseudoStyles {
   '&:hover'?: CSSProperties & CSSCustomProperties;
+  '&::before'?: CSSProperties & CSSCustomProperties;
+  '&::after'?: CSSProperties & CSSCustomProperties;
 }
+
+export interface ToastStyles extends CSSProperties, CSSCustomProperties, PseudoStyles {}
 
 export interface ToastConfig {
   animation: (element: HTMLElement, position: string) => gsap.core.Timeline;

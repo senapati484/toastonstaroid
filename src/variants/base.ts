@@ -35,7 +35,7 @@ export const glassEffect: ContainerStyles = {
   boxSizing: 'border-box',
   position: 'relative',
   overflow: 'hidden',
-  margin: '8px 0',
+  margin: '4px 0',
   cursor: 'default',
   userSelect: 'none',
   '&::before': {

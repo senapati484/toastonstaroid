@@ -7,6 +7,10 @@ import {
   errorToast,
   warningToast,
   infoToast,
+  fireToast,
+  rainToast,
+  smokeToast,
+  cyberpunkToast,
 } from './variants';
 
 // React Icons
@@ -15,6 +19,10 @@ import {
   FaExclamationCircle, 
   FaExclamationTriangle, 
   FaInfoCircle,
+  FaFire,
+  FaCloudRain,
+  FaSmog,
+  FaRobot,
   FaTimes
 } from 'react-icons/fa';
 
@@ -23,6 +31,10 @@ const Icons = {
   error: <FaExclamationCircle className="w-5 h-5" />,
   warning: <FaExclamationTriangle className="w-5 h-5" />,
   info: <FaInfoCircle className="w-5 h-5" />,
+  fire: <FaFire className="w-5 h-5" />,
+  rain: <FaCloudRain className="w-5 h-5" />,
+  smoke: <FaSmog className="w-5 h-5" />,
+  cyberpunk: <FaRobot className="w-5 h-5" />,
 };
 
 const variantMap = {
@@ -30,6 +42,10 @@ const variantMap = {
   error: errorToast,
   warning: warningToast,
   info: infoToast,
+  fire: fireToast,
+  rain: rainToast,
+  smoke: smokeToast,
+  cyberpunk: cyberpunkToast,
 };
 
 interface ToastProps {
@@ -192,16 +208,28 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
 };
 
 export const toast = {
-  success: (message: string, duration: number = 5000) => {
+  success(message: string, duration: number = 5000) {
     useToastStore.getState().addToast({ type: 'success', message, duration });
   },
-  error: (message: string, duration: number = 5000) => {
+  error(message: string, duration: number = 5000) {
     useToastStore.getState().addToast({ type: 'error', message, duration });
   },
-  warning: (message: string, duration: number = 5000) => {
+  warning(message: string, duration: number = 5000) {
     useToastStore.getState().addToast({ type: 'warning', message, duration });
   },
-  info: (message: string, duration: number = 5000) => {
+  info(message: string, duration: number = 5000) {
     useToastStore.getState().addToast({ type: 'info', message, duration });
+  },
+  fire(message: string, duration: number = 5000) {
+    useToastStore.getState().addToast({ type: 'fire', message, duration });
+  },
+  rain(message: string, duration: number = 5000) {
+    useToastStore.getState().addToast({ type: 'rain', message, duration });
+  },
+  smoke(message: string, duration: number = 5000) {
+    useToastStore.getState().addToast({ type: 'smoke', message, duration });
+  },
+  cyberpunk(message: string, duration: number = 5000) {
+    useToastStore.getState().addToast({ type: 'cyberpunk', message, duration });
   },
 };
