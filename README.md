@@ -9,8 +9,11 @@
 [![Website](https://img.shields.io/badge/website-toastonstaroid.vercel.app-blue?style=flat-square)](https://toastonstaroid.vercel.app)
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/senapati484/toastonstaroid/refs/heads/main/data/example1.mp4" alt="Toast Notification Demo" width="600" />
-  
+  <video width="600" controls>
+  <source src="https://raw.githubusercontent.com/senapati484/toastonstaroid/main/data/example1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
   <p align="center">
     <a href="#-features">Features</a> •
     <a href="#-installation">Installation</a> •
