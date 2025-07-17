@@ -9,39 +9,9 @@
 [![Website](https://img.shields.io/badge/website-toastonstaroid.vercel.app-blue?style=flat-square)](https://toastonstaroid.vercel.app)
 
 <div align="center">
-  <a href="https://youtu.be/Uuxnm6ARe0I" target="_blank" style="position: relative; display: inline-block;">
-  <!-- YouTube Thumbnail -->
-  <img
-    src="https://img.youtube.com/vi/Uuxnm6ARe0I/maxresdefault.jpg"
-    alt="Toast Notification Demo"
-    width="600"
-    style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); cursor: pointer;"
-  />
-
-  <!-- Play Button Overlay -->
-
-<svg
-width="80"
-height="80"
-viewBox="0 0 68 48"
-style="
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-filter: drop-shadow(0 0 8px rgba(0,0,0,0.5));
-"
-
->
-
-    <path
-      d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z"
-      fill="#f00"
-    />
-    <path d="M45 24L27 14v20" fill="#fff" />
-
-  </svg>
-</a>
+<div align="center">
+  [![Watch the Demo](https://img.youtube.com/vi/Uuxnm6ARe0I/maxresdefault.jpg)](https://youtu.be/Uuxnm6ARe0I)
+</div>
 
   <p align="center">
     <a href="#-features">Features</a> •
