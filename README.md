@@ -8,68 +8,9 @@
 [![GitHub stars](https://img.shields.io/github/stars/senapati484/toastonstaroid?style=social)](https://github.com/senapati484/toastonstaroid)
 [![Website](https://img.shields.io/badge/website-toastonstaroid.vercel.app-blue?style=flat-square)](https://toastonstaroid.vercel.app)
 
-<div align="center" style="margin: 2rem 0;">
-  <a href="https://youtu.be/Uuxnm6ARe0I" target="_blank" style="display: inline-block; position: relative; text-decoration: none;">
-    <img 
-      src="https://img.youtube.com/vi/Uuxnm6ARe0I/maxresdefault.jpg" 
-      alt="Toast Notification Demo" 
-      style="
-        width: 100%;
-        max-width: 800px;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      "
-      onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 12px 28px rgba(0,0,0,0.2)';"
-      onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.15)';"
-    />
-    <div style="
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80px;
-      height: 80px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      pointer-events: none;
-    ">
-      <div style="
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 15px 0 15px 26px;
-        border-color: transparent transparent transparent #fff;
-        margin-left: 5px;
-      "></div>
-    </div>
-    <div style="
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    ">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 16.5L16 12L10 7.5V16.5Z" fill="white"/>
-        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="white"/>
-      </svg>
-      Watch Demo
-    </div>
-  </a>
-</div>
+[![Watch the video](https://img.youtube.com/vi/Uuxnm6ARe0I/maxresdefault.jpg)](https://youtu.be/Uuxnm6ARe0I)
 
+<div align="center">
   <p align="center">
     <a href="#-features">Features</a> •
     <a href="#-installation">Installation</a> •
