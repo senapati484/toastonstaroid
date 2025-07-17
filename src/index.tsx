@@ -111,6 +111,7 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
         padding: '12px 16px',
         position: 'relative',
         zIndex: 1,
+        pointerEvents: 'auto', // Ensure the toast can receive pointer events
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -151,6 +152,10 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
       <div style={{
         position: 'relative',
         zIndex: 1000,
+        pointerEvents: 'auto',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}>
         <button
           onClick={(e) => {
@@ -174,6 +179,8 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
             outline: 'none',
             position: 'relative',
             zIndex: 1000,
+            pointerEvents: 'auto',
+            WebkitTapHighlightColor: 'transparent',
           }}
           onMouseOver={(e) => {
             e.currentTarget.style.color = 'white';

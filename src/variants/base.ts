@@ -35,10 +35,11 @@ export const glassEffect: ContainerStyles = {
   boxSizing: 'border-box',
   position: 'relative',
   overflow: 'visible',
-  margin: '4px 0',
+  margin: '8px 0',
   cursor: 'default',
   userSelect: 'none',
-  isolation: 'isolate',
+  pointerEvents: 'auto',
+  zIndex: 1000,
   '&::before': {
     content: '""',
     position: 'absolute',

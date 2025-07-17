@@ -17,7 +17,7 @@ const createFireEffect = (element: HTMLElement) => {
   fireContainer.style.background = 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%)';
   fireContainer.style.overflow = 'visible';
   fireContainer.style.clipPath = 'inset(0 0 0 0)';
-  
+
   for (let i = 0; i < 5; i++) {
     const flame = document.createElement('div');
     flame.style.position = 'absolute';
@@ -28,7 +28,7 @@ const createFireEffect = (element: HTMLElement) => {
     flame.style.borderRadius = '50% 50% 0 0';
     flame.style.left = `${10 + i * 20}%`;
     flame.style.filter = 'blur(1px)';
-    
+
     gsap.to(flame, {
       scaleY: 1.5,
       duration: 0.5,
@@ -37,14 +37,14 @@ const createFireEffect = (element: HTMLElement) => {
       ease: 'sine.inOut',
       delay: Math.random() * 0.5
     });
-    
+
     fireContainer.appendChild(flame);
   }
-  
+
   // Ensure the element has relative positioning
   element.style.position = 'relative';
   element.style.overflow = 'visible';
-  
+
   // Ensure close button is clickable
   const closeButton = element.querySelector('button[aria-label="Close toast"]');
   if (closeButton) {
@@ -52,7 +52,7 @@ const createFireEffect = (element: HTMLElement) => {
     button.style.position = 'relative';
     button.style.zIndex = '1000';
     button.style.pointerEvents = 'auto';
-    
+
     // Make sure the button's parent container doesn't block events
     const buttonContainer = button.parentElement;
     if (buttonContainer) {
@@ -61,7 +61,7 @@ const createFireEffect = (element: HTMLElement) => {
       buttonContainer.style.pointerEvents = 'auto';
     }
   }
-  
+
   element.appendChild(fireContainer);
   return fireContainer;
 };
@@ -70,10 +70,10 @@ export const fireToast: ToastConfig = {
   animation: (element: HTMLElement, position: string) => {
     const fromX = position.includes('right') ? 40 : -40;
     const fromY = position.includes('top') ? -40 : 40;
-    
+
     // Initial state
     gsap.set(element, { opacity: 0, y: fromY, x: fromX });
-    
+
     // Create timeline for the animation sequence
     const tl = gsap.timeline({
       onComplete: () => {
@@ -81,7 +81,7 @@ export const fireToast: ToastConfig = {
         createFireEffect(element);
       }
     });
-    
+
     // Add the animation to the timeline
     tl.to(element, {
       x: 0,
@@ -90,7 +90,7 @@ export const fireToast: ToastConfig = {
       duration: 0.6,
       ease: 'back.out(1.7)',
     });
-    
+
     // Flicker effect
     tl.to(element, {
       keyframes: [
@@ -102,7 +102,7 @@ export const fireToast: ToastConfig = {
       yoyo: true,
       ease: 'none',
     }, 0);
-    
+
     return tl;
   },
   containerStyles: {

@@ -27,8 +27,22 @@ export const infoToast: ToastConfig = {
     const fromX = position.includes('right') ? 40 : -40;
     const fromY = position.includes('top') ? -40 : 40;
 
+    // Ensure close button is clickable
+    const closeButton = element.querySelector('button[aria-label="Close toast"]') as HTMLElement;
+    if (closeButton) {
+      closeButton.style.pointerEvents = 'auto';
+      closeButton.style.zIndex = '1001';
+      closeButton.style.position = 'relative';
+    }
+
     // Initial state
-    gsap.set(element, { opacity: 0, y: fromY, x: fromX });
+    gsap.set(element, { 
+      opacity: 0, 
+      y: fromY, 
+      x: fromX,
+      pointerEvents: 'auto',
+      zIndex: 1000,
+    });
 
     // Create timeline for the animation sequence
     const tl = gsap.timeline();
@@ -36,13 +50,14 @@ export const infoToast: ToastConfig = {
     // Add the animation to the timeline
     tl.add(animateIn(element, fromX, fromY));
 
-    // Add a subtle float effect
+    // Add a subtle pulse animation
     tl.to(element, {
-      y: '-=5',
-      yoyo: true,
-      repeat: -1,
       duration: 2,
-      ease: 'sine.inOut'
+      '--toast-shadow': '0 0 15px rgba(59, 130, 246, 0.3)',
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+      pointerEvents: 'auto',
     }, '+=0.2');
 
     // Add a subtle glow
