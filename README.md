@@ -44,9 +44,9 @@
 ### For React 16.8+
 
 ```bash
-npm install toastonstaroid react-icons
+npm install toastonstaroid
 # or
-yarn add toastonstaroid react-icons
+yarn add toastonstaroid
 ```
 
 ### Peer Dependencies
