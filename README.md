@@ -519,10 +519,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   <a href="https://www.npmjs.com/package/toastonstaroid">NPM</a> •
   <a href="https://sayan4.vercel.app">Portfolio</a>
 </div>
+
 ## License
 
-MIT
-
-```
-
-```
+[MIT License](https://raw.githubusercontent.com/senapati484/toastonstaroid/refs/heads/new/LICENSE)
