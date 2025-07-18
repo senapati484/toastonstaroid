@@ -4,7 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/toastonstaroid.svg?style=flat-square)](https://www.npmjs.com/package/toastonstaroid)
 [![npm downloads](https://img.shields.io/npm/dm/toastonstaroid.svg?style=flat-square)](https://www.npmjs.com/package/toastonstaroid)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE.txt)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/senapati484/toastonstaroid?style=social)](https://github.com/senapati484/toastonstaroid)
 [![Website](https://img.shields.io/badge/website-toastonstaroid.vercel.app-blue?style=flat-square)](https://toastonstaroid.vercel.app)
 
