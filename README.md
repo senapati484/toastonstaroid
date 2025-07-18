@@ -118,10 +118,7 @@ function MyComponent() {
   };
 
   return (
-    <button
-      onClick={showToast}
-      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-    >
+    <button onClick={showToast} className="px-4 py-2 text-white rounded">
       Show Toast Notifications
     </button>
   );
@@ -555,7 +552,7 @@ Toasts are fully responsive and adapt to different screen sizes:
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Before you start, please take a moment to read our [Contribution Guidelines](CONTRIBUTING.md) which includes detailed information on:
+We welcome contributions from the community! Before you start, please take a moment to read our [Contribution Guidelines](https://github.com/senapati484/toastonstaroid/blob/new/CONTRIBUTING.md) which includes detailed information on:
 
 - 🛠️ Setting up your development environment
 - 📝 Code style and conventions
@@ -571,11 +568,11 @@ We welcome contributions from the community! Before you start, please take a mom
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-For more details, please see our [Contribution Guidelines](CONTRIBUTING.md).
+For more details, please see our [Contribution Guidelines](https://github.com/senapati484/toastonstaroid/blob/new/CONTRIBUTING.md).
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/senapati484/toastonstaroid/refs/heads/new/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
