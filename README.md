@@ -28,7 +28,7 @@
     <a href="#-installation">Installation</a> •
     <a href="#-quick-start">Quick Start</a> •
     <a href="#-variants">Variants</a> •
-    <a href="#-api-reference">API Reference</a>
+    <a href="#-api">API</a>
   </p>
 </div>
 
@@ -174,7 +174,7 @@ toast.success("Profile updated!", 5000);
 toast.info("Processing...", 0);
 ```
 
-## 🎨 Toast Variants
+## 🎭 Variants
 
 Toastonstaroid comes with a variety of beautiful toast variants, each with unique animations and styles:
 
@@ -332,7 +332,81 @@ toast.update(toastId: string, options: ToastOptions): void;
 | `className` | `string`              | -         | Additional CSS class       |
 | `style`     | `React.CSSProperties` | -         | Inline styles              |
 
-## 🎨 Customization
+## 📚 API
+
+### Toast Methods
+
+All toast methods accept the following parameters:
+
+- `message: string` - The message to display
+- `duration?: number` - (Optional) Time in milliseconds the toast should be visible (default: 5000ms)
+
+#### Basic Variants
+
+```typescript
+import { toast } from "toastonstaroid";
+
+toast.success("Operation completed successfully!");
+toast.error("Something went wrong!");
+toast.warning("This action cannot be undone!");
+toast.info("New update available!");
+```
+
+#### Themed Variants
+
+```typescript
+// Fire theme
+toast.fire("Hot notification!");
+
+// Rain theme
+toast.rain("Bring an umbrella! ☔");
+
+// Smoke theme
+toast.smoke("Poof!");
+
+// Cyberpunk theme
+toast.cyberpunk("System updated!");
+
+// Dragon Ball theme
+toast.dragonball("Power level over 9000!");
+
+// Water Flow theme
+toast.waterflow("Smooth as water");
+```
+
+### ToastContainer Component
+
+The `ToastContainer` component is required in your app to display the toasts. Place it once in your app layout.
+
+```jsx
+import { ToastContainer } from "toastonstaroid";
+
+function App() {
+  return (
+    <div>
+      <YourApp />
+      <ToastContainer position="top-right" />
+    </div>
+  );
+}
+```
+
+#### Props
+
+| Prop      | Type                                                                 | Default       | Description                     |
+| --------- | -------------------------------------------------------------------- | ------------- | ------------------------------- |
+| position  | `'top-right'` \| `'top-left'` \| `'bottom-right'` \| `'bottom-left'` | `'top-right'` | Position of the toast container |
+| className | `string`                                                             | `''`          | Additional CSS class name       |
+| style     | `React.CSSProperties`                                                | `{}`          | Inline styles for the container |
+
+### Customization
+
+You can customize the default duration for all toasts by setting the duration parameter:
+
+```typescript
+// Show success toast for 10 seconds
+toast.success("Saved successfully!", 10000);
+```
 
 ### Styling with CSS Variables
 
