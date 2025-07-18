@@ -4,12 +4,12 @@
 
 [![npm version](https://img.shields.io/npm/v/toastonstaroid.svg?style=flat-square)](https://www.npmjs.com/package/toastonstaroid)
 [![npm downloads](https://img.shields.io/npm/dm/toastonstaroid.svg?style=flat-square)](https://www.npmjs.com/package/toastonstaroid)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://raw.githubusercontent.com/senapati484/toastonstaroid/refs/heads/new/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/senapati484/toastonstaroid?style=social)](https://github.com/senapati484/toastonstaroid)
 [![Website](https://img.shields.io/badge/website-toastonstaroid.vercel.app-blue?style=flat-square)](https://toastonstaroid.vercel.app)
 
 <div align="center">
-  <a href="https://youtu.be/Uuxnm6ARe0I" target="_blank">
+  <!-- <a href="https://youtu.be/Uuxnm6ARe0I" target="_blank">
     <img src="https://img.youtube.com/vi/Uuxnm6ARe0I/maxresdefault.jpg" alt="Toast Notification Demo" width="600" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); cursor: pointer;">
     <div style="position: relative; display: inline-block;">
       <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
@@ -19,7 +19,9 @@
         </svg>
       </div>
     </div>
-  </a>
+  </a> -->
+
+[![Toast Notification Demo](https://img.youtube.com/vi/Uuxnm6ARe0I/maxresdefault.jpg)](https://youtu.be/Uuxnm6ARe0I)
 
   <p align="center">
     <a href="#-features">Features</a> •
@@ -511,7 +513,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  Made with ❤️ by <a href="https://github.com/senapati484">Sayan Senapati</a>
+  Made with ❤️ by Sayan Senapati
   <br/>
   <a href="https://github.com/senapati484/toastonstaroid">GitHub</a> •
   <a href="https://www.npmjs.com/package/toastonstaroid">NPM</a> •
