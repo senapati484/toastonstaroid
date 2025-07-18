@@ -45,7 +45,7 @@ src/
 
 ```bash
 # Clone your fork
-git clone https://github.com/your-username/toastonstaroid.git
+git clone https://github.com/senapati484/toastonstaroid.git
 cd toastonstaroid
 
 # Install dependencies
@@ -98,9 +98,9 @@ Create a new TypeScript file in the `src/variants` directory following the namin
 Use this template for new variants:
 
 ```typescript
-import { gsap } from 'gsap';
-import { glassEffect } from './base';
-import type { ToastConfig, ToastStyles } from './types';
+import { gsap } from "gsap";
+import { glassEffect } from "./base";
+import type { ToastConfig, ToastStyles } from "./types";
 
 const createVariantEffect = (element: HTMLElement) => {
   // Your effect implementation
@@ -116,9 +116,9 @@ export const variantNameToast: ToastConfig = {
   },
   containerStyles: {
     ...glassEffect,
-    '--toast-bg': 'rgba(30, 58, 138, 0.15)',
-    '--toast-border': '1px solid rgba(96, 165, 250, 0.2)',
-    '--toast-shadow': '0 8px 32px 0 rgba(59, 130, 246, 0.1)',
+    "--toast-bg": "rgba(30, 58, 138, 0.15)",
+    "--toast-border": "1px solid rgba(96, 165, 250, 0.2)",
+    "--toast-shadow": "0 8px 32px 0 rgba(59, 130, 246, 0.1)",
     // Add any additional styles
   },
   // Other configuration options
@@ -130,7 +130,7 @@ export const variantNameToast: ToastConfig = {
 Add your new variant to `src/variants/index.ts`:
 
 ```typescript
-export * from './variant-name';
+export * from "./variant-name";
 ```
 
 ### 4. Add to Type Definitions
@@ -172,6 +172,7 @@ Update the `ToastType` in `src/store.ts` if adding a new variant type.
 ## 📝 Submitting Changes
 
 1. **Update Documentation**
+
    - Update README.md if needed
    - Add JSDoc comments for new APIs
    - Document any breaking changes
