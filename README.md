@@ -575,7 +575,7 @@ For more details, please see our [Contribution Guidelines](CONTRIBUTING.md).
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/senapati484/toastonstaroid/refs/heads/new/LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
