@@ -1,5 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Toast as ToastType, useToastStore } from './store';
+import React, { useEffect, useRef, useState, ReactElement } from 'react';
+import { useToastStore, Toast, ToastType } from './store';
+
+type ToastVariant = {
+  animation: (element: HTMLElement, position: string) => any;
+  containerStyles: any;
+};
 import {
   ToastPosition,
   getPositionStyles,
@@ -13,6 +18,7 @@ import {
   cyberpunkToast,
   dragonballToast,
   waterflowToast,
+  basicToast,
 } from './variants';
 
 // React Icons
@@ -30,6 +36,26 @@ import {
   FaWater
 } from 'react-icons/fa';
 
+// Helper component to render icon with color
+const IconWithColor = ({ type, color }: { type: ToastType, color?: string }) => {
+  const iconMap = {
+    success: <FaCheckCircle className="w-5 h-5" style={color ? { color } : undefined} />,
+    error: <FaExclamationCircle className="w-5 h-5" style={color ? { color } : undefined} />,
+    warning: <FaExclamationTriangle className="w-5 h-5" style={color ? { color } : undefined} />,
+    info: <FaInfoCircle className="w-5 h-5" style={color ? { color } : undefined} />,
+    fire: <FaFire className="w-5 h-5" style={color ? { color } : undefined} />,
+    rain: <FaCloudRain className="w-5 h-5" style={color ? { color } : undefined} />,
+    smoke: <FaSmog className="w-5 h-5" style={color ? { color } : undefined} />,
+    cyberpunk: <FaRobot className="w-5 h-5" style={color ? { color } : undefined} />,
+    dragonball: <FaDragon className="w-5 h-5" style={color ? { color } : undefined} />,
+    waterflow: <FaWater className="w-5 h-5" style={color ? { color } : undefined} />,
+    basic: <FaInfoCircle className="w-5 h-5" style={color ? { color } : undefined} />,
+  };
+
+  return iconMap[type] || null;
+};
+
+// Keep the original Icons object for backward compatibility
 const Icons = {
   success: <FaCheckCircle className="w-5 h-5" />,
   error: <FaExclamationCircle className="w-5 h-5" />,
@@ -41,9 +67,10 @@ const Icons = {
   cyberpunk: <FaRobot className="w-5 h-5" />,
   dragonball: <FaDragon className="w-5 h-5" />,
   waterflow: <FaWater className="w-5 h-5" />,
+  basic: <FaInfoCircle className="w-5 h-5" />,
 };
 
-const variantMap = {
+const variantMap: { [key in ToastType]: ToastVariant } = {
   success: successToast,
   error: errorToast,
   warning: warningToast,
@@ -54,10 +81,11 @@ const variantMap = {
   cyberpunk: cyberpunkToast,
   dragonball: dragonballToast,
   waterflow: waterflowToast,
+  basic: basicToast,
 };
 
 interface ToastProps {
-  toast: ToastType;
+  toast: Toast;
   position: ToastPosition;
 }
 
@@ -66,7 +94,7 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
   const toastRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const variant = variantMap[toast.type];
-  const Icon = Icons[toast.type];
+  const Icon = <IconWithColor type={toast.type} color={toast.iconColor} />;
 
   useEffect(() => {
     if (toastRef.current) {
@@ -88,12 +116,18 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
     removeToast(toast.id);
   };
 
+  // Apply custom background style (blur or solid)
   const containerStyle: React.CSSProperties = {
     ...variant.containerStyles,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     transition: 'all 0.2s ease-out',
+    ...(toast.backgroundStyle === 'solid' && {
+      backdropFilter: 'none',
+      WebkitBackdropFilter: 'none',
+      backgroundColor: variant.containerStyles.backgroundColor || 'var(--toast-bg, rgba(30, 41, 59, 0.95))',
+    }),
     ...(isHovered && {
       transform: 'translateY(-1px)',
       boxShadow: '0 6px 16px rgba(0, 0, 0, 0.15)',
@@ -139,7 +173,7 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
           })}
         </div>
         <span style={{
-          color: 'white',
+          color: toast.type === 'basic' ? '#000000' : (toast.textColor || 'white'),
           fontSize: '14px',
           lineHeight: '20px',
           fontWeight: 500,
@@ -163,10 +197,11 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
             e.stopPropagation();
             removeToast(toast.id);
           }}
+          className={toast.type === 'basic' ? 'toast-button' : ''}
           style={{
             background: 'transparent',
             border: 'none',
-            color: 'rgba(255, 255, 255, 0.6)',
+            color: toast.type === 'basic' ? '#000000' : 'rgba(255, 255, 255, 0.6)',
             cursor: 'pointer',
             padding: '4px',
             marginLeft: '12px',
@@ -181,17 +216,18 @@ const Toast: React.FC<ToastProps> = ({ toast, position }) => {
             zIndex: 1000,
             pointerEvents: 'auto',
             WebkitTapHighlightColor: 'transparent',
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.color = 'white';
-            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)';
-            e.currentTarget.style.background = 'transparent';
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.outline = '2px solid rgba(255, 255, 255, 0.3)';
+            ...(toast.type !== 'basic' ? {
+              ':hover': {
+                color: 'white',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              },
+              ':active': {
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              },
+              ':focus': {
+                outline: '2px solid rgba(255, 255, 255, 0.3)',
+              },
+            } : {}),
           }}
           aria-label="Close toast"
           type="button"
@@ -231,37 +267,186 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
   );
 };
 
+interface ToastOptions {
+  duration?: number;
+  textColor?: string;
+  iconColor?: string;
+  backgroundStyle?: 'blur' | 'solid';
+}
+
 export const toast = {
-  success(message: string, duration: number = 5000) {
-    useToastStore.getState().addToast({ type: 'success', message, duration });
+  basic: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'basic',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
   },
-  error(message: string, duration: number = 5000) {
-    useToastStore.getState().addToast({ type: 'error', message, duration });
-  },
-  warning(message: string, duration: number = 5000) {
-    useToastStore.getState().addToast({ type: 'warning', message, duration });
-  },
-  info(message: string, duration: number = 5000) {
-    useToastStore.getState().addToast({ type: 'info', message, duration });
-  },
-  fire(message: string, duration: number = 5000) {
-    useToastStore.getState().addToast({ type: 'fire', message, duration });
-  },
-  rain(message: string, duration: number = 5000) {
-    useToastStore.getState().addToast({ type: 'rain', message, duration });
-  },
-  smoke(message: string, duration: number = 5000) {
-    useToastStore.getState().addToast({ type: 'smoke', message, duration });
-  },
-  cyberpunk(message: string, duration: number = 5000) {
-    useToastStore.getState().addToast({ type: 'cyberpunk', message, duration });
+  success: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'success',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
   },
   
-  dragonball(message: string, duration: number = 5000) {
-    useToastStore.getState().addToast({ type: 'dragonball', message, duration });
+  error: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'error',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
   },
   
-  waterflow(message: string, duration: number = 5000) {
-    useToastStore.getState().addToast({ type: 'waterflow', message, duration });
+  warning: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'warning',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
+  },
+  
+  info: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'info',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
+  },
+  
+  fire: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'fire',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
+  },
+  
+  rain: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'rain',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
+  },
+  
+  smoke: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'smoke',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
+  },
+  
+  cyberpunk: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'cyberpunk',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
+  },
+  
+  dragonball: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'dragonball',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
+  },
+  
+  waterflow: (message: string, options: number | ToastOptions = {}) => {
+    const duration = typeof options === 'number' ? options : options?.duration;
+    const textColor = typeof options === 'object' ? options.textColor : undefined;
+    const iconColor = typeof options === 'object' ? options.iconColor : undefined;
+    const backgroundStyle = typeof options === 'object' ? options.backgroundStyle : undefined;
+    
+    useToastStore.getState().addToast({
+      message,
+      type: 'waterflow',
+      duration,
+      textColor,
+      iconColor,
+      backgroundStyle,
+    });
   },
 };

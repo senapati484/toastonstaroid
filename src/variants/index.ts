@@ -9,3 +9,4 @@ export * from './smoke';
 export * from './cyberpunk';
 export * from './dragonball';
 export * from './waterflow';
+export * from './basic';

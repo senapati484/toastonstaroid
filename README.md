@@ -159,6 +159,14 @@ toast.dragonball("Power level over 9000!");
 
 // Water Flow style
 toast.waterflow("Your changes have been saved");
+
+// Basic toast
+toast.basic("This is a simple notification");
+toast.basic("With custom styling", {
+  iconColor: "#3b82f6",
+  textColor: "#1f2937",
+  duration: 5000
+});
 ```
 
 ### Customizing Duration
@@ -187,6 +195,7 @@ Toastonstaroid comes with a variety of beautiful toast variants, each with uniqu
 | `cyberpunk`  | Futuristic cyberpunk style                    | `toast.cyberpunk('Access granted')`             |
 | `dragonball` | Anime-inspired with energy aura and particles | `toast.dragonball('Power level over 9000!')`    |
 | `waterflow`  | Smooth flowing water animation with bubbles   | `toast.waterflow('Changes saved successfully')` |
+| `basic`      | Clean, simple notifications with solid white background and black text | `toast.basic('This is a simple notification')` |
 
 ### Basic Variants
 
@@ -220,6 +229,19 @@ For general information.
 
 ```jsx
 toast.info("New message received");
+```
+
+#### Basic Toast
+
+Clean, simple notifications with solid white background and black text.
+
+```jsx
+toast.basic("This is a simple notification");
+toast.basic("With custom styling", {
+  iconColor: "#3b82f6",
+  textColor: "#1f2937",
+  duration: 5000
+});
 ```
 
 ### Animated Variants
@@ -307,6 +329,7 @@ toast.fire(message: string, options?: ToastOptions): string;
 toast.rain(message: string, options?: ToastOptions): string;
 toast.smoke(message: string, options?: ToastOptions): string;
 toast.cyberpunk(message: string, options?: ToastOptions): string;
+toast.basic(message: string, options?: ToastOptions): string;
 
 // Remove a toast
 toast.dismiss(toastId: string): void;
@@ -320,14 +343,17 @@ toast.update(toastId: string, options: ToastOptions): void;
 
 ### Toast Options
 
-| Option      | Type                  | Default   | Description                |
-| ----------- | --------------------- | --------- | -------------------------- |
-| `toastId`   | `string`              | Random ID | Custom ID for the toast    |
-| `duration`  | `number`              | `3000`    | Display duration in ms     |
-| `onClose`   | `() => void`          | -         | Callback when toast closes |
-| `onOpen`    | `() => void`          | -         | Callback when toast opens  |
-| `className` | `string`              | -         | Additional CSS class       |
-| `style`     | `React.CSSProperties` | -         | Inline styles              |
+| Option       | Type                  | Default   | Description                                 |
+| ------------ | --------------------- | --------- | ------------------------------------------- |
+| `toastId`    | `string`              | Random ID | Custom ID for the toast                     |
+| `duration`   | `number`              | `3000`    | Display duration in ms                      |
+| `onClose`    | `() => void`          | -         | Callback when toast closes                  |
+| `onOpen`     | `() => void`          | -         | Callback when toast opens                   |
+| `className`  | `string`              | -         | Additional CSS class                        |
+| `style`      | `React.CSSProperties` | -         | Inline styles                               |
+| `textColor`  | `string`              | -         | Custom text color (e.g., '#FF0000', 'blue') |
+| `iconColor`  | `string`              | -         | Custom icon color (e.g., '#00FF00', 'red')  |
+| `backgroundStyle` | `'blur' | 'solid'` | 'blur'  | Background style (blur or solid)            |
 
 ## 📚 API
 

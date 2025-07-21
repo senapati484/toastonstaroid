@@ -1,12 +1,15 @@
 import { create } from 'zustand';
 
-export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'fire' | 'rain' | 'smoke' | 'cyberpunk' | 'dragonball' | 'waterflow';
+export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'fire' | 'rain' | 'smoke' | 'cyberpunk' | 'dragonball' | 'waterflow' | 'basic';
 
 export interface Toast {
   id: string;
   message: string;
   type: ToastType;
   duration?: number;
+  textColor?: string;
+  iconColor?: string;
+  backgroundStyle?: 'blur' | 'solid';
 }
 
 interface ToastStore {
